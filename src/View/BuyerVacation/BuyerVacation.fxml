@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.BuyerVacation.BuyerVacationsController">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TableView fx:id="SaleRequstTable" layoutX="4.0" layoutY="35.0" prefHeight="286.0" prefWidth="653.0" style="-fx-background-color: lightblue;">
+                     <columns>
+                        <TableColumn fx:id="colVacationId" prefWidth="170.0" text="Vacation Code" />
+                        <TableColumn fx:id="colSellerName" prefWidth="226.0" text="Seller Name" />
+                        <TableColumn fx:id="colRequestStatus" prefWidth="265.0" text="Request Status" />
+                     </columns>
+                  </TableView>
+                  <Button fx:id="buy" layoutX="113.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#goToPay" prefHeight="39.0" prefWidth="154.0" text="Buy now" />
+                  <Button fx:id="details" layoutX="331.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#goToDetails" prefHeight="39.0" prefWidth="154.0" text="More Details" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
