@@ -1,116 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5bf06c55-fa67-4e3d-b781-ddcff73c79a2" name="Default" comment="Final!">
-      <change afterPath="$PROJECT_DIR$/src/App/OrderView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/00a5d353-780d-439b-a81d-40f30f42ef38.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/00a5d353-780d-439b-a81d-40f30f42ef38.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/myDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/App/Address.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/App/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/App/Order.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/App/Package.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/App/Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/App/RegisteredUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/App/Renter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/App/Tenant.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/App/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/App/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/DB/SqliteDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/DB/SqliteDB.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/DB/SqliteDBTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/Main/ViewModel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Main/ViewModel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/Main/ViewModel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Main/ViewModel$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/Main/ViewModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Main/ViewModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/Model/Model.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/Model/Model.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/AbstractController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/View/AbstractController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/AddPackageView/AddPackage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/View/AddPackageView/AddPackage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/AddPackageView/AddPackageController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/AddProductView/AddProduct.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/AddProductView/AddProductController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/PackageDescriptionView/PackageDescriptionView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/PackageDescriptionView/PackageDescriptionView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/ProductDescriptionView/ProductView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/ProductDescriptionView/ProductViewController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/SearchView/SearchScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/View/SearchView/SearchScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/SearchView/SearchViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/View/SearchView/SearchViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/SignInScreenView/SignInController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/View/SignInScreenView/SignInController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/SignInScreenView/SignInScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/View/SignInScreenView/SignInScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/SignUpScreenView/SignUpController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/View/SignUpScreenView/SignUpController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/SignUpScreenView/SignUpScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled/View/SignUpScreenView/SignUpScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/UserViewScreen/ProductEntry.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/UserViewScreen/UserView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/UserViewScreen/UserViewController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/14bgc.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/38pjhgh.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/Businessman-Poiting-PNG.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/CSS_COLORS.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/Search_32px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/SignOut_32px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/TODO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/Yad2NoPhoto.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/b60.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/bigloading.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/down_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/exercise_24px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/gradient.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/header_bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Back_48px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Create_50px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Customer_96px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Date_From_48px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Date_To_48px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Date_To_48px_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Date_To_48px_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Date_To_48px_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Home_50px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_ID_Card_32px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Location_40px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Price_Tag_48px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Resume_40px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Search_48px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Sorting.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Sorting_16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Sorting_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Sorting_48px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/icons8_Sorting_48px_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/load.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/loading.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/logo4.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/logo4t.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/logo_ise.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/main-bg.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/notok.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/ok.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/pixel.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/progressbar.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/sky.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/spinner.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled/View/images/up_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App/Package.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App/Vacation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DB/SqliteDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DB/SqliteDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/ViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/AddPackageView/AddPackage.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/AddPackageView/AddPackageController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/BuyerVacation/BuyerVacation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/BuyerVacation/BuyerVacation.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/BuyerVacation/BuyerVacationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/BuyerVacation/BuyerVacationsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/BuyerVacationDetails/BuyerVacationDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/BuyerVacationDetails/BuyerVacationDetailsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/BuyerVacationDetails/BuyerVacationDetailsView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/BuyerVacationDetails/BuyerVacationDetailsView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/PayPal/PayPal.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/PayPal/PayPalController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/ProfileView/EditProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/ProfileView/EditProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/ProfileView/EditProfileView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/ProfileView/EditProfileView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/ProfileView/ProfileView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/ProfileView/ProfileView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/ProfileView/ProfileViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/ProfileView/ProfileViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/SearchView/SearchScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/SearchView/SearchScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/SearchView/SearchViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/SearchView/SearchViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/SellerVacation/SellerVacationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/SellerVacation/SellerVacationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/SellerVacation/SellerVacationView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/SellerVacation/SellerVacationView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/SellerVacationDetails/SellerVacationDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/SellerVacationDetails/SellerVacationDetailsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/SellerVacationDetails/SellerVacationDetailsView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/SellerVacationDetails/SellerVacationDetailsView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/SignInScreenView/SignInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/SignInScreenView/SignInController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/SignUpScreenView/SignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/SignUpScreenView/SignUpController.java" afterDir="false" />
-    </list>
+    <list default="true" id="5bf06c55-fa67-4e3d-b781-ddcff73c79a2" name="Default" comment="Final!" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -641,7 +532,7 @@
       <workItem from="1544991137576" duration="77755000" />
       <workItem from="1545682966522" duration="31122000" />
       <workItem from="1546250899087" duration="14118000" />
-      <workItem from="1546422140642" duration="2075000" />
+      <workItem from="1546422140642" duration="2345000" />
     </task>
     <task id="LOCAL-00001" summary="Adding policies options">
       <created>1515760901436</created>
@@ -732,7 +623,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266788000" />
+    <option name="totallyTimeSpent" value="267058000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -756,14 +647,14 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.009915014" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49895832" visible="true" weight="0.033994336" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49895832" weight="0.033994336" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5013423" side_tool="true" weight="0.014164306" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3286119" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4986577" weight="0.3286119" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4986577" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.40509915" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
