@@ -43,19 +43,19 @@
                </rowConstraints>
                <children>
                   <Label prefHeight="21.0" prefWidth="130.0" text="First name" />
-                  <TextField GridPane.columnIndex="1" />
+                  <TextField fx:id="first_name" GridPane.columnIndex="1" />
                   <Label layoutX="10.0" layoutY="19.0" prefHeight="21.0" prefWidth="130.0" text="Last Name" GridPane.rowIndex="1" />
-                  <TextField layoutX="232.0" layoutY="14.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="last_name" layoutX="232.0" layoutY="14.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label layoutX="10.0" layoutY="57.0" prefHeight="21.0" prefWidth="130.0" text="Password" GridPane.rowIndex="3" />
                   <Label layoutX="10.0" layoutY="110.0" prefHeight="21.0" prefWidth="130.0" text="Email" GridPane.rowIndex="2" />
-                  <TextField layoutX="232.0" layoutY="43.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField layoutX="232.0" layoutY="74.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="email" layoutX="232.0" layoutY="43.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="password" layoutX="232.0" layoutY="74.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label layoutX="10.0" layoutY="147.0" prefHeight="21.0" prefWidth="130.0" text="Confirm Password" GridPane.rowIndex="4" />
                   <Label layoutX="10.0" layoutY="147.0" prefHeight="21.0" prefWidth="130.0" text="Birth date" GridPane.rowIndex="5" />
-                  <TextField layoutX="250.0" layoutY="142.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField layoutX="250.0" layoutY="193.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="confirm_password" layoutX="250.0" layoutY="142.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="city" layoutX="250.0" layoutY="193.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Label layoutX="10.0" layoutY="198.0" prefHeight="21.0" prefWidth="130.0" text="City" GridPane.rowIndex="6" />
-                  <DatePicker id="StartDatePicker" prefHeight="25.0" prefWidth="373.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <DatePicker id="StartDatePicker" fx:id="birth_date" prefHeight="25.0" prefWidth="373.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
             </GridPane>
             <Button fx:id="bt_sup" layoutX="220.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#handleAddUser" prefHeight="41.0" prefWidth="122.0" text="Sign Up" />
@@ -71,7 +71,7 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Sell Vacation">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="New Vacation" />
+                        <MenuItem fx:id="addVac" mnemonicParsing="false" onAction="#goToAddVacation" text="New Vacation" />
                         <MenuItem mnemonicParsing="false" text="buyers suggestions" />
                      </items>
                   </Menu>
@@ -83,11 +83,11 @@
                   </Menu>
                   <Menu fx:id="profile1" mnemonicParsing="false" text="Log in">
                      <items>
-                        <MenuItem fx:id="View_profile11" mnemonicParsing="false" text="Sign in" />
-                        <MenuItem fx:id="View_profil" mnemonicParsing="false" text="Sign out" />
+                        <MenuItem fx:id="signin" mnemonicParsing="false" onAction="#goToSignIn" text="Sign in" />
+                        <MenuItem fx:id="signout" mnemonicParsing="false" onAction="#goTosignOut" text="Sign out" />
                      </items>
                   </Menu>
-                  <Menu mnemonicParsing="false" text="Exit">
+                  <Menu fx:id="exit_menu" mnemonicParsing="false" text="Exit">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Exit" />
                      </items>

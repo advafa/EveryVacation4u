@@ -36,9 +36,6 @@ public class BuyerVacationsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        user = viewModel.getUser();
-        if (this.viewModel.isUserExists(user)) {
             colVacationId.setCellValueFactory(new PropertyValueFactory<>("VacationCode"));
             colSellerName.setCellValueFactory(new PropertyValueFactory<>("SellerName"));
             colRequestStatus.setCellValueFactory(new PropertyValueFactory<>("RequestStatus"));
@@ -63,10 +60,6 @@ public class BuyerVacationsController implements Initializable {
                 return row;
             });
 
-        } else {
-            this.viewModel.popAlertinfo("Please Sign in!");
-            this.viewModel.goToSignIn();
-        }
 
 
     }

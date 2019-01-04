@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 //Package
 public class Vacation {
 
-    private static int vacation_count=0;
+
     private boolean vacation_status;//true=available for sale, false=sold out
 
     private String seller_email;
@@ -90,8 +90,6 @@ public class Vacation {
         this.vacation_status=true;//true=available for sale, false=sold out
 
         this.seller_email= seller_email;
-        this.vacation_id=this.vacation_count;
-        this.vacation_count++;
 
         this.from= from;
         this.to= to;
@@ -119,7 +117,7 @@ public class Vacation {
         this.original_price= original_price;
         this.sale_price= sale_price;
         this.off= off;
-
+        this.vacation_id=-1;
     }
 
 
@@ -133,14 +131,14 @@ public class Vacation {
         this.checkout = LocalDate.parse(checkout, formatter);;
     }
 
-    public Vacation(String from, String to,String checkin, String checkout) {
-
-        this.from=from;
-        this.to=to;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        this.checkin = LocalDate.parse(checkin, formatter);
-        this.checkout = LocalDate.parse(checkout, formatter);
-    }
+//    public Vacation(String from, String to,String checkin, String checkout) {
+//
+//        this.from=from;
+//        this.to=to;
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+//        this.checkin = LocalDate.parse(checkin, formatter);
+//        this.checkout = LocalDate.parse(checkout, formatter);
+//    }
 
 
     public Vacation(String from, String to,LocalDate checkin, LocalDate checkout) {

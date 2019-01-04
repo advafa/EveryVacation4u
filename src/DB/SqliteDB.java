@@ -38,52 +38,52 @@ public class SqliteDB {
         execute("CREATE TABLE IF NOT EXISTS Users (\n" +
                 "first_name text NOT NULL,\n" +
                 "last_name text NOT NULL,\n" +
-                "email text PRIMARY KEY \n" +
+                "email text PRIMARY KEY, \n" +
                 "password text NOT NULL,\n" +
                 "birth_date text,\n" +
                 "city text NOT NULL,\n" +
-                "sign_up_date text,\n" +
-                ");");
+                "sign_up_date text);");
     }
+
+
 
 
     private void createVacationTable() throws SQLException {
         execute("CREATE TABLE IF NOT EXISTS Vacations (\n" +
                 "vacation_status int, \n" +
-                "seller_email text NOT NULL,\n" +
-                "vacation_id int PRIMARY KEY,\n" +
-                "from text NOT NULL,\n" +
-                "to text NOT NULL,\n" +
-                "checkin text,\n" +
-                "checkout text,\n" +
-                "airline text NOT NULL,\n" +
-                "back_flight int,\n" +
-                "hand_bag text NOT NULL,\n" +
-                "checked_bag text NOT NULL ,\n" +
-                "connec_flight text NOT NULL,\n" +
-                "vacation_type text NOT NULL,\n" +
-                "ticket_type text NOT NULL,\n" +
-                "hotel int,\n" +
-                "hotel_type text,\n" +
-                "hotel_raiting int ,\n" +
-                "num_of_tickets int,\n" +
-                "original_price int,\n" +
-                "sale_price int,\n" +
-                "off int,\n" +
-                "CONSTRAINT FK_Vacations FOREIGN KEY (seller_email) REFERENCES Users(email)) ;"
-        );
+                "seller_email text, \n" +
+                "vacation_id int PRIMARY KEY, \n" +
+                "fromCountry text, \n" +
+                "toCountry text, \n" +
+                "checkin text, \n" +
+                "checkout text, \n" +
+                "airline text, \n" +
+                "back_flight int, \n" +
+                "hand_bag text, \n" +
+                "checked_bag text, \n" +
+                "connec_flight text, \n" +
+                "vacation_type text, \n" +
+                "ticket_type text, \n" +
+                "hotel int, \n" +
+                "hotel_type text, \n" +
+                "hotel_raiting int, \n" +
+                "num_of_tickets int, \n" +
+                "original_price int, \n" +
+                "sale_price int, \n" +
+                "off int, \n" +
+                "CONSTRAINT FK_Vacations FOREIGN KEY (seller_email) REFERENCES Users(email)) ;");
     }
 
 
     private void createOrdersTable() throws SQLException {
         execute("CREATE TABLE IF NOT EXISTS Orders (\n" +
-                "seller_email text,\n" +
-                "buyer_email text,\n" +
-                "vacation_id int,\n" +
-                "seller_status int,\n" +
-                "buyer_status int,\n" +
-                "CONSTRAINT PK_Orders PRIMARY KEY (seller_email,buyer_email,vacation_id)), \n" +
-                "CONSTRAINT FK_OrderSeller FOREIGN KEY (seller_email) REFERENCES Users(email)), \n" +
+                "seller_email text, \n" +
+                "buyer_email text, \n" +
+                "vacation_id int, \n" +
+                "seller_status int, \n" +
+                "buyer_status int, \n" +
+                "CONSTRAINT PK_Orders PRIMARY KEY (seller_email, buyer_email, vacation_id), \n" +
+                "CONSTRAINT FK_OrderSeller FOREIGN KEY (seller_email) REFERENCES Users(email), \n" +
                 "CONSTRAINT FK_OrderBuyer FOREIGN KEY (buyer_email) REFERENCES Users(email));"
         );
     }
@@ -91,17 +91,14 @@ public class SqliteDB {
 
     private void createPaymentsTable() throws SQLException {
         execute("CREATE TABLE IF NOT EXISTS Payments (\n" +
-                "seller_email text,\n" +
-                "buyer_email text,\n" +
-                "vacation_id int,\n" +
-                "payment_email text NOT NULL,\n" +
-                "payment_password text NOT NULL,\n" +
-                "payment_date text,\n" +
-                "CONSTRAINT PK_Payments PRIMARY KEY (seller_email,buyer_email,vacation_id)), \n" +
-                "CONSTRAINT FK_PaymentsSeller FOREIGN KEY (seller_email) REFERENCES Users(email)), \n" +
-                "CONSTRAINT FK_PaymentsBuyer FOREIGN KEY (buyer_email) REFERENCES Users(email)),\n" +
-                "CONSTRAINT FK_PaymentsVacation FOREIGN KEY (vacation_id) REFERENCES Vacations(vacation_id)) \n" +
-                ";");
+                "seller_email text, \n" +
+                "buyer_email text, \n" +
+                "vacation_id int PRIMARY KEY, \n" +
+                "payment_date text, \n" +
+                "CONSTRAINT FK_PaymentsSeller FOREIGN KEY (seller_email) REFERENCES Users(email), \n" +
+                "CONSTRAINT FK_PaymentsBuyer FOREIGN KEY (buyer_email) REFERENCES Users(email), \n" +
+                "CONSTRAINT FK_VacationID FOREIGN KEY (vacation_id) REFERENCES Vacations(vacation_id),\n" +
+                "CONSTRAINT FK_PaymentsVacation FOREIGN KEY (vacation_id) REFERENCES Vacations(vacation_id));");
     }
 
 
@@ -127,7 +124,7 @@ public class SqliteDB {
         try {
             int vacation_status = vac.getVacation_status() ? 1 : 0;
             String seller_email = vac.getSeller();
-            int vacation_id = vac.getVacation_id();
+            int vacation_id = getVacationID();
             String from = vac.getFrom();
             String to = vac.getto();
             String checkin = vac.toStringCheckin();
@@ -168,6 +165,19 @@ public class SqliteDB {
         }
     }
 
+private int getVacationID(){
+
+    try {
+        Statement st = dbConnection.createStatement();
+        ResultSet resSet = st.executeQuery("SELECT  MAX(vacation_id) FROM Vacations;");
+        return resSet.getInt(1) + 1;
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return 1;
+    }
+}
+
 
     public void addOrder(Order order) {
 
@@ -176,10 +186,10 @@ public class SqliteDB {
             String seller_email = order.getSeller_email();
             String buyer_email = order.getBuyer_email();
             int vacation_id = order.getVacation_id();
-            int seller_status = order.getSeller_status() ? 1 : 0;
-            int buyer_status = order.getBuyer_status() ? 1 : 0;
+            int seller_status = -1;
+            int buyer_status = 0;
 
-            String query = String.format("INSERT INTO Orders VALUES('%s',%s', %d, %d, %d)", seller_email, buyer_email, vacation_id, seller_status, buyer_status);
+            String query = String.format("INSERT INTO Orders VALUES('%s','%s', %d, %d, %d)", seller_email, buyer_email, vacation_id, seller_status, buyer_status);
             execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -192,9 +202,8 @@ public class SqliteDB {
         try {
             String payment_date = payment.toStringPayment_date();
 
-            String query = String.format("INSERT INTO Payments VALUES('%s',%s', %d, '%s','%s','%s')",
-                    payment.getSeller_email(), payment.getBuyer_email(), payment.getVacation_id(),
-                    payment.getPayment_email(), payment.getPayment_password(), payment_date);
+            String query = String.format("INSERT INTO Payments VALUES('%s','%s', %d, '%s')",
+                    payment.getSeller_email(), payment.getBuyer_email(), payment.getVacation_id(),payment_date);
             execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -214,7 +223,7 @@ public class SqliteDB {
 
     public void deleteVacation(Vacation vacation) {
         try {
-            execute("DELETE FROM Vacations WHERE Vacations.vacation_id = '" + vacation.getVacation_id() + " ;");
+            execute("DELETE FROM Vacations WHERE Vacations.vacation_id = " + vacation.getVacation_id() + " ;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -255,6 +264,20 @@ public class SqliteDB {
     }
 
 
+    public void deleteVacationsBySeller(String selllerEmail) {
+        try {
+            execute("DELETE FROM Vacations WHERE Vacations.seller_email = '" + selllerEmail + "' ;");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+
+    }
     //***************Update****************//
 
 
@@ -265,8 +288,8 @@ public class SqliteDB {
     private void UpdateUsers(String first_name, String last_name, String email, String password, String birth_date, String city, String sign_up_date) {
         try {
             String query = "UPDATE Users SET first_name='" + first_name +
-                    "', last_name='" + last_name + "',password='" + password + "',birth_date='" + birth_date + "',city='" + city + "',sign_up_date='" + sign_up_date + "'" +
-                    "WHERE email = '" + email + "');";
+                    "', last_name='" + last_name + "',password='" + password + "',birth_date='" + birth_date + "',city='" + city + "'" +
+                    "WHERE email = '" + email + "'";
             execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -281,8 +304,8 @@ public class SqliteDB {
             int vacation_id = ord.getVacation_id();
             int status = sellerStatus ? 1 : 0;
 
-            String query = "UPDATE Orders SET seller_status='" + status + "'" +
-                    "WHERE seller_email = '" + seller_email + "'AND buyer_email='" + buyer_email + "'AND vacation_id='" + vacation_id + "');";
+            String query = "UPDATE Orders SET seller_status=" + status +
+                    " WHERE seller_email = '" + seller_email + "' AND buyer_email='" + buyer_email + "' AND vacation_id=" + vacation_id + "";
             execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -296,8 +319,8 @@ public class SqliteDB {
             int vacation_id = ord.getVacation_id();
             int status = buyerStatus ? 1 : 0;
 
-            String query = "UPDATE Orders SET buyer_status='" + status + "'" +
-                    "WHERE seller_email = '" + seller_email + "'AND buyer_email='" + buyer_email + "'AND vacation_id='" + vacation_id + "');";
+            String query = "UPDATE Orders SET buyer_status = " + status + "" +
+                    " WHERE seller_email = '" + seller_email + "' AND buyer_email='" + buyer_email + "' AND vacation_id=" + vacation_id + "";
             execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -308,9 +331,11 @@ public class SqliteDB {
     public void UpdatVacationStatus(int vacation_id, boolean vac_status) {
         try {
             int status = vac_status ? 1 : 0;
-            String query = "UPDATE Vacations SET vacation_status='" + status + "'" +
-                    "WHERE vacation_id = '" + vacation_id + "');";
+
+            String query = "UPDATE Vacations SET vacation_status = " + status + "" +
+                    " WHERE vacation_id = " + vacation_id + "";
             execute(query);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -328,7 +353,6 @@ public class SqliteDB {
             return getUserFromRow(resultSet);
 
         } catch (SQLException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -354,13 +378,14 @@ public class SqliteDB {
         try {
             Statement st = dbConnection.createStatement();
             ResultSet resSet = st.executeQuery("SELECT * FROM Vacations as p " +
-                    "WHERE p.vacation_id = '" + vacationId + "';");
+                    "WHERE p.vacation_id = " + vacationId + ";");
             return getVacationFromRow(resSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
+
 
     public List<Order> getOrdersByseller_email(String seller_email) {
         try {
@@ -383,7 +408,7 @@ public class SqliteDB {
         try {
             Statement st = dbConnection.createStatement();
             ResultSet resSet = st.executeQuery("SELECT * FROM Orders " +
-                    "WHERE Orders.seller_email = '" + buyer_email + "';");
+                    "WHERE Orders.buyer_email = '" + buyer_email + "';");
 
             List<Order> orders = new ArrayList<>();
             while (resSet.next()) {
@@ -417,12 +442,16 @@ public class SqliteDB {
     public List<Vacation> getVacationBySimpleSearch(Vacation vacation) {
 
         try {
+            String from=vacation.getFrom();
+            String to=vacation.getto();
+            String cin=vacation.toStringCheckin();
+            String cout=vacation.toStringCheckout();
+
             Statement st = dbConnection.createStatement();
-            ResultSet resSet = st.executeQuery("SELECT * FROM Vacations as V " +
-                    "WHERE V.from = '" + vacation.getHand_bag() +
-                    "'AND V.to='" + vacation.getto() +
-                    "'AND V.checkin='" + vacation.toStringCheckin() +
-                    "'AND V.checkout='" + vacation.toStringCheckout() + "'AND P.vacation_status=1;");
+            ResultSet resSet = st.executeQuery("SELECT * FROM Vacations WHERE Vacations.vacation_status=1 AND Vacations.fromCountry = '" + from +
+                    "' AND Vacations.toCountry = '" + to +
+                    "' AND Vacations.checkin = '" + cin +
+                    "' AND Vacations.checkout='" + cout + "' ;");
 
             List<Vacation> vacations = new ArrayList<>();
             while (resSet.next()) {
@@ -460,8 +489,8 @@ public class SqliteDB {
         String seller_email = resSet.getString("seller_email");
         int vacation_id = resSet.getInt("vacation_id");
 
-        String from = resSet.getString("from");
-        String to = resSet.getString("to");
+        String from = resSet.getString("fromCountry");
+        String to = resSet.getString("toCountry");
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate checkin = LocalDate.parse(resSet.getString("checkin"), formatter);
@@ -523,7 +552,7 @@ public class SqliteDB {
             String query = "SELECT * FROM Users as u WHERE u.email = '" + user.getEmail() + "' ;";
             ResultSet resSet = st.executeQuery(query);
             User resUser = getUserFromRow(resSet);
-            return resUser.getPassword().equals(user.getPassword());
+            return resUser!=null;
         } catch (SQLException e) {
             return false;
         }

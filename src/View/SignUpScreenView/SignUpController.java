@@ -6,15 +6,9 @@ import java.util.ResourceBundle;
 
 import App.User;
 import Main.ViewModel;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import java.time.LocalDate;
 
@@ -22,26 +16,35 @@ import java.time.LocalDate;
 public class SignUpController implements Initializable {
 
     @FXML
-    public JFXTextField first_name;
-    public JFXTextField last_name;
-    public JFXTextField email;
-    public JFXPasswordField password;
-    public JFXPasswordField confirm_password;
+    public TextField first_name;
+    public TextField last_name;
+    public TextField email;
+    public TextField password;
+    public TextField confirm_password;
     public DatePicker birth_date;
-    public JFXTextField city;
+    public TextField city;
+
 
     private ViewModel viewModel;
-    private User user;
+    private User newuser;
+
+
+    //MenuItems
+    public MenuItem exit_menu;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        exit_menu.setOnAction(e -> {System.exit(0);});
+
     }
 
-    public void handleAddUser(MouseEvent mouseEvent) {
-        user = new User(first_name.getText(), last_name.getText(), email.getText(), password.getText(), birth_date.getValue(), city.getText());
+    public void handleAddUser (MouseEvent mouseEvent) {
+        LocalDate birth_dateValue = birth_date.getValue();
+        newuser = new User(first_name.getText(), last_name.getText(), email.getText(), password.getText(), birth_dateValue, city.getText());
 
         if (validateform()) {
-            viewModel.addUser(user);
+            viewModel.addUser(newuser);
             popAlertinfo("Registration successfully completed!");
             resetFields(mouseEvent);
             viewModel.goToSignIn();
@@ -55,6 +58,10 @@ public class SignUpController implements Initializable {
             popAlerterror("One or more fields is empty!");
             return false;
         }
+        if (viewModel.isUserExists(newuser)) {
+            popAlerterror("This email already exist!");
+            return false;
+        }
 
         if (!confirm_password.getText().equals(password.getText())) {
             popAlerterror("The passwords don't match!");
@@ -65,15 +72,12 @@ public class SignUpController implements Initializable {
             popAlerterror("The passwords have to contain 8 characters!");
             return false;
         }
-        if ((birth_date.getValue().getYear() - LocalDate.now().getYear() < 18)) {
+        if ((LocalDate.now().getYear() - birth_date.getValue().getYear())  < 18) {
             popAlerterror("You are too young!");
             return false;
         }
 
-        if (viewModel.isUserExists(user)) {
-            popAlerterror("This email already exist!");
-            return false;
-        }
+
         if (!first_name.getText().chars().allMatch(Character::isLetter)) {
             popAlerterror("First Name have contain only letters!");
             return false;
@@ -81,6 +85,10 @@ public class SignUpController implements Initializable {
 
         if (!last_name.getText().chars().allMatch(Character::isLetter)) {
             popAlerterror("Last Name have contain only letters!");
+            return false;
+        }
+        if (!city.getText().chars().allMatch(Character::isLetter)) {
+            popAlerterror("City have contain only letters!");
             return false;
         }
         return true;
@@ -132,7 +140,7 @@ public class SignUpController implements Initializable {
         password.setText("");
         confirm_password.setText("");
         city.setText("");
-        birth_date.setValue(LocalDate.now());
+        birth_date.setValue(null);
     }
 
 
@@ -152,29 +160,12 @@ public class SignUpController implements Initializable {
 
 //*********  Menu Functions **************///
 
-    public void goToSignIn(MouseEvent mouseEvent) {
-        User currentUser = viewModel.getUser();
-        if (this.viewModel.isUserExists(currentUser)) {
-            this.viewModel.popAlertinfo("You already Sign in!"); }
-        else {
-            viewModel.goToSignIn();
-        }
-    }
+    public void goToSignIn(MouseEvent mouseEvent) {viewModel.goToSignIn(); }
+    public void goTosignOut(MouseEvent mouseEvent) {viewModel.loguotUser();}
 
-    public void goTosignOut(MouseEvent mouseEvent) {
-
-        User currentUser = viewModel.getUser();
-        if (this.viewModel.isUserExists(currentUser)) {
-            this.user = null;
-            viewModel.loguotUser();
-            viewModel.goToSearchView();
-            }
-        else {
-            this.viewModel.popAlertinfo("You are NOT Sign in!");
-        }
+    public void goToAddVacation(MouseEvent mouseEvent){viewModel.goToAddVacation();}
 
 
-    }
 
 
     public void goToSignUp(MouseEvent mouseEvent) {
@@ -228,18 +219,6 @@ public class SignUpController implements Initializable {
 
     }
 
-    public void goToAddVacation(MouseEvent mouseEvent){
-        User currentUser = viewModel.getUser();
-        if (this.viewModel.isUserExists(currentUser)) {
-            viewModel.goToAddVacation();
-        }
-        else {
-            this.viewModel.popAlertinfo("You are NOT Sign in!");
-            viewModel.goToSignIn();
-        }
-
-
-         }
 
 
 
@@ -270,8 +249,8 @@ public class SignUpController implements Initializable {
     public void goToSearch(MouseEvent mouseEvent) {
         viewModel.goToSearchView();
     }
-    private void exitApp(MouseEvent event) {
-        System.exit(0);
-    }
+//    public void exitApp(MouseEvent event) {
+//        System.exit(0);
+//    }
 
 }

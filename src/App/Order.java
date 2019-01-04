@@ -16,6 +16,12 @@ public class Order {
         this.buyer_status=buyer_status;
     }
 
+    public Order(String seller_email, String buyer_email, int vacation_id) {
+        this.seller_email = seller_email;
+        this.buyer_email = buyer_email;
+        this.vacation_id = vacation_id;
+    }
+
 
     //Get Functions
     public String getSeller_email(){return this.seller_email;}

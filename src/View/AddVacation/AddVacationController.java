@@ -58,13 +58,6 @@ public class AddVacationController implements Initializable {
 
 
         public void initialize(URL url, ResourceBundle rb) {
-
-            user= viewModel.getUser();
-            if(!this.viewModel.isUserExists(user)){
-                this.viewModel.popAlerterror("Please Sign in!");
-                this.viewModel.goToSignIn();
-            }
-
         }
 
         public void addVacation(MouseEvent mouseEvent){
@@ -171,5 +164,6 @@ public class AddVacationController implements Initializable {
         }
 
         public void setViewModel(ViewModel viewModel) {this.viewModel = viewModel; }
+        public void setUser(User currentUser){this.user=currentUser;}
 
     }

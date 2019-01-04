@@ -22,22 +22,30 @@ public class SignInController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    public void setViewModel(ViewModel viewModel) {
+    public void setViewModel (ViewModel viewModel) {
         this.viewModel = viewModel;
     }
 
 
-    public void goToSignUp(MouseEvent mouseEvent) {
+    public void goToSignUp (MouseEvent mouseEvent) {
         viewModel.goToSignUp();
     }
 
 
     public void goToUserView(MouseEvent mouseEvent) {
-        if(viewModel.loadUser(email.getText(), password.getText())) {
-            viewModel.goToSearchView();
+
+        if (email.getText() == null || email.getText().trim().isEmpty() || password.getText()==null ||password.getText().trim().isEmpty()) {
+            viewModel.popAlerterror("Email or password are empty");
+            return;
         }
-            else {
+        else {
+        if(viewModel.loadUser(email.getText(), password.getText())) {
+            System.out.println("loadUser");
+//            viewModel.goToSearchView();
+        }
+            else
                 viewModel.popAlerterror("Email or password are incorrect");
-            }
+
         }
     }
+}

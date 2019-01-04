@@ -35,17 +35,17 @@ public class Model {
     //*************** Delete ******************************
     public void deleteVacation(Vacation aVacation) {db.deleteVacation(aVacation);}
     public void deleteUser(User user){db.deleteUser(user);}
-
+    public void deleteVacationsBySeller(String userEmail){db.deleteVacationsBySeller(userEmail);}
 
     // ******************** Get ********************************
 
-    public User loadUser(User user) {return db.getUserByEmail(user.getEmail());}
+    public User loadUser(String userEmail) {return db.getUserByEmail(userEmail);}
     public String getUserNameByEmail(String email){return db.getUserNameByEmail(email);}
     public Vacation getVacationByVacationId(int VacationId){return db.getVacationByVacationId(VacationId);}
     public List<Order> getOrdersByseller_email(String seller_email){return db.getOrdersByseller_email(seller_email);}
     public List<Order> getOrdersByBuyer_email(String buyer_email){return db.getOrdersByBuyer_email(buyer_email);}
     public List<Vacation> getAllAvailableVacations(){return db.getAllAvailableVacations();}
-    public List<Vacation> getVacationBySimpleSearch(Vacation aVacation){return getVacationBySimpleSearch(aVacation);}
+    public List<Vacation> getVacationBySimpleSearch(Vacation aVacation){return db.getVacationBySimpleSearch(aVacation);}
 
 
     //*****************Update************************
