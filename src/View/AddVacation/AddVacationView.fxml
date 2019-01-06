@@ -22,12 +22,12 @@
       <AnchorPane layoutX="-42.0" layoutY="34.0" prefHeight="607.0" prefWidth="970.0" styleClass="bodybg" stylesheets="@../images/background.css" AnchorPane.bottomAnchor="-12.0" AnchorPane.leftAnchor="-42.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="34.0">
          <children>
             <AnchorPane layoutX="122.0" layoutY="32.0" opacity="0.65" prefHeight="545.0" prefWidth="772.0" style="-fx-background-color: #ffffff;" />
-            <GridPane layoutX="141.0" layoutY="115.0" prefHeight="370.0" prefWidth="722.0" AnchorPane.leftAnchor="141.0" AnchorPane.rightAnchor="152.0">
+            <GridPane layoutX="141.0" layoutY="114.0" prefHeight="371.0" prefWidth="720.0" AnchorPane.leftAnchor="141.0" AnchorPane.rightAnchor="109.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="191.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="189.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="177.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="156.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="182.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="184.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="170.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="182.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="48.0" minHeight="9.0" prefHeight="24.0" vgrow="SOMETIMES" />
@@ -53,7 +53,7 @@
                   <TextField fx:id="original_price" layoutX="250.0" layoutY="193.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
                   <Label layoutX="10.0" layoutY="198.0" prefHeight="21.0" prefWidth="130.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <DatePicker id="StartDatePicker" fx:id="checkin" prefHeight="31.0" prefWidth="197.0" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="checked_bag" prefHeight="31.0" prefWidth="176.0" promptText="Checked Baggage" value="Checked Baggage" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                  <ComboBox fx:id="checked_bag" prefHeight="31.0" prefWidth="184.0" promptText="Checked Baggage" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="Not included" />
@@ -63,7 +63,7 @@
                         </FXCollections>
                      </items>
                   </ComboBox>
-                  <ComboBox fx:id="hand_bag" prefHeight="31.0" prefWidth="191.0" promptText="Hand baggage" value="Hand baggage" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                  <ComboBox fx:id="hand_bag" prefHeight="31.0" prefWidth="191.0" promptText="Hand baggage" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="Not included" />
@@ -74,7 +74,7 @@
                      </items>
                   </ComboBox>
                   <DatePicker id="StartDatePicker" fx:id="checkout" layoutX="10.0" layoutY="84.0" prefHeight="31.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="from" layoutX="342.0" layoutY="269.0" prefHeight="31.0" prefWidth="181.0" promptText="From" value="Israel" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <ComboBox fx:id="from" layoutX="342.0" layoutY="269.0" prefHeight="31.0" prefWidth="181.0" promptText="From" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="Austria" />
@@ -159,7 +159,7 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </CheckBox>
-                  <CheckBox fx:id="hotel_in" layoutX="197.0" layoutY="217.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="143.0" text="Hotel included" GridPane.rowIndex="10" />
+                  <CheckBox fx:id="hotel_in" layoutX="197.0" layoutY="217.0" mnemonicParsing="false" onAction="#isHotel" prefHeight="21.0" prefWidth="143.0" text="Hotel included" GridPane.rowIndex="10" />
                   <ComboBox fx:id="hotel_raiting" layoutX="197.0" layoutY="356.0" prefHeight="31.0" prefWidth="158.0" promptText="Hotel Raiting" GridPane.columnIndex="2" GridPane.rowIndex="10">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
@@ -173,7 +173,7 @@
                   </ComboBox>
                </children>
             </GridPane>
-            <Button fx:id="add_bt" layoutX="219.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#addVacation" prefHeight="41.0" prefWidth="578.0" text="Add" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="180.0" />
+            <Button fx:id="add_bt" layoutX="219.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#AddVacation" prefHeight="41.0" prefWidth="578.0" text="Add" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="180.0" />
             <Label layoutX="292.0" layoutY="51.0" prefHeight="21.0" prefWidth="411.0" text="Add a New Vacation4Sale" textFill="#0d186b">
                <font>
                   <Font size="36.0" />

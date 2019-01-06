@@ -58,7 +58,7 @@
                   <DatePicker id="StartDatePicker" fx:id="birth_date" prefHeight="25.0" prefWidth="373.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
             </GridPane>
-            <Button fx:id="bt_sup" layoutX="220.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#handleAddUser" prefHeight="41.0" prefWidth="122.0" text="Sign Up" />
+            <Button fx:id="bt_sup" layoutX="220.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#AddUser" prefHeight="41.0" prefWidth="122.0" text="Sign Up" />
             <MenuBar layoutX="10.0" layoutY="8.0" prefHeight="10.0" prefWidth="662.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <menus>
                   <Menu fx:id="profile" mnemonicParsing="false" text="My Profil">
@@ -71,20 +71,20 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Sell Vacation">
                      <items>
-                        <MenuItem fx:id="addVac" mnemonicParsing="false" onAction="#goToAddVacation" text="New Vacation" />
+                        <MenuItem fx:id="addVac_menu" mnemonicParsing="false" text="New Vacation" />
                         <MenuItem mnemonicParsing="false" text="buyers suggestions" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Buy Now!">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Search vacation" />
-                        <MenuItem mnemonicParsing="false" text="My vacation Cart" />
+                        <MenuItem fx:id="buyer_req_menu" mnemonicParsing="false" text="My vacation Request" />
                      </items>
                   </Menu>
                   <Menu fx:id="profile1" mnemonicParsing="false" text="Log in">
                      <items>
-                        <MenuItem fx:id="signin" mnemonicParsing="false" onAction="#goToSignIn" text="Sign in" />
-                        <MenuItem fx:id="signout" mnemonicParsing="false" onAction="#goTosignOut" text="Sign out" />
+                        <MenuItem fx:id="SignIn_menu" mnemonicParsing="false" text="Sign in" />
+                        <MenuItem fx:id="SignOut_menu" mnemonicParsing="false" text="Sign out" />
                      </items>
                   </Menu>
                   <Menu fx:id="exit_menu" mnemonicParsing="false" text="Exit">

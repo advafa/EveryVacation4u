@@ -48,7 +48,7 @@ public class EditProfileController implements Initializable {
     }
 
 
-    public void handleUpdateUser(MouseEvent mouseEvent) {
+    public void EditProfile(MouseEvent mouseEvent) {
         user = new User(first_name.getText(), last_name.getText(), email.getText(), password.getText(), birth_date.getValue(), city.getText());
 
         if (validateform()) {

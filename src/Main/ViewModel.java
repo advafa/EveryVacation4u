@@ -53,7 +53,7 @@ public class ViewModel extends Application {
     private Scene AddVacationScene;
     private AddVacationController addVacationController;
 
-    private Scene BuyerVacationsView;
+    private Scene BuyerVacationsViewScene;
     private BuyerVacationsController buyerVacationsController;
 
     private Scene BuyerVacationDetails;
@@ -82,8 +82,7 @@ public class ViewModel extends Application {
     private Scene signUpScene;
     private SignUpController signUpController;
 
-
-
+    private Scene goToPageScene;
 
 
 //*********************************************************************
@@ -105,8 +104,8 @@ public class ViewModel extends Application {
 //        FXMLLoader EditProfileViewLoader = new FXMLLoader(getClass().getResource("../View/ProfileView/EditProfileView.fxml"));
 //        Parent EditProfileViewRoot = (Parent) EditProfileViewLoader.load();
 
-//        FXMLLoader BuyerVacationViewLoader = new FXMLLoader(getClass().getResource("../View/BuyerVacation/BuyerVacation.fxml"));
-//        Parent BuyerVacationViewRoot = (Parent) BuyerVacationViewLoader.load();
+        FXMLLoader BuyerVacationViewLoader = new FXMLLoader(getClass().getResource("../View/BuyerVacation/BuyerVacation.fxml"));
+        Parent BuyerVacationViewRoot = (Parent) BuyerVacationViewLoader.load();
 
 //        FXMLLoader buyerVacationDetailViewLoader = new FXMLLoader(getClass().getResource("../View/BuyerVacationDetails/BuyerVacationDetailsView.fxml"));
 //        Parent buyerVacationDetailViewRoot = (Parent) buyerVacationDetailViewLoader.load();
@@ -138,7 +137,7 @@ public class ViewModel extends Application {
         setDraggable(stage, signInRoot);
 //        setDraggable(stage, ProfileViewRoot);
 ////        setDraggable(stage, EditProfileViewRoot);
-////        setDraggable(stage, BuyerVacationViewRoot);
+        setDraggable(stage, BuyerVacationViewRoot);
 ////        setDraggable(stage, buyerVacationDetailViewRoot);
         setDraggable(stage, addVacationRoot);
 ////        setDraggable(stage, searchViewRoot);
@@ -151,8 +150,8 @@ public class ViewModel extends Application {
         signUpScene = new Scene(signUpRoot);
         signInScene = new Scene(signInRoot);
         AddVacationScene = new Scene(addVacationRoot);
-////        BuyerVacationsView = new Scene(BuyerVacationViewRoot);
-////        BuyerVacationDetails = new Scene(buyerVacationDetailViewRoot);
+        BuyerVacationsViewScene = new Scene(BuyerVacationViewRoot);
+//        BuyerVacationDetails = new Scene(buyerVacationDetailViewRoot);
 //        Payment = new Scene(PaymentRoot);
 //        EditProfile = new Scene(EditProfileViewRoot);
 //        ProfileView = new Scene(ProfileViewRoot);
@@ -174,8 +173,8 @@ public class ViewModel extends Application {
         addVacationController = addVacationLoader.getController();
         addVacationController.setViewModel(this);
 
-//        buyerVacationsController = BuyerVacationViewLoader.getController();
-//        buyerVacationsController.setViewModel(this);
+        buyerVacationsController = BuyerVacationViewLoader.getController();
+        buyerVacationsController.setViewModel(this);
 
 //        buyerVacationDetailsController = buyerVacationDetailViewLoader.getController();
 //        buyerVacationDetailsController.setViewModel(this);
@@ -199,8 +198,23 @@ public class ViewModel extends Application {
 //        sellerVacationDetailsController.setViewModel(this);
 
 
+//        loadUser("Tal@gmail.com", "1111");
+        loadUser("Niv@gmail.com", "1111");
+//
 
+//        Order o1= new Order("Tal@gmail.com","Niv@gmail.com",4,false);
+//        Order o2= new Order("Tal@gmail.com","Niv@gmail.com",5,false);
+//
+//        Order o3= new Order("Tal@gmail.com","Niv@gmail.com",6,false);
+//
+//        addReq(o1);
+//        addReq(o2);
+//        addReq(o3);
+//
+//        setSellerStatus(o2, true);
+//        setSellerStatus(o3,false);
 
+        goToPageScene=SearchView;
         stage.setScene(this.signUpScene);
         stage.show();
 
@@ -219,7 +233,7 @@ public class ViewModel extends Application {
         model.UpdateUser(user);
     }
 
-    public void addUser(User user) { model.addUser(user); }
+    public void AddUser(User user) { model.addUser(user); }
     public void deleteUser(User user) {
         model.deleteUser(user);
     }
@@ -279,6 +293,9 @@ public class ViewModel extends Application {
         model.addVacation(vacation);
     }
 
+    public void addReq(Order order) {
+        model.addReq(order);
+    }
 
     //******************************?????????????
 
@@ -328,15 +345,24 @@ public class ViewModel extends Application {
 
     }
 
+    public void goToPage(){
+        stage.setScene(goToPageScene);
+
+    }
     public void goToSignIn() {
-        this.user = null;
-        stage.setScene(signInScene);}
+
+        if (this.user==null)  {
+            stage.setScene(signInScene);
+        }
+        else {
+            popAlertinfo("You already Sign in!");
+        }
+        ;}
 
 
     public void goToAddVacation() {
-
+        goToPageScene=AddVacationScene;
         if (isUserExists(this.user)) {
-            addVacationController.setUser(this.user);
             stage.setScene(AddVacationScene);
         }
         else {
@@ -363,9 +389,15 @@ public class ViewModel extends Application {
 
 
     public void goToBuyerVacationsView() {
-        buyerVacationsController.setUser(user);
-        buyerVacationsController.loadBuyerVacations(user);
-        stage.setScene(BuyerVacationsView); }
+        goToPageScene=BuyerVacationsViewScene;
+        if (isUserExists(this.user)) {
+            buyerVacationsController.loadBuyerVacations();
+            stage.setScene(BuyerVacationsViewScene);
+        } else {
+            popAlertinfo("You are NOT Sign in!");
+            stage.setScene(signInScene);
+        }
+    }
 
 
 

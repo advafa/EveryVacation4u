@@ -21,8 +21,8 @@ public class Model {
     public void addVacation(Vacation aVacation) {
         db.addVacation(aVacation);
     }
-    public void addOrder(Order order) {
-        db.addOrder(order);
+    public void addReq(Order order) {
+        db.addReq(order);
     }
     public void addPayment(Payment payment) {
         db.addPayment(payment);
@@ -53,5 +53,5 @@ public class Model {
     public void UpdateOrdersSellerStatus(Order ord, boolean sellerStatus) {db.UpdateOrdersSellerStatus(ord,sellerStatus);};
     public void UpdateOrdersBuyerStatus(Order ord, boolean buyerStatus) {db.UpdateOrdersBuyerStatus(ord,buyerStatus);}
     public void UpdatVacationStatus(int vacation_id, boolean vac_status) {db.UpdatVacationStatus(vacation_id,vac_status);}
-
+    public void UpdateVacation(Vacation vac){db.UpdateVacation(vac);}
 }

@@ -9,6 +9,8 @@ public class Order {
     private Boolean seller_status;//true=approve, false=decline
     private Boolean buyer_status;//true=paid, false=submit
 
+    public String status="App";
+
     public Order(String seller_email, String buyer_email, int vacation_id, Boolean buyer_status){
         this.seller_email=seller_email;
         this.buyer_email=buyer_email;
@@ -16,11 +18,7 @@ public class Order {
         this.buyer_status=buyer_status;
     }
 
-    public Order(String seller_email, String buyer_email, int vacation_id) {
-        this.seller_email = seller_email;
-        this.buyer_email = buyer_email;
-        this.vacation_id = vacation_id;
-    }
+
 
 
     //Get Functions
@@ -36,5 +34,6 @@ public class Order {
     public void setVacation_id(int vacation_id) {this.vacation_id = vacation_id;}
     public void setBuyer_status(Boolean buyer_status) {this.buyer_status = buyer_status; }
     public void setSeller_status(Boolean seller_status) {this.seller_status = seller_status;}
+
 
 }

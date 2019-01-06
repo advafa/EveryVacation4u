@@ -12,9 +12,9 @@
    <children>
       <AnchorPane layoutX="-19.0" prefHeight="423.0" prefWidth="691.0" AnchorPane.bottomAnchor="-23.0" AnchorPane.leftAnchor="-19.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="dec_btn" layoutX="168.0" layoutY="349.0" mnemonicParsing="false" onMouseClicked="#Decline" prefHeight="39.0" prefWidth="154.0" style="-fx-background-color: #f41c00;" text="Decline" />
-            <Button fx:id="app_btn" layoutX="7.0" layoutY="349.0" mnemonicParsing="false" onMouseClicked="#Aprrove" prefHeight="39.0" prefWidth="154.0" style="-fx-background-color: #42bf3d;" text="Approve" />
-            <Button fx:id="payment" layoutX="505.0" layoutY="349.0" mnemonicParsing="false" onMouseClicked="#goToPay" prefHeight="39.0" prefWidth="154.0" text="Approve payment" />
+            <Button fx:id="dec_btn" layoutX="168.0" layoutY="349.0" mnemonicParsing="false" onMouseClicked="#DeclineSaleRequest" prefHeight="39.0" prefWidth="154.0" style="-fx-background-color: #f41c00;" text="Decline" />
+            <Button fx:id="app_btn" layoutX="7.0" layoutY="349.0" mnemonicParsing="false" onMouseClicked="#ApproveSaleRequest" prefHeight="39.0" prefWidth="154.0" style="-fx-background-color: #42bf3d;" text="Approve" />
+            <Button fx:id="payment" layoutX="505.0" layoutY="349.0" mnemonicParsing="false" onMouseClicked="#ApprovePament" prefHeight="39.0" prefWidth="154.0" text="Approve payment" />
             <TableView fx:id="SaleRequstTable" layoutX="4.0" layoutY="28.0" prefHeight="286.0" prefWidth="678.0" style="-fx-background-color: lightblue;">
                <columns>
                   <TableColumn fx:id="colVacationId" prefWidth="156.0" text="Vacation Code" />

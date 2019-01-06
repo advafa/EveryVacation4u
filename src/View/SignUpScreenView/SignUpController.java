@@ -31,20 +31,29 @@ public class SignUpController implements Initializable {
 
     //MenuItems
     public MenuItem exit_menu;
-
+    public MenuItem SignIn_menu;
+    public MenuItem SignOut_menu;
+    public MenuItem addVac_menu;
+    public MenuItem buyer_req_menu;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        //*********  Menu Functions **************///
         exit_menu.setOnAction(e -> {System.exit(0);});
+        SignIn_menu.setOnAction(e -> {viewModel.goToSignIn();});
+        SignOut_menu.setOnAction(e -> {viewModel.loguotUser();});
+        addVac_menu.setOnAction(e -> {viewModel.goToAddVacation();});
+        buyer_req_menu.setOnAction(e -> {viewModel.goToBuyerVacationsView();});
+
 
     }
 
-    public void handleAddUser (MouseEvent mouseEvent) {
+    public void AddUser (MouseEvent mouseEvent) {
         LocalDate birth_dateValue = birth_date.getValue();
         newuser = new User(first_name.getText(), last_name.getText(), email.getText(), password.getText(), birth_dateValue, city.getText());
 
         if (validateform()) {
-            viewModel.addUser(newuser);
+            viewModel.AddUser(newuser);
             popAlertinfo("Registration successfully completed!");
             resetFields(mouseEvent);
             viewModel.goToSignIn();
@@ -160,14 +169,6 @@ public class SignUpController implements Initializable {
 
 //*********  Menu Functions **************///
 
-    public void goToSignIn(MouseEvent mouseEvent) {viewModel.goToSignIn(); }
-    public void goTosignOut(MouseEvent mouseEvent) {viewModel.loguotUser();}
-
-    public void goToAddVacation(MouseEvent mouseEvent){viewModel.goToAddVacation();}
-
-
-
-
     public void goToSignUp(MouseEvent mouseEvent) {
         User currentUser = viewModel.getUser();
         if (this.viewModel.isUserExists(currentUser)) {
@@ -178,7 +179,7 @@ public class SignUpController implements Initializable {
     }
 
 
-    public void goToProfileView(MouseEvent mouseEvent){
+    public void ProfileView(MouseEvent mouseEvent){
         User currentUser = viewModel.getUser();
         if (this.viewModel.isUserExists(currentUser)) {
             viewModel.goToProfileView();
@@ -189,7 +190,7 @@ public class SignUpController implements Initializable {
         }
     }
 
-    public void goToEditProfile(MouseEvent mouseEvent){
+    public void EditProfile(MouseEvent mouseEvent){
         User currentUser = viewModel.getUser();
         if (this.viewModel.isUserExists(currentUser)) {
             viewModel.goToEditProfile();
@@ -200,7 +201,7 @@ public class SignUpController implements Initializable {
         }
     }
 
-    public void deleteUser(){
+    public void DeleteProfile(){
         User currentUser= viewModel.getUser();
         if(this.viewModel.isUserExists(currentUser)){
 

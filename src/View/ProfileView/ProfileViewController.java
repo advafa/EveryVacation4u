@@ -9,39 +9,40 @@ import App.User;
 import Main.ViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
+import javafx.scene.control.*;
+//javafx.scene.control.Label
 public class ProfileViewController implements Initializable{
 
         @FXML
-        public javafx.scene.control.Label first_name;
-        public javafx.scene.control.Label last_name;
-        public javafx.scene.control.Label email;
-        public javafx.scene.control.Label password;
-        public javafx.scene.control.Label birth_date;
-        public javafx.scene.control.Label city;
+        public Label first_name;
+        public Label last_name;
+        public Label email;
+        public Label password;
+        public Label birth_date;
+        public Label city;
 
-        private ViewModel viewModel;
-        private User user;
+    private ViewModel viewModel;
+    private User user;
 
         @Override
         public void initialize(URL url, ResourceBundle rb) {
-
-            user=viewModel.getUser();
-            if(this.viewModel.isUserExists(user)){
-                this.first_name.setText(user.getFirst_name());
-                this.last_name.setText(user.getLast_name());
-                this.email.setText(user.getEmail());
-                this.password.setText(user.getPassword());
-                this.birth_date.setText((user.getBirth_date().toString()));
-                this.city.setText(user.getCity());}
-            else{
-                viewModel.popAlerterror("Please Sign in!");
-            }
+            this.first_name.setText(user.getFirst_name());
+            this.last_name.setText(user.getLast_name());
+            this.email.setText(user.getEmail());
+            this.password.setText(user.getPassword());
+            this.birth_date.setText((user.getBirth_date().toString()));
+            this.city.setText(user.getCity());
         }
+//        public void setUserView(){
+//        this.first_name.setText(user.getFirst_name());
+//        this.last_name.setText(user.getLast_name());
+//        this.email.setText(user.getEmail());
+//        this.password.setText(user.getPassword());
+//        this.birth_date.setText((user.getBirth_date().toString()));
+//        this.city.setText(user.getCity());}
 
-
-
-    public void setViewModel(ViewModel viewModel) { this.viewModel = viewModel; }
+        public void setUser(User currentUser){this.user=currentUser;}
+        public void setViewModel(ViewModel viewModel) { this.viewModel = viewModel; }
 
 
 }

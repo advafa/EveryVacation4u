@@ -179,7 +179,7 @@ private int getVacationID(){
 }
 
 
-    public void addOrder(Order order) {
+    public void addReq (Order order) {
 
         try {
 
@@ -290,6 +290,67 @@ private int getVacationID(){
             String query = "UPDATE Users SET first_name='" + first_name +
                     "', last_name='" + last_name + "',password='" + password + "',birth_date='" + birth_date + "',city='" + city + "'" +
                     "WHERE email = '" + email + "'";
+            execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public void UpdateVacation(Vacation vac) {
+        try {
+
+            int vacation_id = vac.getVacation_id();
+            String from = vac.getFrom();
+            String to = vac.getto();
+            String checkin = vac.toStringCheckin();
+            String checkout = vac.toStringCheckout();
+            String airline = vac.getAirline();
+            int back_flight = vac.getBackFlight() ? 1 : 0;
+            String hand_bag = vac.getHand_bag();
+            String checked_bag = vac.getChecked_bag();
+            String connec_flight = vac.getConnec_flight();
+            String vacation_type = vac.getVacation_type();
+            String ticket_type = vac.getTicket_type();
+
+            int hotel;
+            String hotel_type;
+            int hotel_raiting;
+            if (vac.getHotel()) {
+                hotel = 1;
+                hotel_type = vac.getHotel_type();
+                hotel_raiting = vac.getHotel_raiting();
+            } else {
+                hotel = 0;
+                hotel_type = null;
+                hotel_raiting = -1;
+            }
+
+            int num_of_tickets = vac.getNum_of_tickets();
+            int original_price = vac.getOriginal_price();
+            int sale_price = vac.getSale_price();
+            int off = vac.getOff();
+
+            String query = "UPDATE Vacations SET fromCountry= '" + from +
+                            "', toCountry = '" +to+
+                            "', checkin = '" +checkin +
+                            "', checkout = '" +checkout+
+                            "', airline = '" +airline +
+                            "', back_flight = " +back_flight+
+                            ", hand_bag  = '" + hand_bag +
+                            "', checked_bag = '" + checked_bag +
+                            "', connec_flight = '" + connec_flight +
+                            "', vacation_type = '" + vacation_type +
+                            "', ticket_type  = '" + ticket_type +
+                            "', hotel =" +hotel+
+                            ", hotel_type = '" +hotel_type+
+                            "', hotel_raiting =" +hotel_raiting+
+                            ", num_of_tickets = " +num_of_tickets+
+                            ", original_price= " +original_price+
+                            ", sale_price = " +sale_price+
+                            ", off  = " +off+ " WHERE vacation_id = " + vacation_id + "";
+
             execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -532,6 +593,7 @@ private int getVacationID(){
         String buyer_email = resultSet.getString("buyer_email");
         int vacation_id = resultSet.getInt("vacation_id");
         Boolean seller_status = resultSet.getInt("seller_status") == 1;
+        if(resultSet.getInt("seller_status") == -1) seller_status=null;
         Boolean buyer_status = resultSet.getInt("buyer_status") == 1;
 
 

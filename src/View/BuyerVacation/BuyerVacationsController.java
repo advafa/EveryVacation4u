@@ -21,39 +21,33 @@ public class BuyerVacationsController implements Initializable {
 
 //seller_status true=approve, false=decline
 
-    public TableView<OrderView> SaleRequstTable;
-    public TableColumn<OrderView, String> colVacationId;
-    public TableColumn<OrderView, String> colSellerName;
-    public TableColumn<OrderView, String> colRequestStatus;
-    private ObservableList<OrderView> SaleRequst;
+    public TableView<Order> SaleRequstTable;
+    public TableColumn<Order, Integer> colVacationId;
+    public TableColumn<Order, String> colSellerName;
+    public TableColumn<Order, String> colRequestStatus;
+    private ObservableList<Order> SaleRequst;
 
-    private OrderView clickedRow;
+    private Order clickedRow;
 
-    public Button buy;
+
 
     private ViewModel viewModel;
-    private User user;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-            colVacationId.setCellValueFactory(new PropertyValueFactory<>("VacationCode"));
-            colSellerName.setCellValueFactory(new PropertyValueFactory<>("SellerName"));
-            colRequestStatus.setCellValueFactory(new PropertyValueFactory<>("RequestStatus"));
+            colVacationId.setCellValueFactory(new PropertyValueFactory<>("vacation_id"));
+            colSellerName.setCellValueFactory(new PropertyValueFactory<> ("buyer_email"));
+            colRequestStatus.setCellValueFactory(new PropertyValueFactory<> ("seller_email"));
 
             SaleRequst = FXCollections.observableArrayList();
 
             SaleRequstTable.setRowFactory(tv -> {
-                TableRow<OrderView> row = new TableRow<>();
+                TableRow<Order> row = new TableRow<>();
                 row.setOnMouseClicked(event -> {
                     if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
 
                         this.clickedRow = row.getItem();
 
-                        if(this.clickedRow.getStatus()=="Approved"){
-                            buy.setDisable(false);}
-                        else{
-                            buy.setDisable(true);
-                        }
 
                     }
                 });
@@ -64,63 +58,32 @@ public class BuyerVacationsController implements Initializable {
 
     }
 
-
-    public void goToDetails(MouseEvent mouseEvent) {
-        if(this.clickedRow.getStatus()=="Approved"){
-        viewModel.goToBuyerVacationDetails(this.clickedRow.getVacation_id(),true);}
-        else{
-            viewModel.goToBuyerVacationDetails(this.clickedRow.getVacation_id(),false);}
-
-    }
-
-    public void goToPay(MouseEvent mouseEvent) {
-        if(this.clickedRow.getStatus()=="Declined") {
-            viewModel.popAlerterror("This vacation is not available4U!");
-            return;
-        }
-        if(!viewModel.getVacationStatus(clickedRow.getVacation_id())){
-            viewModel.popAlerterror("This vacation Sold Out!");
-            return;
-        }
-
-//        viewModel.goToPayment(this.clickedRow.getVacation_id());
-
-    }
-
-
     public void setViewModel(ViewModel viewModel) {
         this.viewModel = viewModel;
     }
-    public void setUser(User user) {
-        this.user = user;
-    }
+
+    public void goToDetails(MouseEvent mouseEvent) {
+        viewModel.goToBuyerVacationDetails(this.clickedRow.getVacation_id(),this.clickedRow.getSeller_status());}
 
 
 
 
-    public void loadBuyerVacations(User user) {
 
-        if (this.viewModel.isUserExists(user)) {
+
+
+    public void loadBuyerVacations() {
+
             SaleRequstTable.setItems(FXCollections.observableArrayList());
             SaleRequst = FXCollections.observableArrayList();
             List<Order> SaleRequstList = viewModel.getOrdersByBuyer_email();
 
-            String sellerName;
-            int vacation_id;
-            String sellerStatus;
+            for(Order order : SaleRequstList){
 
-            for (Order ord : SaleRequstList) {
-                sellerName=viewModel.getUserNameByEmail(ord.getSeller_email());
-                vacation_id=ord.getVacation_id();
-                sellerStatus=ord.getSeller_status()?"Approved":"Declined";
-                OrderView orderView = new OrderView(vacation_id, sellerName, sellerStatus);
-                SaleRequst.add(orderView);
+                SaleRequst.add(order);
             }
-            SaleRequstTable.setItems(SaleRequst);
-        } else {
-            this.viewModel.popAlertinfo("Please Sign in!");
-            this.viewModel.goToSignIn();
-        }
+
+
+        SaleRequstTable.setItems(SaleRequst);
     }
 
 

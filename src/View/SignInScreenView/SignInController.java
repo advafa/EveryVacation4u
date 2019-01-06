@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import Main.ViewModel;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -17,7 +16,6 @@ public class SignInController implements Initializable {
     public PasswordField password;
     private ViewModel viewModel;
 
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
@@ -41,7 +39,7 @@ public class SignInController implements Initializable {
         else {
         if(viewModel.loadUser(email.getText(), password.getText())) {
             System.out.println("loadUser");
-//            viewModel.goToSearchView();
+            viewModel.goToPage();
         }
             else
                 viewModel.popAlerterror("Email or password are incorrect");

@@ -4,6 +4,7 @@ import App.User;
 import App.Vacation;
 import Main.ViewModel;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -11,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-
+import javafx.scene.control.*;
 
 
 
@@ -26,13 +27,13 @@ public class AddVacationController implements Initializable {
         public ComboBox<String> from;
         public ComboBox<String> to;
 
-        public javafx.scene.control.TextField airline;
+        public TextField airline;
         public javafx.scene.control.CheckBox back_flight;
         public ComboBox<String> hand_bag;
         public ComboBox<String> checked_bag;
-        public javafx.scene.control.TextField num_of_tickets;
-        public javafx.scene.control.TextField original_price;
-        public javafx.scene.control.TextField sale_price;
+        public TextField num_of_tickets;
+        public TextField original_price;
+        public TextField sale_price;
 
 
         public ComboBox<String> connec_flight;
@@ -45,8 +46,6 @@ public class AddVacationController implements Initializable {
         public javafx.scene.control.CheckBox separately;
 
         private ViewModel viewModel;
-        private User user;
-
         private Vacation vacation;
 
 
@@ -58,41 +57,36 @@ public class AddVacationController implements Initializable {
 
 
         public void initialize(URL url, ResourceBundle rb) {
+            hotel_type.setEditable(true);
+            hotel_raiting.setEditable(true);
         }
 
-        public void addVacation(MouseEvent mouseEvent){
-            try {
-                org_p=Integer.parseInt(original_price.getText());
-                sal_p=Integer.parseInt(sale_price.getText());
-                off=100*(org_p-sal_p)/org_p;
-            }
-            catch (Exception e) {
-                viewModel.popAlertinfo("Prices must be integer");
-            }
-            try{
-                num=Integer.parseInt(num_of_tickets.getText());}
-            catch (Exception e) {
-                viewModel.popAlertinfo("Number of tickets must be integer");
-            }
+        public void AddVacation(MouseEvent mouseEvent){
+
             if(hotel_in.isSelected()){
                 try{
-                    hotelR=Integer.getInteger(hotel_raiting.getValue());}
+                    hotelR=Integer.parseInt(hotel_raiting.getValue());}
                 catch (Exception e) {
-                    viewModel.popAlertinfo("Hotel raiting of must be integer");
-                }} else { hotelR=-1;}
+                    hotelR=-1;}}
 
-            seller_email=user.getEmail();
-
-            vacation=new Vacation (seller_email, from.getValue(),to.getValue() ,checkin.getValue(), checkout.getValue(),
-                    airline.getText(),back_flight.isSelected(),hand_bag.getValue(),checked_bag.getValue(),
-                    connec_flight.getValue(), vacation_type.getValue(), ticket_type.getValue(), hotel_in.isSelected(),
-                    hotel_type.getValue(),hotelR, num,
-                    separately.isSelected(), org_p,sal_p,off);
-
-
+            seller_email=viewModel.getUser().getEmail();
             if(validateform()){
+                vacation=new Vacation (seller_email, from.getValue(),to.getValue() ,checkin.getValue(), checkout.getValue(),
+                        airline.getText(),back_flight.isSelected(),hand_bag.getValue(),checked_bag.getValue(),
+                        connec_flight.getValue(), vacation_type.getValue(), ticket_type.getValue(), hotel_in.isSelected(),
+                        hotel_type.getValue(),hotelR, num,
+                        separately.isSelected(), org_p,sal_p,off);
+
+                if((num>1 && !separately.isSelected()) || num==1)
                 this.viewModel.addVacation(vacation);
+                else {
+                    if(num>1 && separately.isSelected()) {
+                        vacation.setNum_of_tickets(1);
+                    for(int i=0;i<num;i++)
+                        this.viewModel.addVacation(vacation);
+                    } }
                 this.viewModel.popAlertinfo("Your Vacation successfully saved!");
+                this.reset();
             }
         }
 
@@ -101,7 +95,31 @@ public class AddVacationController implements Initializable {
                 this.viewModel.popAlertinfo("One or more fields is empty!");
                 return false;
             }
-            if(org_p>sal_p){
+
+            try {
+                org_p=Integer.parseInt(original_price.getText());
+                sal_p=Integer.parseInt(sale_price.getText());
+                off=100*(org_p-sal_p)/org_p;
+            }
+            catch (Exception e) {
+                viewModel.popAlertinfo("Prices must be integer");
+                return false;
+            }
+            try{
+                num=Integer.parseInt(num_of_tickets.getText());}
+            catch (Exception e) {
+                viewModel.popAlertinfo("Number of tickets must be integer");
+                return false;
+            }
+
+            if(num<=0) {
+                viewModel.popAlertinfo("Number of tickets must be greater than 0 !");
+                return false;
+            }
+
+
+
+            if(org_p<sal_p){
                 this.viewModel.popAlertinfo("Sale price must by smallest than Original price!");
                 return false;
             }
@@ -164,6 +182,40 @@ public class AddVacationController implements Initializable {
         }
 
         public void setViewModel(ViewModel viewModel) {this.viewModel = viewModel; }
-        public void setUser(User currentUser){this.user=currentUser;}
 
+
+
+    public void isHotel (ActionEvent event) {
+        hotel_type.setValue(null);
+        hotel_raiting.setValue(null);
+        hotel_type.setEditable(!hotel_in.isSelected());
+        hotel_raiting.setEditable(!hotel_in.isSelected());
+    }
+
+
+    private void reset(){
+
+        checkin.setValue(null);
+        checkout.setValue(null);
+        from.setValue(null);
+        to.setValue(null);
+        airline.setText("");
+        hand_bag.setValue(null);
+        checked_bag.setValue(null);
+        num_of_tickets.setText("");
+        original_price.setText("");
+        sale_price.setText("");
+        connec_flight.setValue(null);
+        vacation_type.setValue(null);
+        ticket_type.setValue(null);
+        hotel_type.setValue(null);
+        hotel_raiting.setValue(null);
+
+        hotel_in.setSelected(false);
+        separately.setSelected(false);
+        back_flight.setSelected(false);
+
+
+
+    }
     }

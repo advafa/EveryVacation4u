@@ -120,7 +120,7 @@ public class SellerVacationController implements Initializable {
 
     }
 
-    public void goToPay(MouseEvent mouseEvent) {
+    public void ApprovePament(MouseEvent mouseEvent) {
         if(this.clickedRow.getStatus()=="Declined") {
             viewModel.popAlerterror("This vacation is not available!");
             return;
@@ -150,7 +150,7 @@ public class SellerVacationController implements Initializable {
 
 
 
-    public void Aprrove(MouseEvent mouseEvent){
+    public void ApproveSaleRequest(MouseEvent mouseEvent){
         if(!viewModel.getVacationStatus(clickedRow.getVacation_id())){
             viewModel.popAlerterror("This vacation Sold Out!");
             return;
@@ -160,7 +160,7 @@ public class SellerVacationController implements Initializable {
 
     }
 
-    public void Decline(MouseEvent mouseEvent){
+    public void DeclineSaleRequest(MouseEvent mouseEvent){
         if(!viewModel.getVacationStatus(clickedRow.getVacation_id())){
             viewModel.popAlerterror("This vacation Sold Out!");
             return;
