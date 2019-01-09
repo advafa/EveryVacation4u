@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="774.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SellerRequests.RequestDetailsController">
+   <children>
+      <AnchorPane layoutX="-34.0" prefHeight="774.0" prefWidth="1154.0" styleClass="bodybg" stylesheets="@../images/background.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-34.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="94.0" layoutY="48.0" opacity="0.58" prefHeight="706.0" prefWidth="1002.0" style="-fx-background-color: #ffffff;" />
+         </children>
+      </AnchorPane>
+      <Button fx:id="back_btn" layoutX="896.0" layoutY="687.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="142.0" text="Back" />
+      <Label fx:id="seller_email" layoutX="127.0" layoutY="684.0" prefHeight="45.0" prefWidth="802.0" text="Label">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <GridPane fx:id="hotel" layoutX="115.0" layoutY="144.0" prefHeight="521.0" prefWidth="452.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="191.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="189.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="48.0" minHeight="9.0" prefHeight="24.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="101.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label prefHeight="21.0" prefWidth="130.0" text="Check in:" underline="true">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="19.0" prefHeight="21.0" prefWidth="130.0" text="Check out:" underline="true" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="110.0" prefHeight="21.0" prefWidth="130.0" text="From:" underline="true" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="147.0" prefHeight="21.0" prefWidth="130.0" text="Airline:" underline="true" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="198.0" prefHeight="21.0" prefWidth="130.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label layoutX="198.0" layoutY="134.0" prefHeight="21.0" prefWidth="130.0" text="Baggage included" underline="true" GridPane.rowIndex="6">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="198.0" layoutY="134.0" prefHeight="21.0" prefWidth="130.0" text="Number of tickets" underline="true" GridPane.rowIndex="11">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="check_in" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" />
+            <Label fx:id="backf" layoutX="10.0" layoutY="38.0" prefHeight="26.0" prefWidth="185.0" text="Back flight included" GridPane.rowIndex="5" />
+            <Label fx:id="from" layoutX="204.0" layoutY="38.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="to" layoutX="395.0" layoutY="55.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="check_out" layoutX="10.0" layoutY="39.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="airline" layoutX="204.0" layoutY="39.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="handbag" layoutX="395.0" layoutY="39.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="checkbag" layoutX="395.0" layoutY="39.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label fx:id="num" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+            <Label fx:id="conectin" layoutX="10.0" layoutY="200.0" prefHeight="26.0" prefWidth="185.0" text="Flight" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="original_price" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+            <Label fx:id="vac_type" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Label fx:id="price" layoutX="10.0" layoutY="306.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+            <Label fx:id="tic_type" layoutX="204.0" layoutY="306.0" prefHeight="26.0" prefWidth="185.0" text="Ticket Type" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+            <Label layoutX="204.0" layoutY="303.0" prefHeight="26.0" prefWidth="185.0" text="Vacation Type:" underline="true" GridPane.rowIndex="8">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="395.0" layoutY="303.0" prefHeight="26.0" prefWidth="185.0" text="Ticket Type" underline="true" GridPane.rowIndex="12">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="hotel_in" layoutX="10.0" layoutY="303.0" prefHeight="26.0" prefWidth="185.0" text="Hotel included" underline="true" GridPane.rowIndex="9">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="hotel_type" layoutX="204.0" layoutY="303.0" prefHeight="26.0" prefWidth="185.0" text="Hotel Type" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Label fx:id="hotel_raiting" layoutX="204.0" layoutY="346.0" prefHeight="26.0" prefWidth="185.0" text="Hotel Raiting" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <Label fx:id="sellerStatus" layoutX="361.0" layoutY="430.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+            <Label layoutX="361.0" layoutY="13.0" prefHeight="21.0" prefWidth="130.0" text="To:" underline="true" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+                 </font>
+            </Label>
+            <Label layoutX="186.0" layoutY="292.0" prefHeight="21.0" prefWidth="130.0" text="Price:" underline="true" GridPane.rowIndex="13">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="361.0" layoutY="292.0" prefHeight="21.0" prefWidth="130.0" text="Original Price" underline="true" GridPane.rowIndex="14">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="396.0" prefHeight="21.0" prefWidth="183.0" text="Request Status:" underline="true" GridPane.rowIndex="15">
+                  <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="name" layoutX="186.0" layoutY="430.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+            <Label layoutX="10.0" layoutY="450.0" prefHeight="21.0" prefWidth="183.0" text="Seller Name:" underline="true" GridPane.rowIndex="16">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <Label fx:id="vac_status" layoutX="135.0" layoutY="65.0" prefHeight="53.0" prefWidth="266.0" text="My Vacation">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="vac_status1" layoutX="567.0" layoutY="65.0" prefHeight="53.0" prefWidth="266.0" text="Trade Vacation">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <GridPane fx:id="hotel1" layoutX="549.0" layoutY="144.0" prefHeight="521.0" prefWidth="452.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="191.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="189.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="48.0" minHeight="9.0" prefHeight="24.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="101.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label prefHeight="21.0" prefWidth="130.0" text="Check in:" underline="true">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="19.0" prefHeight="21.0" prefWidth="130.0" text="Check out:" underline="true" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="110.0" prefHeight="21.0" prefWidth="130.0" text="From:" underline="true" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="147.0" prefHeight="21.0" prefWidth="130.0" text="Airline:" underline="true" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="198.0" prefHeight="21.0" prefWidth="130.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label layoutX="198.0" layoutY="134.0" prefHeight="21.0" prefWidth="130.0" text="Baggage included" underline="true" GridPane.rowIndex="6">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="198.0" layoutY="134.0" prefHeight="21.0" prefWidth="130.0" text="Number of tickets" underline="true" GridPane.rowIndex="11">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="check_in1" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" />
+            <Label fx:id="backf1" layoutX="10.0" layoutY="38.0" prefHeight="26.0" prefWidth="185.0" text="Back flight included" GridPane.rowIndex="5" />
+            <Label fx:id="from1" layoutX="204.0" layoutY="38.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="to1" layoutX="395.0" layoutY="55.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="check_out1" layoutX="10.0" layoutY="39.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="airline1" layoutX="204.0" layoutY="39.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="handbag1" layoutX="395.0" layoutY="39.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="checkbag1" layoutX="395.0" layoutY="39.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label fx:id="num1" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+            <Label fx:id="conectin1" layoutX="10.0" layoutY="200.0" prefHeight="26.0" prefWidth="185.0" text="Flight" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="original_price1" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+            <Label fx:id="vac_type1" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Label fx:id="price1" layoutX="10.0" layoutY="306.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+            <Label fx:id="tic_type1" layoutX="204.0" layoutY="306.0" prefHeight="26.0" prefWidth="185.0" text="Ticket Type" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+            <Label layoutX="204.0" layoutY="303.0" prefHeight="26.0" prefWidth="185.0" text="Vacation Type:" underline="true" GridPane.rowIndex="8">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="395.0" layoutY="303.0" prefHeight="26.0" prefWidth="185.0" text="Ticket Type" underline="true" GridPane.rowIndex="12">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="hotel_in1" layoutX="10.0" layoutY="303.0" prefHeight="26.0" prefWidth="185.0" text="Hotel included" underline="true" GridPane.rowIndex="9">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="hotel_type1" layoutX="204.0" layoutY="303.0" prefHeight="26.0" prefWidth="185.0" text="Hotel Type" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Label fx:id="hotel_raiting1" layoutX="204.0" layoutY="346.0" prefHeight="26.0" prefWidth="185.0" text="Hotel Raiting" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <Label fx:id="sellerStatus1" layoutX="361.0" layoutY="430.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+            <Label layoutX="361.0" layoutY="13.0" prefHeight="21.0" prefWidth="130.0" text="To:" underline="true" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="186.0" layoutY="292.0" prefHeight="21.0" prefWidth="130.0" text="Price:" underline="true" GridPane.rowIndex="13">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="361.0" layoutY="292.0" prefHeight="21.0" prefWidth="130.0" text="Off:" underline="true" GridPane.rowIndex="14">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="396.0" prefHeight="21.0" prefWidth="183.0" text="Request Status:" underline="true" GridPane.rowIndex="15">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="name1" layoutX="186.0" layoutY="430.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+            <Label layoutX="10.0" layoutY="450.0" prefHeight="21.0" prefWidth="183.0" text="Seller Name:" underline="true" GridPane.rowIndex="16">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

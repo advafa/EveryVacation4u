@@ -13,16 +13,18 @@ import Model.Model;
 
 //import Views
 import View.AddVacation.AddVacationController;
-import View.BuyerVacation.BuyerVacationsController;
-import View.BuyerVacationDetails.BuyerVacationDetailsController;
-import View.ProfileView.EditProfileController;
-import View.ProfileView.ProfileViewController;
-import View.SearchView.SearchViewController;
-import View.SearchVacationDetails.SearchVacationDetailsController;
+import View.BuyerRequests.BuyerRequestsController;
+import View.BuyerRequests.BuyerVacationDetailsController;
+import View.Profile.EditProfileController;
+import View.Profile.ProfileViewController;
+import View.Search.SearchViewController;
+import View.Search.SearchVacationDetailsController;
 import View.SellerVacation.SellerVacationController;
-import View.SellerVacationDetails.SellerVacationDetailsController;
-import View.SignInScreenView.SignInController;
-import View.SignUpScreenView.SignUpController;
+import View.SellerVacation.SellerVacationDetailsController;
+import View.SignIn.SignInController;
+import View.SignUp.SignUpController;
+import View.SellerRequests.SellerRequestsController;
+import View.SellerRequests.RequestDetailsController;
 
 
 import javafx.application.Application;
@@ -31,12 +33,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ViewModel extends Application {
 
@@ -46,160 +49,182 @@ public class ViewModel extends Application {
     private Model model;
     private Stage stage;
     private User user = null;
-    private Vacation vacation=null;
+    private Vacation vacation;
 
 
     //************************Vacation4U********************************
     private Scene AddVacationScene;
     private AddVacationController addVacationController;
 
-    private Scene BuyerVacationsViewScene;
-    private BuyerVacationsController buyerVacationsController;
+    private Scene BuyerRequestsViewScene;
+    private BuyerRequestsController buyerRequestsController;
 
-    private Scene BuyerVacationDetails;
+    private Scene BuyerVacationDetailsScene;
     private BuyerVacationDetailsController buyerVacationDetailsController;
 
-    private Scene EditProfile;
+    private Scene EditProfileScene;
     private EditProfileController editProfileController;
 
-    private Scene ProfileView;
+    private Scene ProfileViewScene;
     private ProfileViewController profileViewController;
 
-    private Scene SearchView;
+    private Scene SearchViewScene;
     private SearchViewController searchViewController;
 
-    private Scene SearchVacationDetails;
+    private Scene SearchVacationDetailsScene;
     private SearchVacationDetailsController searchVacationDetailsController;
 
-    private Scene  SellerVacationiew;
+    private Scene SellerRequestViewScene;
+    private SellerRequestsController sellerRequestsController;
+
+    private Scene RequestDetailsViewScene;
+    private RequestDetailsController requestDetailsController;
+
+    private Scene SellerVacationiewScene;
     private SellerVacationController sellerVacationController;
 
-    private Scene SellerVacationDetails;
+    private Scene SellerVacationDetailsScene;
     private SellerVacationDetailsController sellerVacationDetailsController;
 
     private Scene signInScene;
     private SignInController signInController;
+
     private Scene signUpScene;
     private SignUpController signUpController;
 
-    private Scene goToPageScene;
+    private String goTo;
 
-
-//*********************************************************************
+    //*********************************************************************
     private Order orderforSeller;
     private Order orderforBuyer;
 
     @Override
     public void start(Stage stage) throws Exception {
 
-        FXMLLoader signUpLoader = new FXMLLoader(getClass().getResource("../View/SignUpScreenView/SignUpScreen.fxml"));
-        Parent signUpRoot = (Parent) signUpLoader.load();
-//
-        FXMLLoader signInLoader = new FXMLLoader(getClass().getResource("../View/SignInScreenView/SignInScreen.fxml"));
-        Parent signInRoot = (Parent) signInLoader.load();
 
-//        FXMLLoader ProfileViewLoader = new FXMLLoader(getClass().getResource("../View/ProfileView/ProfileView.fxml"));
-//        Parent ProfileViewRoot = (Parent) ProfileViewLoader.load();
-
-//        FXMLLoader EditProfileViewLoader = new FXMLLoader(getClass().getResource("../View/ProfileView/EditProfileView.fxml"));
-//        Parent EditProfileViewRoot = (Parent) EditProfileViewLoader.load();
-
-        FXMLLoader BuyerVacationViewLoader = new FXMLLoader(getClass().getResource("../View/BuyerVacation/BuyerVacation.fxml"));
-        Parent BuyerVacationViewRoot = (Parent) BuyerVacationViewLoader.load();
-
-//        FXMLLoader buyerVacationDetailViewLoader = new FXMLLoader(getClass().getResource("../View/BuyerVacationDetails/BuyerVacationDetailsView.fxml"));
-//        Parent buyerVacationDetailViewRoot = (Parent) buyerVacationDetailViewLoader.load();
-//
-        FXMLLoader addVacationLoader = new FXMLLoader(getClass().getResource( "../View/AddVacation/AddVacationView.fxml"));
+        FXMLLoader addVacationLoader = new FXMLLoader(getClass().getResource("../View/AddVacation/AddVacationView.fxml"));
         Parent addVacationRoot = (Parent) addVacationLoader.load();
 
-//        FXMLLoader searchViewLoader = new FXMLLoader(getClass().getResource("../View/SearchView/SearchScreen.fxml"));
-//        Parent searchViewRoot = (Parent) searchViewLoader.load();
+        FXMLLoader BuyerRequestsViewLoader = new FXMLLoader(getClass().getResource("../View/BuyerRequests/BuyerRequestsView.fxml"));
+        Parent BuyerRequestsViewRoot = (Parent) BuyerRequestsViewLoader.load();
 
-//        FXMLLoader SearchVacationDetailsLoader = new FXMLLoader(getClass().getResource("../View/SearchVacationDetails/SearchVacationDetailsView.fxml"));
-//        Parent SearchVacationDetailsRoot = (Parent) SearchVacationDetailsLoader.load();
+        FXMLLoader buyerVacationDetailViewLoader = new FXMLLoader(getClass().getResource("../View/BuyerRequests/BuyerVacationDetailsView.fxml"));
+        Parent buyerVacationDetailViewRoot = (Parent) buyerVacationDetailViewLoader.load();
 
-//        FXMLLoader SellerVacationLoader = new FXMLLoader(getClass().getResource("../View/SellerVacation/SellerVacationView.fxml"));
-//        Parent SellerVacationRoot = (Parent) SellerVacationLoader.load();
+        FXMLLoader EditProfileViewLoader = new FXMLLoader(getClass().getResource("../View/Profile/EditProfileView.fxml"));
+        Parent EditProfileViewRoot = (Parent) EditProfileViewLoader.load();
 
-//        FXMLLoader SellerVacationDetailsLoader = new FXMLLoader(getClass().getResource("../View/SellerVacationDetails/SellerVacationDetailsView.fxml"));
-//        Parent SellerVacationDetailsRoot = (Parent) SellerVacationDetailsLoader.load();
-//
-//        FXMLLoader PaymentViewLoader = new FXMLLoader(getClass().getResource("../View/Payment/Payment.fxml"));
-//        Parent PaymentRoot = (Parent) PaymentViewLoader.load();
+        FXMLLoader ProfileViewLoader = new FXMLLoader(getClass().getResource("../View/Profile/ProfileView.fxml"));
+        Parent ProfileViewRoot = (Parent) ProfileViewLoader.load();
+
+
+        FXMLLoader searchViewLoader = new FXMLLoader(getClass().getResource("../View/Search/SearchView.fxml"));
+        Parent searchViewRoot = (Parent) searchViewLoader.load();
+
+        FXMLLoader SearchVacationDetailsLoader = new FXMLLoader(getClass().getResource("../View/Search/SearchVacationDetailsView.fxml"));
+        Parent SearchVacationDetailsRoot = (Parent) SearchVacationDetailsLoader.load();
+
+        FXMLLoader SellerRequestViewLoader = new FXMLLoader(getClass().getResource("../View/SellerRequests/SellerRequestsView.fxml"));
+        Parent SellerRequestRoot = (Parent) SellerRequestViewLoader.load();
+
+        FXMLLoader RequestDetailsViewLoader = new FXMLLoader(getClass().getResource("../View/SellerRequests/RequestDetailsView.fxml"));
+        Parent RequestDetailstRoot = (Parent) RequestDetailsViewLoader.load();
+
+
+        FXMLLoader SellerVacationLoader = new FXMLLoader(getClass().getResource("../View/SellerVacation/SellerVacationsView.fxml"));
+        Parent SellerVacationRoot = (Parent) SellerVacationLoader.load();
+
+        FXMLLoader SellerVacationDetailsLoader = new FXMLLoader(getClass().getResource("../View/SellerVacation/SellerVacationDetailsView.fxml"));
+        Parent SellerVacationDetailsRoot = (Parent) SellerVacationDetailsLoader.load();
+
+        FXMLLoader signUpLoader = new FXMLLoader(getClass().getResource("../View/SignUp/SignUpView.fxml"));
+        Parent signUpRoot = (Parent) signUpLoader.load();
+
+        FXMLLoader signInLoader = new FXMLLoader(getClass().getResource("../View/SignIn/SignInView.fxml"));
+        Parent signInRoot = (Parent) signInLoader.load();
 
 
         this.stage = stage;
         this.stage.initStyle(StageStyle.UNDECORATED);
 
         //set mouse pressed
+        setDraggable(stage, addVacationRoot);
+        setDraggable(stage, BuyerRequestsViewRoot);
+        setDraggable(stage, buyerVacationDetailViewRoot);
+        setDraggable(stage, EditProfileViewRoot);
+        setDraggable(stage, ProfileViewRoot);
+        setDraggable(stage, searchViewRoot);
+        setDraggable(stage, SearchVacationDetailsRoot);
+        setDraggable(stage, SellerRequestRoot);
+        setDraggable(stage, RequestDetailstRoot);
+        setDraggable(stage, SellerVacationRoot);
+        setDraggable(stage, SellerVacationDetailsRoot);
         setDraggable(stage, signUpRoot);
         setDraggable(stage, signInRoot);
-//        setDraggable(stage, ProfileViewRoot);
-////        setDraggable(stage, EditProfileViewRoot);
-        setDraggable(stage, BuyerVacationViewRoot);
-////        setDraggable(stage, buyerVacationDetailViewRoot);
-        setDraggable(stage, addVacationRoot);
-////        setDraggable(stage, searchViewRoot);
-//        setDraggable(stage, SearchVacationDetailsRoot);
-//        setDraggable(stage, SellerVacationRoot);
-//        setDraggable(stage, SellerVacationDetailsRoot);
-//        setDraggable(stage, PaymentRoot);
 
 //
+
+
+        AddVacationScene = new Scene(addVacationRoot);
+        BuyerRequestsViewScene = new Scene(BuyerRequestsViewRoot);
+        BuyerVacationDetailsScene = new Scene(buyerVacationDetailViewRoot);
+        EditProfileScene = new Scene(EditProfileViewRoot);
+        ProfileViewScene = new Scene(ProfileViewRoot);
+        SearchViewScene = new Scene(searchViewRoot);
+        SearchVacationDetailsScene = new Scene(SearchVacationDetailsRoot);
+        SellerRequestViewScene = new Scene(SellerRequestRoot);
+        RequestDetailsViewScene = new Scene(RequestDetailstRoot);
+        SellerVacationiewScene = new Scene(SellerVacationRoot);
+        SellerVacationDetailsScene = new Scene(SellerVacationDetailsRoot);
         signUpScene = new Scene(signUpRoot);
         signInScene = new Scene(signInRoot);
-        AddVacationScene = new Scene(addVacationRoot);
-        BuyerVacationsViewScene = new Scene(BuyerVacationViewRoot);
-//        BuyerVacationDetails = new Scene(buyerVacationDetailViewRoot);
-//        Payment = new Scene(PaymentRoot);
-//        EditProfile = new Scene(EditProfileViewRoot);
-//        ProfileView = new Scene(ProfileViewRoot);
-//        SearchView = new Scene(searchViewRoot);
-//        SearchVacationDetails = new Scene(SearchVacationDetailsRoot);
-//        SellerVacationiew = new Scene(SellerVacationRoot);
-//        SellerVacationDetails = new Scene(SellerVacationDetailsRoot);
 
 
         Model model = new Model();
         setModel(model);
 
-        signInController = signInLoader.getController();
-        signInController.setViewModel(this);
-//
-        signUpController= signUpLoader.getController();
-        signUpController.setViewModel(this);
-
         addVacationController = addVacationLoader.getController();
         addVacationController.setViewModel(this);
 
-        buyerVacationsController = BuyerVacationViewLoader.getController();
-        buyerVacationsController.setViewModel(this);
+        buyerRequestsController = BuyerRequestsViewLoader.getController();
+        buyerRequestsController.setViewModel(this);
 
-//        buyerVacationDetailsController = buyerVacationDetailViewLoader.getController();
-//        buyerVacationDetailsController.setViewModel(this);
+        buyerVacationDetailsController = buyerVacationDetailViewLoader.getController();
+        buyerVacationDetailsController.setViewModel(this);
 
-//        editProfileController =EditProfileViewLoader.getController();
-//        editProfileController.setViewModel(this);
+        editProfileController = EditProfileViewLoader.getController();
+        editProfileController.setViewModel(this);
 
-//        profileViewController = ProfileViewLoader.getController();
-//        profileViewController.setViewModel(this);
+        profileViewController = ProfileViewLoader.getController();
+        profileViewController.setViewModel(this);
 
-//        searchViewController = searchViewLoader.getController();
-//        searchViewController.setViewModel(this);
+        searchViewController = searchViewLoader.getController();
+        searchViewController.setViewModel(this);
 
-//        searchVacationDetailsController = SearchVacationDetailsLoader.getController();
-//        searchVacationDetailsController.setViewModel(this);
+        searchVacationDetailsController = SearchVacationDetailsLoader.getController();
+        searchVacationDetailsController.setViewModel(this);
 
-//        sellerVacationController = SellerVacationLoader.getController();
-//        sellerVacationController.setViewModel(this);
+        sellerRequestsController = SellerRequestViewLoader.getController();
+        sellerRequestsController.setViewModel(this);
 
-//        sellerVacationDetailsController = SellerVacationDetailsLoader.getController();
-//        sellerVacationDetailsController.setViewModel(this);
+        requestDetailsController = RequestDetailsViewLoader.getController();
+        requestDetailsController.setViewModel(this);
+
+        sellerVacationController = SellerVacationLoader.getController();
+        sellerVacationController.setViewModel(this);
+
+        sellerVacationDetailsController = SellerVacationDetailsLoader.getController();
+        sellerVacationDetailsController.setViewModel(this);
+
+        signInController = signInLoader.getController();
+        signInController.setViewModel(this);
+
+        signUpController = signUpLoader.getController();
+        signUpController.setViewModel(this);
 
 
 //        loadUser("Tal@gmail.com", "1111");
-        loadUser("Niv@gmail.com", "1111");
+        loadUser("Tal@gmail.com", "1111");
 //
 
 //        Order o1= new Order("Tal@gmail.com","Niv@gmail.com",4,false);
@@ -214,7 +239,6 @@ public class ViewModel extends Application {
 //        setSellerStatus(o2, true);
 //        setSellerStatus(o3,false);
 
-        goToPageScene=SearchView;
         stage.setScene(this.signUpScene);
         stage.show();
 
@@ -222,82 +246,11 @@ public class ViewModel extends Application {
 
 
     //****************************************
+//******************************
 
-
-
-    //*****************USER*******************
-    public User getUser() {
-        return this.user;
+    public static void main(String[] args) {
+        launch(args);
     }
-    public void setUser(User user) {
-        model.UpdateUser(user);
-    }
-
-    public void AddUser(User user) { model.addUser(user); }
-    public void deleteUser(User user) {
-        model.deleteUser(user);
-    }
-
-    public Boolean isUserExists(User user) {
-        return model.isUserExists(user);
-    }
-
-    public Boolean loadUser(String email, String pass) {
-
-        this.user = model.loadUser(email);
-        if(this.user!=null && pass.equals(this.user.getPassword()))
-            return true;
-        else
-            return false;
-
-    }
-
-    public void loguotUser() {
-
-        if (isUserExists(this.user))  {
-            this.user = null;
-            goToSearchView();
-        }
-        else {
-            popAlertinfo("You are NOT Sign in!");
-        }
-    }
-
-//    public void loadUser(User u) {
-////        this.user = u;
-////    }
-
-    //*****************Update************************
-
-    public void setSellerStatus(Order ord, boolean sellerStatus) {
-        model.UpdateOrdersSellerStatus(ord, sellerStatus);
-    }
-
-    public void setBuyerStatus(Order ord, boolean buyerStatus) {
-        model.UpdateOrdersBuyerStatus(ord, buyerStatus);
-    }
-
-    public void setVacationStatus(int vacation_id, boolean vac_status) {
-        model.UpdatVacationStatus(vacation_id, vac_status);
-    }
-
-    public List<Order> getOrdersByBuyer_email() {
-        return model.getOrdersByBuyer_email(user.getEmail());
-    }
-
-    public List<Order> getOrdersByseller_email() {
-        return model.getOrdersByseller_email(user.getEmail());
-    }
-
-    public void addVacation(Vacation vacation) {
-        model.addVacation(vacation);
-    }
-
-    public void addReq(Order order) {
-        model.addReq(order);
-    }
-
-    //******************************?????????????
 
     public void setDraggable(Stage stage, Parent parent) {
         parent.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -317,82 +270,194 @@ public class ViewModel extends Application {
         });
     }
 
-    public static void main(String[] args) {
-        launch(args);
+
+    //******************** LoadUser ************************
+    public Boolean loadUser(String email, String pass) {
+        this.user = model.loadUser(email);
+        if(this.user!=null && pass.equals(this.user.getPassword()))
+            return true;
+        else
+            return false;
     }
 
+    //***************** Set Functions ************************
     public void setModel(Model model) {
         this.model = model;
     }
 
+    public void setUser(User user) {
+        model.UpdateUser(user);
+    }
 
-    /////?????????????????????????????????????
+    public void setSellerStatus(Order ord, boolean sellerStatus) {
+        model.UpdateOrdersSellerStatus(ord, sellerStatus);
+    }
 
+    public void setBuyerStatus(Order ord, boolean buyerStatus) {
+        model.UpdateOrdersBuyerStatus(ord, buyerStatus);
+    }
+
+    public void setVacationStatus(int vacation_id, boolean vac_status) {
+        model.UpdatVacationStatus(vacation_id, vac_status);
+    }
+
+
+    //***************** Get Functions ************************
+    public User getUser() { return this.user; }
+    public String getUserNameByEmail(String email) { return model.getUserNameByEmail(email); }
+//    public Vacation getVacation(){ return this.vacation; }
+
+//
+    public List<Order> getOrdersByBuyer_email() {return model.getOrdersByBuyer_email(user.getEmail()); }
+    public List<Order> getOrdersByseller_email() { return model.getOrdersByseller_email(user.getEmail()); }
+    public boolean getVacationStatus(int vacationID){ return model.getVacationByVacationId(vacationID).getVacation_status(); }
+    public Vacation getVacation(int vacationID){ return model.getVacationByVacationId(vacationID);}
+    public List<Vacation> getVacationsByseller_email(){ return model.getVacationsByseller_email(this.user.getEmail()); }
+    public List<Vacation> getAvailableVacationsByseller_email(){ return model.getAvailableVacationsByseller_email(this.user.getEmail()); }
+
+
+
+    //*****************  Add functions ******************************
+    public void AddUser(User user) {
+        model.addUser(user);
+    }
+
+    public void AddVacation(Vacation vacation) {
+        model.addVacation(vacation);
+    }
+
+    public void addReq(Order order) {
+        model.addReq(order);
+    }
+
+    public void addPayment(Payment pay) {
+        model.addPayment(pay);
+    }
+
+    public void addReq(int vacation_id) {
+
+    }
+
+    //  ******************** Check if Exists *****************************
+    public Boolean isUserExists(User user) {
+        return model.isUserExists(user);
+    }
+
+
+    //*************** Delete ******************************
+
+    public void DeleteProfile() {
+        model.deleteRequestsBySeller(this.user.getEmail());
+        model.deleteRequestsByBuyer(this.user.getEmail());
+        model.deleteVacationsBySeller(this.user.getEmail());
+        model.deleteUser(this.user);
+        this.user = null;
+
+    }
+
+
+    public void DeleteVacation(Vacation vacation) {
+        model.deleteVacation(vacation);
+    }
+
+
+//    eleteVacation(Vacation aVacation) {db.del
+//        deleteUser(User user){db.deleteUser(user);
+//            deleteVacationsBySeller(String userEmail){
 
 
     ///*********************goTo Functions**********************
 
 
-
-
+    ///**************** Profile ***********************
     public void goToSignUp() {
-        if(this.user==null)
-        stage.setScene(signUpScene);
-        else{
+        goTo="goToSearchView";
+        if (this.user == null)
+            stage.setScene(signUpScene);
+        else {
             popAlertinfo("You Already sign in! \n" +
                     "for new Profile please sign out first");
         }
-
     }
 
-    public void goToPage(){
-        stage.setScene(goToPageScene);
-
-    }
-    public void goToSignIn() {
-
-        if (this.user==null)  {
+    public void goToProfileView() {
+        goTo = "goToProfileView";
+        if (isUserExists(this.user)) {
+            profileViewController.loadUserView();
+            stage.setScene(ProfileViewScene);
+        } else {
+            popAlertinfo("You are NOT Sign in!");
             stage.setScene(signInScene);
         }
-        else {
-            popAlertinfo("You already Sign in!");
-        }
-        ;}
+    }
 
+    public void goToEditProfile() {
+        goTo = "goToEditProfile";
+        if (isUserExists(this.user)) {
+            editProfileController.loadUserView();
+            stage.setScene(EditProfileScene);
+        } else {
+            popAlertinfo("You are NOT Sign in!");
+            stage.setScene(signInScene);
+        } }
+
+
+
+
+    public void goTODeleteProfile(){
+        goTo="goToSearchView";
+        if (isUserExists(this.user)){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Are you sure you want to delete ypur proflie?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                this.DeleteProfile();
+                this.goToSearchView();
+            }
+        }
+        else {
+            this.popAlertinfo("You are NOT Sign in!");
+            this.goToSignIn();
+        } }
+
+
+    ///**************** Seller ***********************
 
     public void goToAddVacation() {
-        goToPageScene=AddVacationScene;
+        goTo="goToAddVacation";
         if (isUserExists(this.user)) {
             stage.setScene(AddVacationScene);
         }
         else {
             popAlertinfo("You are NOT Sign in!");
             stage.setScene(signInScene);
-        }
+        } }
 
 
 
+    public void goToSellerVacationsView(String page) {
 
-    }
-    public void goToProfileView(){stage.setScene(ProfileView);}
-    public void goToEditProfile(){stage.setScene(EditProfile);}
-    public void goToSearchView() {
-        stage.setScene(SearchView);
-    }
-
-
-
-    public void goToSellerVacationsView() {
-        sellerVacationController.setUser(user);
-        sellerVacationController.loadSellerVacations(user);
-        stage.setScene(SellerVacationiew); }
-
-
-    public void goToBuyerVacationsView() {
-        goToPageScene=BuyerVacationsViewScene;
+        goTo=page;//View or Trade
         if (isUserExists(this.user)) {
-            buyerVacationsController.loadBuyerVacations();
-            stage.setScene(BuyerVacationsViewScene);
+            if(page=="View")
+                sellerVacationController.loadAllSellerVacations();
+            if(page=="Trade")
+                sellerVacationController.loadAvailableSellerVacations();
+            stage.setScene(SellerVacationiewScene);
+        } else {
+            popAlertinfo("You are NOT Sign in!");
+            stage.setScene(signInScene);
+        } }
+
+    public void goToSellerVacationsView(){this.goToSellerVacationsView(goTo);}
+
+
+
+    public void goToSellerRequest(){
+        goTo="goToSellerRequest";
+        if (isUserExists(this.user)) {
+            sellerRequestsController.loadSellerRequests();
+            stage.setScene(SellerRequestViewScene);
         } else {
             popAlertinfo("You are NOT Sign in!");
             stage.setScene(signInScene);
@@ -401,58 +466,118 @@ public class ViewModel extends Application {
 
 
 
-//SellerVacationDetails
-    //SearchVacationDetails
-    //BuyerVacationDetails
-    //Payment
-
-
-
-    public String getUserNameByEmail(String email) {
-       return model.getUserNameByEmail(email); }
-
-    public void goToBuyerVacationDetails(int vacationID,boolean status) {
-        Vacation aVacation = model.getVacationByVacationId(vacationID);
-        buyerVacationDetailsController.setUser(user);
-        buyerVacationDetailsController.setVacation(aVacation);
-        buyerVacationDetailsController.setSellerStatus(status);
-        stage.setScene(BuyerVacationDetails);
+    public void goToSellerVacationDetails(int vacationID) {
+        goTo="goToSearchView";
+        this.vacation = model.getVacationByVacationId(vacationID);
+        sellerVacationDetailsController.loadVacationView(this.vacation);
+        stage.setScene(SellerVacationDetailsScene);
     }
 
-    public void goToSellerVacationDetails(int vacationID,Order order) {
-        //TODO
-        Vacation aVacation = model.getVacationByVacationId(vacationID);
-        sellerVacationDetailsController.setUser(user);
-        sellerVacationDetailsController.setVacation(aVacation);
-        sellerVacationDetailsController.setOrder(order);
-        stage.setScene(SellerVacationDetails);
+    public void goToRequestDetails(int vacationID) {
+        goTo="goToSearchView";
+        this.vacation = model.getVacationByVacationId(vacationID);
+        requestDetailsController.loadVacationRequestView(this.vacation);
+        stage.setScene(RequestDetailsViewScene);
+    }
+
+///**************** Buyer ***********************
+
+
+    public void goToSearchView() {
+        goTo="goToSearchView";
+        if (isUserExists(this.user))
+            searchViewController.setButtonsON();
+        else
+            searchViewController.setButtonsOff();
+        stage.setScene(SearchViewScene);
     }
 
 
-    ///***********************************
+    public void goToSearchVacationDetails(int vacationID) {
+        goTo="goToSearchView";
+        vacation = model.getVacationByVacationId(vacationID);
 
-//    public void searchVacationsBy(List<Vacation> vacationsList) {
-//        packageDescriptionViewController.addPackagesToTable(packagesList);
-//        if (user != null)
-//            packageDescriptionViewController.setUserLoggedIn();
-//        else
-//            packageDescriptionViewController.setUserLoggedOut();
-//        stage.setScene(PackageDescriptionView);
-//    }
-//
-//    public List<Vacation> searchVacationsByDate(LocalDate startDateValue, LocalDate endDateValue) {
-//        return model.getVacationsBy(startDateValue, endDateValue);
-//    }
+        if (isUserExists(this.user))
+            searchVacationDetailsController.setButtonsON();
+        else
+            searchVacationDetailsController.setButtonsOff();
 
-    public boolean getVacationStatus(int vacationID){
-        return model.getVacationByVacationId(vacationID).getVacation_status();
+        searchVacationDetailsController.loadVacationView(vacation);
+        stage.setScene(SearchVacationDetailsScene);
 
     }
 
-public Vacation getVacation(int vacationID){
-    Vacation aVacation = model.getVacationByVacationId(vacationID);
-        return aVacation;
-}
+    public void goToBuyerVacationsView() {
+        goTo="goToBuyerVacationsView";
+        if (isUserExists(this.user)) {
+            buyerRequestsController.loadBuyerVacations();
+            stage.setScene(BuyerRequestsViewScene);
+        } else {
+            popAlertinfo("You are NOT Sign in!");
+            stage.setScene(signInScene);
+        }
+    }
+
+    public void goToBuyerVacationDetails(int vacationID,String status) {
+        goTo="goToSearchView";
+        vacation = model.getVacationByVacationId(vacationID);
+        buyerVacationDetailsController.loadVacation(vacation,status);
+        stage.setScene(BuyerVacationDetailsScene);
+    }
+
+
+///************SignIn*********************
+
+    public void goToSignIn() {
+        goTo="goToSearchView";
+        if (this.user==null)
+            stage.setScene(signInScene);
+        else
+            popAlertinfo("You already Sign in!"); }
+
+
+
+    public void SignOut() {
+        goTo="goToSearchView";
+        if (isUserExists(this.user)) {
+            this.user = null;
+            goToSearchView();
+        }
+        else
+            popAlertinfo("You are NOT Sign in!");
+    }
+
+
+
+
+
+//************ goToPage **************
+
+
+    public void goToPage(){
+        if(this.goTo.equals("goToSearchView"))
+            this.goToSearchView();
+        if(this.goTo.equals("goToProfileView"))
+            this.goToProfileView();
+        if(this.goTo.equals("goToEditProfile"))
+            this.goToEditProfile();
+        if(this.goTo.equals("goToAddVacation"))
+            this.goToAddVacation();
+        if (this.goTo.equals("View"))
+            this.goToSellerVacationsView("View");
+        if(this.goTo.equals("Trade"))
+            this.goToSellerVacationsView("Trade");
+        if (this.goTo.equals("goToBuyerVacationsView"))
+            this.goToBuyerVacationsView();
+        if(this.goTo.equals("goToSellerVacationsView"))
+            this.goToSellerVacationsView();
+        if(this.goTo.equals("goToSellerRequest"))
+            this.goToSellerRequest();
+        if(this.goTo.equals("goToAddVacation"))
+            this.goToAddVacation();
+    }
+
+
 
     ///***********Alert************
     public void popAlerterror(String text) {
@@ -468,6 +593,7 @@ public Vacation getVacation(int vacationID){
         alert.setHeaderText(text);
         alert.showAndWait();
     }
+
 
 
 }

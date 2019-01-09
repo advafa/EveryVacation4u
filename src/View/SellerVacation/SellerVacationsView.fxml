@@ -20,7 +20,7 @@
                   <TableColumn fx:id="colVacatinStatus" minWidth="0.0" prefWidth="158.0" text="Status" />
                </columns>
             </TableView>
-            <Button fx:id="done" layoutX="429.0" layoutY="401.0" mnemonicParsing="false" onMouseClicked="#goToDone" prefHeight="39.0" prefWidth="154.0" text="Done" />
+            <Button fx:id="done_btn" layoutX="429.0" layoutY="401.0" mnemonicParsing="false" onMouseClicked="#goToDone" prefHeight="39.0" prefWidth="154.0" text="Done" />
          </children>
       </AnchorPane>
    </children>

@@ -1,4 +1,4 @@
-package View.SignUpScreenView;
+package View.SignUp;
 
 import java.net.URL;
 import java.util.Optional;
@@ -30,21 +30,48 @@ public class SignUpController implements Initializable {
 
 
     //MenuItems
-    public MenuItem exit_menu;
+
+    public MenuItem SignUp_menu;
+    public MenuItem View_profile_menu;
+    public MenuItem EditProfile_menu;
+    public MenuItem Delete_profile_menu;
+
+    public MenuItem addVac_menu;
+    public MenuItem seller_vacations_menu;
+    public MenuItem seller_req_menu;
+
+    public MenuItem search_menu;
+    public MenuItem buyer_req_menu;
+
     public MenuItem SignIn_menu;
     public MenuItem SignOut_menu;
-    public MenuItem addVac_menu;
-    public MenuItem buyer_req_menu;
+    public MenuItem exit_menu;
+
+
+
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         //*********  Menu Functions **************///
-        exit_menu.setOnAction(e -> {System.exit(0);});
-        SignIn_menu.setOnAction(e -> {viewModel.goToSignIn();});
-        SignOut_menu.setOnAction(e -> {viewModel.loguotUser();});
+        SignUp_menu.setOnAction(e -> {viewModel.goToSignUp();});
+        View_profile_menu.setOnAction(e -> {viewModel.goToProfileView();});
+        EditProfile_menu.setOnAction(e -> {viewModel.goToEditProfile();});
+        Delete_profile_menu.setOnAction(e -> {viewModel.goTODeleteProfile();});;
+
         addVac_menu.setOnAction(e -> {viewModel.goToAddVacation();});
+        seller_vacations_menu.setOnAction(e -> {viewModel.goToSellerVacationsView("View");});
+        seller_req_menu.setOnAction(e -> {viewModel.goToSellerRequest();});
+
+        search_menu.setOnAction(e -> {viewModel.goToSearchView();});
         buyer_req_menu.setOnAction(e -> {viewModel.goToBuyerVacationsView();});
 
+        SignIn_menu.setOnAction(e -> {viewModel.goToSignIn();});
+        SignOut_menu.setOnAction(e -> {viewModel.SignOut();});
+        exit_menu.setOnAction(e -> {System.exit(0);});
 
     }
 
@@ -169,26 +196,9 @@ public class SignUpController implements Initializable {
 
 //*********  Menu Functions **************///
 
-    public void goToSignUp(MouseEvent mouseEvent) {
-        User currentUser = viewModel.getUser();
-        if (this.viewModel.isUserExists(currentUser)) {
-            this.viewModel.popAlertinfo("You already Sign in!"); }
-        else {
-            viewModel.goToSignUp();
-        }
-    }
 
 
-    public void ProfileView(MouseEvent mouseEvent){
-        User currentUser = viewModel.getUser();
-        if (this.viewModel.isUserExists(currentUser)) {
-            viewModel.goToProfileView();
-        }
-        else {
-            this.viewModel.popAlertinfo("You are NOT Sign in!");
-            viewModel.goToSignIn();
-        }
-    }
+
 
     public void EditProfile(MouseEvent mouseEvent){
         User currentUser = viewModel.getUser();
@@ -201,38 +211,9 @@ public class SignUpController implements Initializable {
         }
     }
 
-    public void DeleteProfile(){
-        User currentUser= viewModel.getUser();
-        if(this.viewModel.isUserExists(currentUser)){
-
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText("Are you sure you want to delete ypur proflie?");
-            Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            this.viewModel.deleteUser(currentUser);
-            this.viewModel.goToSearchView();
-        }
-        }
-        else {
-            this.viewModel.popAlertinfo("You are NOT Sign in!");
-            viewModel.goToSignIn();
-        }
-
-    }
 
 
 
-
-    public void goToSellerVacationsView(MouseEvent mouseEvent){
-        User currentUser = viewModel.getUser();
-        if (this.viewModel.isUserExists(currentUser)) {
-            viewModel.goToSellerVacationsView();
-        }
-        else {
-            this.viewModel.popAlertinfo("You are NOT Sign in!");
-            viewModel.goToSignIn();
-        }
-    }
 
 
     public void goToBuyerVacationsView(MouseEvent mouseEvent){

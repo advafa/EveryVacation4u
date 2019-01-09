@@ -239,29 +239,6 @@ private int getVacationID(){
         }
     }
 
-    public void deleteUsers() {
-        try {
-            execute("DELETE FROM Users");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void deleteOrders() {
-        try {
-            execute("DELETE FROM Orders");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void deleteVacation() {
-        try {
-            execute("DELETE FROM Vacations");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
 
     public void deleteVacationsBySeller(String selllerEmail) {
@@ -270,22 +247,32 @@ private int getVacationID(){
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
-
-
-
-
     }
+
+    public void deleteRequestsBySeller(String selllerEmail) {
+            try {
+                execute("DELETE FROM Orders WHERE Orders.seller_email = "  + selllerEmail + "' ;");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    }
+
+    public void deleteRequestsByBuyer(String buyerEmail) {
+        try {
+            execute("DELETE FROM Orders WHERE Orders.buyer_email = "  + buyerEmail + "' ;");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //***************Update****************//
 
 
     public void UpdateUser(User user) {
-        UpdateUsers(user.getFirst_name(), user.getLast_name(), user.getEmail(), user.getPassword(), user.toStringBirth_date(), user.getCity(), user.toStringSignup_date());
+        UpdateUsers(user.getFirst_name(), user.getLast_name(), user.getEmail(), user.getPassword(), user.toStringBirth_date(), user.getCity());
     }
 
-    private void UpdateUsers(String first_name, String last_name, String email, String password, String birth_date, String city, String sign_up_date) {
+    private void UpdateUsers(String first_name, String last_name, String email, String password, String birth_date, String city) {
         try {
             String query = "UPDATE Users SET first_name='" + first_name +
                     "', last_name='" + last_name + "',password='" + password + "',birth_date='" + birth_date + "',city='" + city + "'" +
@@ -499,6 +486,37 @@ private int getVacationID(){
         return null;
     }
 
+    public List<Vacation> getVacationsByseller_email(String seller_email) {
+        try {
+            Statement st = dbConnection.createStatement();
+            ResultSet resSet = st.executeQuery("SELECT * FROM Vacations WHERE Vacations.seller_email=seller_email;");
+            List<Vacation> vacations = new ArrayList<>();
+            while (resSet.next()) {
+                vacations.add(getVacationFromRow(resSet));
+            }
+
+            return vacations;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Vacation> getAvailableVacationsByseller_email(String seller_email) {
+        try {
+            Statement st = dbConnection.createStatement();
+            ResultSet resSet = st.executeQuery("SELECT * FROM Vacations WHERE Vacations.vacation_status=1 AND Vacations.seller_email=seller_email;");
+            List<Vacation> vacations = new ArrayList<>();
+            while (resSet.next()) {
+                vacations.add(getVacationFromRow(resSet));
+            }
+
+            return vacations;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public List<Vacation> getVacationBySimpleSearch(Vacation vacation) {
 

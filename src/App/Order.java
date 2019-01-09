@@ -9,7 +9,7 @@ public class Order {
     private Boolean seller_status;//true=approve, false=decline
     private Boolean buyer_status;//true=paid, false=submit
 
-    public String status="App";
+
 
     public Order(String seller_email, String buyer_email, int vacation_id, Boolean buyer_status){
         this.seller_email=seller_email;

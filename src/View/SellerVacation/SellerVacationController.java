@@ -1,8 +1,7 @@
 package View.SellerVacation;
 
-import App.Order;
-import App.User;
-import App.OrderView;
+
+import App.TableViewClass;
 import App.Vacation;
 import Main.ViewModel;
 
@@ -15,162 +14,144 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
-
+import javafx.scene.control.Button;
 
 public class SellerVacationController implements Initializable {
 
+
+
 //seller_status true=approve, false=decline
 
-    public TableView<OrderView> SaleRequstTable;
-    public TableColumn<OrderView, String> colVacationId;
-    public TableColumn<OrderView, String> colSellerStatus;
-    public TableColumn<OrderView, String> colBuyerName;
-    public TableColumn<OrderView, String> colPaymentStatus;
-    private ObservableList<OrderView> SaleRequst;
+        public TableView<TableViewClass> SaleRequstTable;
+        public TableColumn<TableViewClass, Integer> colVacationId;
+        public TableColumn<TableViewClass, String>  colFrom;
+        public TableColumn<TableViewClass, String>  colTo;
+        public TableColumn<TableViewClass, String>  colCheckin;
+        public TableColumn<TableViewClass, String>  colCheckout;
+        public TableColumn<TableViewClass, String>  colVacatinStatus;
+        public Button done_btn;
+
+        private ObservableList<TableViewClass> SaleRequst;
+
+        private TableViewClass clickedRow;
+
+        private ViewModel viewModel;
 
 
-    private OrderView clickedRow;
+        @Override
+        public void initialize(URL location, ResourceBundle resources) {
+            colVacationId.setCellValueFactory(new PropertyValueFactory<>("vacation_id"));
+            colFrom.setCellValueFactory(new PropertyValueFactory<> ("from"));
+            colTo.setCellValueFactory(new PropertyValueFactory<> ("to"));
+            colCheckin.setCellValueFactory(new PropertyValueFactory<>("checkin"));
+            colCheckout.setCellValueFactory(new PropertyValueFactory<>("checkout"));
+            colVacatinStatus.setCellValueFactory(new PropertyValueFactory<>("vac_status"));
 
-    public Button app_btn;
-    public Button dec_btn;
+            colVacationId.setStyle("-fx-alignment: BASELINE_CENTER");
+            colFrom.setStyle("-fx-alignment: BASELINE_CENTER");
+            colTo.setStyle("-fx-alignment: BASELINE_CENTER");
+            colCheckin.setStyle("-fx-alignment: BASELINE_CENTER");
+            colCheckout.setStyle("-fx-alignment: BASELINE_CENTER");
+            colVacatinStatus.setStyle("-fx-alignment: BASELINE_CENTER");
 
-    private ViewModel viewModel;
-    private User user;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        user = viewModel.getUser();
-        if (this.viewModel.isUserExists(user)) {
-            colVacationId.setCellValueFactory(new PropertyValueFactory<>("VacationCode"));
-            colBuyerName.setCellValueFactory(new PropertyValueFactory<>("BuyerName"));
-            colPaymentStatus.setCellValueFactory(new PropertyValueFactory<>("PaymentStatus"));
-            colSellerStatus.setCellValueFactory(new PropertyValueFactory<>("RequestStatus"));
 
             SaleRequst = FXCollections.observableArrayList();
 
             SaleRequstTable.setRowFactory(tv -> {
-                TableRow<OrderView> row = new TableRow<>();
+                TableRow<TableViewClass> row = new TableRow<>();
                 row.setOnMouseClicked(event -> {
                     if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
 
                         this.clickedRow = row.getItem();
 
-                        if(this.clickedRow.getStatus()=="Approved"){
-                            app_btn.setDisable(false);
-                            dec_btn.setDisable(false);}
-                        }
-                        else{
-                            app_btn.setDisable(true);
-                            dec_btn.setDisable(true);
-                        }
 
-                    });
+                    }
+                });
                 return row;
             });
 
-        } else {
-            this.viewModel.popAlertinfo("Please Sign in!");
-            this.viewModel.goToSignIn();
+
+
         }
 
+        public void setViewModel(ViewModel viewModel) {
+            this.viewModel = viewModel;
+        }
 
+        public void goToDetails(MouseEvent mouseEvent) {
+            if(this.clickedRow==null)
+                viewModel.popAlertinfo("Please pick a Request row from the Table!");
+            else
+                viewModel.goToSellerVacationDetails(this.clickedRow.getVacation_id());
+
+        }
+
+    public void goToDone (MouseEvent mouseEvent) {
+        if(this.clickedRow==null)
+            viewModel.popAlertinfo("Please pick a Request row from the Table!");
+        else
+            if(this.clickedRow.getVac_status()== "Available")
+            viewModel.addReq(this.clickedRow.getVacation_id());
+            else
+                viewModel.popAlertinfo("This Vacation is NOT Available!");
     }
 
 
-    public void loadSellerVacations(User user) {
-
-        if (this.viewModel.isUserExists(user)) {
+        public void loadAllSellerVacations() {
+            this.done_btn.setVisible(false);
             SaleRequstTable.setItems(FXCollections.observableArrayList());
             SaleRequst = FXCollections.observableArrayList();
-            List<Order> SaleRequstList = viewModel.getOrdersByseller_email();
-
-            String buyerName;
-            int vacation_id;
-            String sellerStatus;
-            String buyerStatus;
-
-            for (Order ord : SaleRequstList) {
-                buyerName=viewModel.getUserNameByEmail(ord.getBuyer_email());
-                vacation_id=ord.getVacation_id();
-                sellerStatus=ord.getSeller_status()?"Approved":"Declined";
-                buyerStatus=ord.getBuyer_status()?"Paid":"Not yet";
-                OrderView orderView = new OrderView(vacation_id, buyerName, sellerStatus,buyerStatus,ord.getBuyer_email());
-                    SaleRequst.add(orderView);
+            List<Vacation> SellerVacationsList = viewModel.getVacationsByseller_email();
+            int id;
+            String checkin;
+            String checkout;
+            String from;
+            String to;
+            String stat;
+            TableViewClass addrow;
+            for(Vacation vacation : SellerVacationsList){
+                id=vacation.getVacation_id();
+                from=vacation.getFrom();
+                to=vacation.getto();
+                checkin=vacation.toStringCheckin();
+                checkout=vacation.toStringCheckout();
+                stat=vacation.getVacation_status()?"Available":"NOT Available";
+                addrow=new TableViewClass(id,checkin,checkout, from,to,stat);
+                SaleRequst.add(addrow);
             }
+
+
             SaleRequstTable.setItems(SaleRequst);
-        } else {
-            this.viewModel.popAlertinfo("Please Sign in!");
-            this.viewModel.goToSignIn();
-        }
-    }
-
-
-    public void goToDetails(MouseEvent mouseEvent) {
-        Order ord;
-
-        if(this.clickedRow.getStatus()=="Approved"){
-            ord=new Order(user.getEmail(),clickedRow.getBuyer_email(),clickedRow.getVacation_id(),true);
-            viewModel.goToSellerVacationDetails(this.clickedRow.getVacation_id(),ord);}
-        else{
-            ord=new Order(user.getEmail(),clickedRow.getBuyer_email(),clickedRow.getVacation_id(),false);
-            viewModel.goToSellerVacationDetails(this.clickedRow.getVacation_id(),ord);}
-
-    }
-
-    public void ApprovePament(MouseEvent mouseEvent) {
-        if(this.clickedRow.getStatus()=="Declined") {
-            viewModel.popAlerterror("This vacation is not available!");
-            return;
-        }
-        if(!viewModel.getVacationStatus(clickedRow.getVacation_id())){
-            viewModel.popAlerterror("This vacation Sold Out!");
-            return;
         }
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("Are you sure this buyer pay in cash?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            this.viewModel.setVacationStatus(clickedRow.getVacation_id(),false);
-            Order ord=new Order(user.getEmail(),clickedRow.getBuyer_email(),clickedRow.getVacation_id(),true);
-            this.viewModel.setBuyerStatus(ord,true);
-            }
-    }
-
-
-    public void setViewModel(ViewModel viewModel) {
-        this.viewModel = viewModel;
-    }
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-
-
-    public void ApproveSaleRequest(MouseEvent mouseEvent){
-        if(!viewModel.getVacationStatus(clickedRow.getVacation_id())){
-            viewModel.popAlerterror("This vacation Sold Out!");
-            return;
+    public void loadAvailableSellerVacations() {
+        this.done_btn.setVisible(true);
+        SaleRequstTable.setItems(FXCollections.observableArrayList());
+        SaleRequst = FXCollections.observableArrayList();
+        List<Vacation> SellerVacationsList = viewModel.getAvailableVacationsByseller_email();
+        int id;
+        String checkin;
+        String checkout;
+        String from;
+        String to;
+        String stat;
+        TableViewClass addrow;
+        for(Vacation vacation : SellerVacationsList){
+            id=vacation.getVacation_id();
+            from=vacation.getFrom();
+            to=vacation.getto();
+            checkin=vacation.toStringCheckin();
+            checkout=vacation.toStringCheckout();
+            stat=vacation.getVacation_status()?"Available":"NOT Available";
+            addrow=new TableViewClass(id,checkin,checkout, from,to,stat);
+            SaleRequst.add(addrow);
         }
-        Order ord=new Order(user.getEmail(),clickedRow.getBuyer_email(),clickedRow.getVacation_id(),false);
-        this.viewModel.setSellerStatus(ord,true);
 
-    }
 
-    public void DeclineSaleRequest(MouseEvent mouseEvent){
-        if(!viewModel.getVacationStatus(clickedRow.getVacation_id())){
-            viewModel.popAlerterror("This vacation Sold Out!");
-            return;
-        }
-        Order ord=new Order(user.getEmail(),clickedRow.getBuyer_email(),clickedRow.getVacation_id(),false);
-        this.viewModel.setSellerStatus(ord,false);
-
+        SaleRequstTable.setItems(SaleRequst);
     }
 
 
-}
-
-
+    }

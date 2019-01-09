@@ -1,4 +1,4 @@
-package View.SignInScreenView;
+package View.SignIn;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,7 +30,7 @@ public class SignInController implements Initializable {
     }
 
 
-    public void goToUserView(MouseEvent mouseEvent) {
+    public void login (MouseEvent mouseEvent) {
 
         if (email.getText() == null || email.getText().trim().isEmpty() || password.getText()==null ||password.getText().trim().isEmpty()) {
             viewModel.popAlerterror("Email or password are empty");

@@ -72,7 +72,8 @@
                   <Menu mnemonicParsing="false" text="Sell Vacation">
                      <items>
                         <MenuItem fx:id="addVac_menu" mnemonicParsing="false" text="New Vacation" />
-                        <MenuItem mnemonicParsing="false" text="buyers suggestions" />
+                        <MenuItem fx:id="seller_vacations_menu" mnemonicParsing="false" text="My Vacations" />
+                        <MenuItem fx:id="seller_req_menu" mnemonicParsing="false" text="buyers Requests" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Buy Now!">

@@ -78,12 +78,12 @@ public class AddVacationController implements Initializable {
                         separately.isSelected(), org_p,sal_p,off);
 
                 if((num>1 && !separately.isSelected()) || num==1)
-                this.viewModel.addVacation(vacation);
+                this.viewModel.AddVacation(vacation);
                 else {
                     if(num>1 && separately.isSelected()) {
                         vacation.setNum_of_tickets(1);
                     for(int i=0;i<num;i++)
-                        this.viewModel.addVacation(vacation);
+                        this.viewModel.AddVacation(vacation);
                     } }
                 this.viewModel.popAlertinfo("Your Vacation successfully saved!");
                 this.reset();
