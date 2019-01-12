@@ -39,8 +39,6 @@ public class EditProfileController implements Initializable {
         this.first_name.setText(user.getFirst_name());
         this.last_name.setText(user.getLast_name());
         this.email.setText(user.getEmail());
-        this.password.setText(user.getPassword());
-        this.confirm_password.setText(user.getPassword());
         this.birth_date.setValue(user.getBirth_date());
         this.city.setText(user.getCity());
 

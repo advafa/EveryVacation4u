@@ -23,10 +23,9 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="app_btn" layoutX="205.0" layoutY="594.0" mnemonicParsing="false"  prefHeight="42.0" prefWidth="175.0" style="-fx-background-color: #42bf3d;" text="Approve" />
-                  <Button fx:id="dec_btn" layoutX="394.0" layoutY="595.0" mnemonicParsing="false"  prefHeight="42.0" prefWidth="163.0" style="-fx-background-color: #f41c00;" text="Decline" />
-                  <Button fx:id="payment" layoutX="590.0" layoutY="594.0" mnemonicParsing="false"  prefHeight="44.0" prefWidth="163.0" text="Approve Payment" />
-                  <Button fx:id="back_btn" layoutX="785.0" layoutY="598.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="142.0" text="Back" />
+                  <Button fx:id="app_btn" layoutX="205.0" layoutY="594.0" mnemonicParsing="false" onMouseClicked="#ApproveSaleRequest" prefHeight="42.0" prefWidth="175.0" style="-fx-background-color: #42bf3d;" text="Approve" />
+                  <Button fx:id="dec_btn" layoutX="394.0" layoutY="595.0" mnemonicParsing="false" onMouseClicked="#DeclineSaleRequest" prefHeight="42.0" prefWidth="163.0" style="-fx-background-color: #f41c00;" text="Decline" />
+                  <Button fx:id="payment_btn" layoutX="590.0" layoutY="594.0" mnemonicParsing="false" onMouseClicked="#ApprovePayment" prefHeight="44.0" prefWidth="163.0" text="Approve Payment" />
                   <GridPane fx:id="hotel" layoutX="258.0" layoutY="82.0" prefHeight="453.0" prefWidth="656.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="191.0" />
@@ -47,6 +46,7 @@
                         <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                      </rowConstraints>
@@ -134,19 +134,26 @@
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Label layoutX="10.0" layoutY="396.0" prefHeight="21.0" prefWidth="183.0" text="Request Status:" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="12">
+                        <Label fx:id="name" layoutX="186.0" layoutY="430.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                        <Label prefHeight="21.0" prefWidth="183.0" text="Payment Status:" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="13">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Label fx:id="name" layoutX="186.0" layoutY="430.0" prefHeight="26.0" prefWidth="185.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                        <Label fx:id="buyer_status" prefHeight="21.0" prefWidth="125.0" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="13" />
+                        <Label prefHeight="21.0" prefWidth="183.0" text="Request Status:" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="12">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
                      </children>
                   </GridPane>
-                  <Label fx:id="seller_email" layoutX="160.0" layoutY="500.0" prefHeight="45.0" prefWidth="802.0" text="Label">
+                  <Label fx:id="buyer_email" layoutX="160.0" layoutY="500.0" prefHeight="45.0" prefWidth="802.0" text="Label">
                      <font>
                         <Font name="System Bold" size="30.0" />
                      </font>
                   </Label>
+                  <Button fx:id="back_btn" onMouseClicked="#Back" layoutX="780.0" layoutY="595.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="163.0" text="Back" />
                </children>
             </AnchorPane>
          </children>

@@ -21,6 +21,6 @@
       <Button fx:id="details" layoutX="621.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#goToDetails" prefHeight="31.0" prefWidth="170.0" text="More Details" />
       <Button fx:id="app_btn" layoutX="62.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#ApproveSaleRequest" prefHeight="31.0" prefWidth="174.0" style="-fx-background-color: #42bf3d;" text="Approve" />
       <Button fx:id="dec_btn" layoutX="253.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#DeclineSaleRequest" prefHeight="28.0" prefWidth="170.0" style="-fx-background-color: #f41c00;" text="Decline" />
-      <Button fx:id="payment" layoutX="438.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#ApprovePament" prefHeight="25.0" prefWidth="169.0" text="Approve Payment" />
+      <Button fx:id="payment" layoutX="438.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#ApprovePayment" prefHeight="25.0" prefWidth="169.0" text="Approve Payment" />
    </children>
 </AnchorPane>

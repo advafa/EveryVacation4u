@@ -7,7 +7,7 @@ public class Order {
     private String buyer_email;
     private int vacation_id;
     private Boolean seller_status;//true=approve, false=decline
-    private Boolean buyer_status;//true=paid, false=submit
+    public Boolean buyer_status;//true=paid, false=submit
 
 
 
@@ -27,6 +27,17 @@ public class Order {
     public int getVacation_id(){return this.vacation_id;}
     public Boolean getSeller_status(){return this.seller_status;}//true=approve, false=decline
     public Boolean getBuyer_status(){return this.buyer_status;}//true=paid, false=submit
+    public String toStringSellerStatus(){
+        if (this.seller_status == null)
+        return  "";
+        return this.seller_status? "Approved" : "Declined";
+    }
+
+    public String toStringBuyer_status(){
+        if (this.buyer_status == null)
+            return  "";
+        return this.buyer_status? "Paid" : "Submit";
+    }
 
     //Set Functions
     public void setSeller_email(String seller_email) {this.seller_email = seller_email;}

@@ -23,17 +23,17 @@ public class BuyerRequestsController implements Initializable {
 
     public TableView<TableViewClass> SaleRequstTable;
     public TableColumn<TableViewClass, Integer> colVacationId;
-    public TableColumn<TableViewClass, String> colFrom;
-    public TableColumn<TableViewClass, String> colTo;
     public TableColumn<TableViewClass, String> colCheckin;
     public TableColumn<TableViewClass, String> colCheckout;
+    public TableColumn<TableViewClass, String> colFrom;
+    public TableColumn<TableViewClass, String> colTo;
     public TableColumn<TableViewClass, String> colSellerName;
     public TableColumn<TableViewClass, String> colRequestStatus;
 
 
     private ObservableList<TableViewClass> SaleRequst;
 
-    private TableViewClass clickedRow;
+    private TableViewClass clickedRow=null;
 
     private ViewModel viewModel;
 
@@ -99,7 +99,7 @@ else
 
             SaleRequstTable.setItems(FXCollections.observableArrayList());
             SaleRequst = FXCollections.observableArrayList();
-            List<Order> SaleRequstList = viewModel.getOrdersByBuyer_email();
+            List<Order> SaleRequstList = viewModel.getRequestsByBuyer_email();
             Vacation vacation;
             String checkin;
         String checkout;

@@ -62,7 +62,15 @@ public class BuyerVacationDetailsController implements Initializable {
 
         this.vacation=vacation;
         this.statusString=status;
-        this.status=this.statusString=="Approved";
+
+        if(status== "Approved") this.status=true;
+        if(status== "Declined") this.status=false;
+        if(status== "") {
+            this.status=null;
+            this.statusString="submitted";
+        }
+
+
 
         //Set Labels
 

@@ -20,13 +20,13 @@
          <children>
             <AnchorPane layoutX="103.0" layoutY="53.0" opacity="0.78" prefHeight="448.0" prefWidth="554.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="53.0">
                <children>
-                  <Label layoutX="79.0" layoutY="14.0" prefHeight="21.0" prefWidth="411.0" text="Wellcome to Vacation4U" textFill="#0d186b">
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="53.0" prefWidth="491.0" text="Wellcome to EveryVacation4U" textFill="#0d186b">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
                </children></AnchorPane>
-            <Button fx:id="canc" layoutX="397.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#goToSearch" prefHeight="41.0" prefWidth="122.0" text="cancel" />
+            <Button fx:id="canc_btn" layoutX="397.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#goToSearch" prefHeight="41.0" prefWidth="122.0" text="cancel" />
             <GridPane layoutX="160.0" layoutY="150.0" prefHeight="268.0" prefWidth="404.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="185.0" />
@@ -61,9 +61,13 @@
             <Button fx:id="bt_sup" layoutX="220.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#AddUser" prefHeight="41.0" prefWidth="122.0" text="Sign Up" />
             <MenuBar layoutX="10.0" layoutY="8.0" prefHeight="10.0" prefWidth="662.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <menus>
+                  <Menu mnemonicParsing="false" text="Search vacation">
+                    <items>
+                        <MenuItem fx:id="search_menu" mnemonicParsing="false" text="Simple Search" />
+                    </items>
+                  </Menu>
                   <Menu fx:id="profile" mnemonicParsing="false" text="My Profil">
                      <items>
-                        <MenuItem fx:id="SignUp_menu" mnemonicParsing="false" text="Sign Up" />
                         <MenuItem fx:id="View_profile_menu" mnemonicParsing="false" text="View" />
                         <MenuItem fx:id="EditProfile_menu" mnemonicParsing="false" text="Edit" />
                         <MenuItem fx:id="Delete_profile_menu" mnemonicParsing="false" text="Delete" />
@@ -71,21 +75,27 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Sell Vacation">
                      <items>
-                        <MenuItem fx:id="addVac_menu" mnemonicParsing="false" text="New Vacation" />
+                        <MenuItem fx:id="addVac_menu" mnemonicParsing="false" text="Add New Vacation" />
                         <MenuItem fx:id="seller_vacations_menu" mnemonicParsing="false" text="My Vacations" />
                         <MenuItem fx:id="seller_req_menu" mnemonicParsing="false" text="buyers Requests" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Buy Now!">
                      <items>
-                        <MenuItem fx:id="search_menu" mnemonicParsing="false" text="Search vacation" />
                         <MenuItem fx:id="buyer_req_menu" mnemonicParsing="false" text="My vacation Request" />
                      </items>
                   </Menu>
-                  <Menu fx:id="profile1" mnemonicParsing="false" text="Log in">
+                  <Menu mnemonicParsing="false" text="Trade in">
+                    <items>
+                      <MenuItem fx:id="inbox_traderequests_menu" mnemonicParsing="false" text="Inbox  Requests" />
+                        <MenuItem fx:id="outbox_traderequests_menu" mnemonicParsing="false" text="Outbox  Requests" />
+                    </items>
+                  </Menu>
+                  <Menu fx:id="profile1" mnemonicParsing="false" text="Sign">
                      <items>
                         <MenuItem fx:id="SignIn_menu" mnemonicParsing="false" text="Sign in" />
                         <MenuItem fx:id="SignOut_menu" mnemonicParsing="false" text="Sign out" />
+                        <MenuItem fx:id="SignUp_menu" mnemonicParsing="false" text="Sign Up" />
                      </items>
                   </Menu>
                   <Menu fx:id="exit_menu" mnemonicParsing="false" text="Exit">

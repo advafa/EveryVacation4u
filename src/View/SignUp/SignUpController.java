@@ -30,24 +30,21 @@ public class SignUpController implements Initializable {
 
 
     //MenuItems
-
+    @FXML
     public MenuItem SignUp_menu;
     public MenuItem View_profile_menu;
     public MenuItem EditProfile_menu;
     public MenuItem Delete_profile_menu;
-
     public MenuItem addVac_menu;
     public MenuItem seller_vacations_menu;
     public MenuItem seller_req_menu;
-
     public MenuItem search_menu;
     public MenuItem buyer_req_menu;
-
+    public MenuItem inbox_traderequests_menu;
+    public MenuItem outbox_traderequests_menu;
     public MenuItem SignIn_menu;
     public MenuItem SignOut_menu;
     public MenuItem exit_menu;
-
-
 
 
 
@@ -61,14 +58,13 @@ public class SignUpController implements Initializable {
         View_profile_menu.setOnAction(e -> {viewModel.goToProfileView();});
         EditProfile_menu.setOnAction(e -> {viewModel.goToEditProfile();});
         Delete_profile_menu.setOnAction(e -> {viewModel.goTODeleteProfile();});;
-
         addVac_menu.setOnAction(e -> {viewModel.goToAddVacation();});
         seller_vacations_menu.setOnAction(e -> {viewModel.goToSellerVacationsView("View");});
         seller_req_menu.setOnAction(e -> {viewModel.goToSellerRequest();});
-
         search_menu.setOnAction(e -> {viewModel.goToSearchView();});
         buyer_req_menu.setOnAction(e -> {viewModel.goToBuyerVacationsView();});
-
+        inbox_traderequests_menu.setOnAction(e -> {viewModel.goToInbox_traderequests();});
+        outbox_traderequests_menu.setOnAction(e -> {viewModel.goToOutbox_traderequests();});
         SignIn_menu.setOnAction(e -> {viewModel.goToSignIn();});
         SignOut_menu.setOnAction(e -> {viewModel.SignOut();});
         exit_menu.setOnAction(e -> {System.exit(0);});
@@ -194,45 +190,8 @@ public class SignUpController implements Initializable {
         alert.showAndWait();
     }
 
-//*********  Menu Functions **************///
-
-
-
-
-
-    public void EditProfile(MouseEvent mouseEvent){
-        User currentUser = viewModel.getUser();
-        if (this.viewModel.isUserExists(currentUser)) {
-            viewModel.goToEditProfile();
-        }
-        else {
-            this.viewModel.popAlertinfo("You are NOT Sign in!");
-            viewModel.goToSignIn();
-        }
-    }
-
-
-
-
-
-
-    public void goToBuyerVacationsView(MouseEvent mouseEvent){
-        User currentUser = viewModel.getUser();
-        if (this.viewModel.isUserExists(currentUser)) {
-            viewModel.goToBuyerVacationsView();
-        }
-        else {
-            this.viewModel.popAlertinfo("You are NOT Sign in!");
-            viewModel.goToSignIn();
-        }
-
-         }
-
     public void goToSearch(MouseEvent mouseEvent) {
-        viewModel.goToSearchView();
-    }
-//    public void exitApp(MouseEvent event) {
-//        System.exit(0);
-//    }
+        viewModel.goToSearchView();}
+
 
 }

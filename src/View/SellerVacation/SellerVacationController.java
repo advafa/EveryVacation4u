@@ -7,6 +7,7 @@ import Main.ViewModel;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -14,6 +15,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 
@@ -22,7 +24,7 @@ public class SellerVacationController implements Initializable {
 
 
 //seller_status true=approve, false=decline
-
+        @FXML
         public TableView<TableViewClass> SaleRequstTable;
         public TableColumn<TableViewClass, Integer> colVacationId;
         public TableColumn<TableViewClass, String>  colFrom;
@@ -91,12 +93,17 @@ public class SellerVacationController implements Initializable {
     public void goToDone (MouseEvent mouseEvent) {
         if(this.clickedRow==null)
             viewModel.popAlertinfo("Please pick a Request row from the Table!");
-        else
-            if(this.clickedRow.getVac_status()== "Available")
-            viewModel.addReq(this.clickedRow.getVacation_id());
-            else
-                viewModel.popAlertinfo("This Vacation is NOT Available!");
-    }
+        else{
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("In this send Requst you agree to trade in");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+
+                this.viewModel.addTradeReq(this.clickedRow.getVacation_id(),true);
+
+
+            }}}
 
 
         public void loadAllSellerVacations() {

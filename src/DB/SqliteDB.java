@@ -25,6 +25,7 @@ public class SqliteDB {
             createVacationTable();
             createOrdersTable();
             createPaymentsTable();
+            createTradeRequestsTable();
 
             System.out.println("db init");
         } catch (Exception e) {
@@ -83,6 +84,7 @@ public class SqliteDB {
                 "seller_status int, \n" +
                 "buyer_status int, \n" +
                 "CONSTRAINT PK_Orders PRIMARY KEY (seller_email, buyer_email, vacation_id), \n" +
+                "CONSTRAINT FK_Orders FOREIGN KEY (vacation_id) REFERENCES Vacations(vacation_id),\n" +
                 "CONSTRAINT FK_OrderSeller FOREIGN KEY (seller_email) REFERENCES Users(email), \n" +
                 "CONSTRAINT FK_OrderBuyer FOREIGN KEY (buyer_email) REFERENCES Users(email));"
         );
@@ -101,6 +103,22 @@ public class SqliteDB {
                 "CONSTRAINT FK_PaymentsVacation FOREIGN KEY (vacation_id) REFERENCES Vacations(vacation_id));");
     }
 
+
+    private void createTradeRequestsTable() throws SQLException {
+        execute("CREATE TABLE IF NOT EXISTS TradeRequests (\n" +
+                "seller_email text, \n" +
+                "trader_email text, \n" +
+                "vacation_id int, \n" +
+                "vacationtoTrade_id int, \n"+
+                "seller_status int, \n" +
+                "trader_status int, \n" +
+                "CONSTRAINT PK_TradeRequests PRIMARY KEY (vacation_id, vacationtoTrade_id), \n" +
+                "CONSTRAINT FK_TradeRequests1 FOREIGN KEY (vacation_id) REFERENCES Vacations(vacation_id),\n" +
+                "CONSTRAINT FK_TradeRequests2 FOREIGN KEY (vacationtoTrade_id) REFERENCES Vacations(vacation_id),\n" +
+                "CONSTRAINT FK1_TradeRequests FOREIGN KEY (seller_email) REFERENCES Users(email), \n" +
+                "CONSTRAINT FK2_TradeRequests FOREIGN KEY (trader_email) REFERENCES Users(email));"
+        );
+    }
 
     //*******************Add *****************************************//
 
@@ -210,6 +228,24 @@ private int getVacationID(){
         }
     }
 
+    public void addReq (TradeRequest tradeRequest) {
+
+        try {
+
+            String seller_email = tradeRequest.getSeller_email();
+            String trader_email = tradeRequest.getBuyer_email();
+            int vacation_id = tradeRequest.getVacation_id();
+            int vacationtoTrade_id = tradeRequest.getVacationtoTrade_id();
+            int seller_status = -1;
+            int trader_status = 1;
+
+            String query = String.format("INSERT INTO TradeRequests VALUES('%s', '%s', %d, %d, %d, %d)", seller_email, trader_email, vacation_id, vacationtoTrade_id, seller_status, trader_status);
+            execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     //*************** Delete ******************************
 
@@ -223,6 +259,8 @@ private int getVacationID(){
 
     public void deleteVacation(Vacation vacation) {
         try {
+
+
             execute("DELETE FROM Vacations WHERE Vacations.vacation_id = " + vacation.getVacation_id() + " ;");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -232,8 +270,7 @@ private int getVacationID(){
     public void deleteOrder(Order order) {
         try {
             execute("DELETE FROM Orders WHERE Orders.seller_email = " + order.getSeller_email() +
-                    " AND Orders.buyer_email = " + order.getBuyer_email() + " AND Orders.vacation_id = " +
-                    "'" + order.getVacation_id() + "' ;");
+                    " AND Orders.buyer_email = " + order.getBuyer_email() + " AND Orders.vacation_id = " + order.getVacation_id() + " ;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -242,6 +279,8 @@ private int getVacationID(){
 
 
     public void deleteVacationsBySeller(String selllerEmail) {
+
+        if(!this.getVacationsByseller_email(selllerEmail).isEmpty())
         try {
             execute("DELETE FROM Vacations WHERE Vacations.seller_email = '" + selllerEmail + "' ;");
         } catch (SQLException e) {
@@ -250,20 +289,69 @@ private int getVacationID(){
     }
 
     public void deleteRequestsBySeller(String selllerEmail) {
+        if(!this.getRequestsByseller_email(selllerEmail).isEmpty()) {
             try {
-                execute("DELETE FROM Orders WHERE Orders.seller_email = "  + selllerEmail + "' ;");
+                execute("DELETE FROM Orders WHERE Orders.seller_email = " + selllerEmail + "' ;");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
     }
 
     public void deleteRequestsByBuyer(String buyerEmail) {
+        if(!this.getRequestsByBuyer_email(buyerEmail).isEmpty()) {
+            try {
+                execute("DELETE FROM Orders WHERE Orders.buyer_email = " + buyerEmail + "' ;");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void deleteOrderByVacationID (int vacation_id) {
         try {
-            execute("DELETE FROM Orders WHERE Orders.buyer_email = "  + buyerEmail + "' ;");
+            execute("DELETE FROM Orders WHERE Orders.vacation_id = " + vacation_id + " ;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+
+    public void deleteTradeRequestBySeller(String seller_email) {
+        if (!this.getTradeRequestByseller_email(seller_email).isEmpty()) {
+            try {
+                execute("DELETE FROM TradeRequests WHERE TradeRequests.seller_email = " + seller_email + "' ;");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void deleteTradeRequestsByTrader(String trader_email) {
+        if(!this.getTradeRequestByTrader_email(trader_email).isEmpty()){
+        try {
+            execute("DELETE FROM TradeRequests WHERE TradeRequests.trader_email = "  + trader_email + "' ;");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }}
+
+    public void deleteTradeRequestByVacationID (int vacation_id) {
+        try {
+            execute("DELETE FROM TradeRequests WHERE TradeRequests.vacation_id = " + vacation_id + " ;");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteTradeRequestByTradeVacationID (int vacationtoTrade_id) {
+        try {
+            execute("DELETE FROM TradeRequests WHERE TradeRequests.vacationtoTrade_id = " + vacationtoTrade_id + " ;");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     //***************Update****************//
 
@@ -389,6 +477,22 @@ private int getVacationID(){
         }
     }
 
+    public void UpdateTradeRequestSellerStatus(TradeRequest req, boolean sellerStatus) {
+        try {
+            String seller_email = req.getSeller_email();
+            String trader_email = req.getBuyer_email();
+            int vacation_id = req.getVacation_id();
+            int vacationtoTrade_id = req.getVacationtoTrade_id();
+            int status = sellerStatus ? 1 : 0;
+
+            String query = "UPDATE TradeRequests SET seller_status=" + status +
+                    " WHERE TradeRequests.vacation_id = " + vacation_id +" AND TradeRequests.vacationtoTrade_id = "+vacationtoTrade_id+ "";
+            execute(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     // ******************** Get ********************************
 
 
@@ -435,7 +539,7 @@ private int getVacationID(){
     }
 
 
-    public List<Order> getOrdersByseller_email(String seller_email) {
+    public List<Order> getRequestsByseller_email(String seller_email) {
         try {
             Statement st = dbConnection.createStatement();
             ResultSet resSet = st.executeQuery("SELECT * FROM Orders " +
@@ -452,7 +556,7 @@ private int getVacationID(){
     }
 
 
-    public List<Order> getOrdersByBuyer_email(String buyer_email) {
+    public List<Order> getRequestsByBuyer_email(String buyer_email) {
         try {
             Statement st = dbConnection.createStatement();
             ResultSet resSet = st.executeQuery("SELECT * FROM Orders " +
@@ -468,6 +572,43 @@ private int getVacationID(){
         }
         return null;
     }
+
+
+
+    public List<TradeRequest> getTradeRequestByseller_email(String seller_email) {
+        try {
+            Statement st = dbConnection.createStatement();
+            ResultSet resSet = st.executeQuery("SELECT * FROM TradeRequests " +
+                    "WHERE TradeRequests.seller_email = '" + seller_email + "';");
+            List<TradeRequest> tradeRequests = new ArrayList<>();
+            while (resSet.next()) {
+                tradeRequests.add(getTradeFromRow(resSet));
+            }
+            return tradeRequests;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public List<TradeRequest> getTradeRequestByTrader_email(String trader_email) {
+        try {
+            Statement st = dbConnection.createStatement();
+            ResultSet resSet = st.executeQuery("SELECT * FROM TradeRequests " +
+                    "WHERE TradeRequests.trader_email = '" + trader_email + "';");
+
+            List<TradeRequest> tradeRequests = new ArrayList<>();
+            while (resSet.next()) {
+                tradeRequests.add(getTradeFromRow(resSet));
+            }
+            return tradeRequests;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 
     public List<Vacation> getAllAvailableVacations() {
@@ -621,6 +762,23 @@ private int getVacationID(){
     }
 
 
+    private TradeRequest getTradeFromRow(ResultSet resultSet) throws SQLException {
+        String seller_email = resultSet.getString("seller_email");
+        String trader_email = resultSet.getString("trader_email");
+        int vacation_id = resultSet.getInt("vacation_id");
+        int vacationtoTrade_id = resultSet.getInt("vacationtoTrade_id");
+        Boolean seller_status = resultSet.getInt("seller_status") == 1;
+        if(resultSet.getInt("seller_status") == -1) seller_status=null;
+        Boolean trader_status = resultSet.getInt("trader_status") == 1;
+
+
+        TradeRequest tradeRequest = new TradeRequest(seller_email, trader_email, vacation_id,vacationtoTrade_id, trader_status);
+        tradeRequest.setSeller_status(seller_status);
+        return tradeRequest;
+    }
+
+
+
 //    ******************** Check if Exists ***********************************
 
     public Boolean isUserExists(User user) {
@@ -637,6 +795,35 @@ private int getVacationID(){
             return false;
         }
     }
+
+
+    public Boolean isSaleReqExists (String seller_email,String buyer_email,int VacationId) {
+         try {
+            Statement st = dbConnection.createStatement();
+            ResultSet resSet = st.executeQuery("SELECT * FROM Orders " +
+                    "WHERE Orders.vacation_id = "+ VacationId+" AND  Orders.seller_email = '" + seller_email + "' AND Orders.buyer_email='"+buyer_email+ "' ;");
+            Order req=getOrderFromRow(resSet);
+            return req!=null;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+
+    public Boolean isSaleReqExists (int VacationId, int VacationtoTrade_id) {
+        try {
+            Statement st = dbConnection.createStatement();
+            ResultSet resSet = st.executeQuery("SELECT * FROM TradeRequests " +
+                    "WHERE TradeRequests.vacation_id = "+ VacationId+" AND TradeRequests.vacationtoTrade_id = "+VacationtoTrade_id + " ;");
+            TradeRequest req=getTradeFromRow(resSet);
+            return req!=null;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+
+
 
 
 //*******************//

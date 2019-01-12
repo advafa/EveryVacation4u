@@ -5,10 +5,7 @@
  */
 package Main;
 
-import App.Order;
-import App.Payment;
-import App.Vacation;
-import App.User;
+import App.*;
 import Model.Model;
 
 //import Views
@@ -25,7 +22,8 @@ import View.SignIn.SignInController;
 import View.SignUp.SignUpController;
 import View.SellerRequests.SellerRequestsController;
 import View.SellerRequests.RequestDetailsController;
-
+import View.TraderRequest.TraderRequestController;
+import View.TraderRequest.TradeRequestDetailsController;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -40,6 +38,8 @@ import javafx.stage.StageStyle;
 
 import java.util.List;
 import java.util.Optional;
+
+import static javafx.scene.input.KeyCode.V;
 
 public class ViewModel extends Application {
 
@@ -86,18 +86,29 @@ public class ViewModel extends Application {
     private Scene SellerVacationDetailsScene;
     private SellerVacationDetailsController sellerVacationDetailsController;
 
+
     private Scene signInScene;
     private SignInController signInController;
 
     private Scene signUpScene;
     private SignUpController signUpController;
 
+    private Scene TraderRequestScene;
+    private TraderRequestController traderRequestController;
+
+    private Scene TradeRequestDetailsScene;
+    private TradeRequestDetailsController tradeRequestDetailsController;
+
+
     private String goTo;
 
     //*********************************************************************
     private Order orderforSeller;
     private Order orderforBuyer;
+    private Order CurrentReq;
 
+
+    private int VacationID4Trade;
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -143,6 +154,11 @@ public class ViewModel extends Application {
         FXMLLoader signInLoader = new FXMLLoader(getClass().getResource("../View/SignIn/SignInView.fxml"));
         Parent signInRoot = (Parent) signInLoader.load();
 
+        FXMLLoader TraderRequestLoader = new FXMLLoader(getClass().getResource("../View/TraderRequest/TraderRequestView.fxml"));
+        Parent TraderRequestRoot = (Parent) TraderRequestLoader.load();
+
+        FXMLLoader TradeRequestDetailsLoader = new FXMLLoader(getClass().getResource("../View/TraderRequest/TradeRequestDetailsView.fxml"));
+        Parent TradeRequestDetailsRoot = (Parent) TradeRequestDetailsLoader.load();
 
         this.stage = stage;
         this.stage.initStyle(StageStyle.UNDECORATED);
@@ -161,7 +177,8 @@ public class ViewModel extends Application {
         setDraggable(stage, SellerVacationDetailsRoot);
         setDraggable(stage, signUpRoot);
         setDraggable(stage, signInRoot);
-
+        setDraggable(stage, TraderRequestRoot);
+        setDraggable(stage, TradeRequestDetailsRoot);
 //
 
 
@@ -178,7 +195,8 @@ public class ViewModel extends Application {
         SellerVacationDetailsScene = new Scene(SellerVacationDetailsRoot);
         signUpScene = new Scene(signUpRoot);
         signInScene = new Scene(signInRoot);
-
+        TraderRequestScene = new Scene(TraderRequestRoot);
+        TradeRequestDetailsScene= new Scene(TradeRequestDetailsRoot);
 
         Model model = new Model();
         setModel(model);
@@ -222,9 +240,13 @@ public class ViewModel extends Application {
         signUpController = signUpLoader.getController();
         signUpController.setViewModel(this);
 
+        traderRequestController=TraderRequestLoader.getController();
+        traderRequestController.setViewModel(this);
 
+        tradeRequestDetailsController=TradeRequestDetailsLoader.getController();
+        tradeRequestDetailsController.setViewModel(this);
 //        loadUser("Tal@gmail.com", "1111");
-        loadUser("Tal@gmail.com", "1111");
+        loadUser("Niv@gmail.com", "12345678");
 //
 
 //        Order o1= new Order("Tal@gmail.com","Niv@gmail.com",4,false);
@@ -238,7 +260,13 @@ public class ViewModel extends Application {
 //
 //        setSellerStatus(o2, true);
 //        setSellerStatus(o3,false);
-
+        TradeRequest t2=new TradeRequest("Niv@gmail.com","Hilel@gmail.com",2,3,true);
+t2.setSeller_status(true);
+        TradeRequest t1=new TradeRequest("Niv@gmail.com","Hilel@gmail.com",3,4,true);
+t1.setSeller_status(false);
+        //this.addReq(t1);
+      //  this.addReq(t2);
+        //        TradeRequest t2=new TradeRequest("Hilel@gmail.com","Niv@gmail.com")
         stage.setScene(this.signUpScene);
         stage.show();
 
@@ -292,6 +320,9 @@ public class ViewModel extends Application {
     public void setSellerStatus(Order ord, boolean sellerStatus) {
         model.UpdateOrdersSellerStatus(ord, sellerStatus);
     }
+    public void setSellerStatus(TradeRequest req, boolean sellerStatus) {
+        model.UpdateTradeRequestSellerStatus(req,sellerStatus);
+    }
 
     public void setBuyerStatus(Order ord, boolean buyerStatus) {
         model.UpdateOrdersBuyerStatus(ord, buyerStatus);
@@ -308,14 +339,17 @@ public class ViewModel extends Application {
 //    public Vacation getVacation(){ return this.vacation; }
 
 //
-    public List<Order> getOrdersByBuyer_email() {return model.getOrdersByBuyer_email(user.getEmail()); }
-    public List<Order> getOrdersByseller_email() { return model.getOrdersByseller_email(user.getEmail()); }
+    public List<Order> getRequestsByBuyer_email() {return model.getRequestsByBuyer_email(user.getEmail()); }
+    public List<Order> getRequestsByseller_email() { return model.getRequestsByseller_email(user.getEmail()); }
     public boolean getVacationStatus(int vacationID){ return model.getVacationByVacationId(vacationID).getVacation_status(); }
     public Vacation getVacation(int vacationID){ return model.getVacationByVacationId(vacationID);}
     public List<Vacation> getVacationsByseller_email(){ return model.getVacationsByseller_email(this.user.getEmail()); }
     public List<Vacation> getAvailableVacationsByseller_email(){ return model.getAvailableVacationsByseller_email(this.user.getEmail()); }
+    public List<Vacation> getAllAvailableVacations() {return model.getAllAvailableVacations();}
+    public List<Vacation> getVacationBySimpleSearch(Vacation aVacation){return model.getVacationBySimpleSearch(aVacation);}
 
-
+    public List<TradeRequest> getTradeRequestByseller_email(){return model.getTradeRequestByseller_email(this.user.getEmail());}
+    public List<TradeRequest> getTradeRequestByTrader_email(){ return model.getTradeRequestByTrader_email(this.user.getEmail());}
 
     //*****************  Add functions ******************************
     public void AddUser(User user) {
@@ -330,28 +364,88 @@ public class ViewModel extends Application {
         model.addReq(order);
     }
 
-    public void addPayment(Payment pay) {
-        model.addPayment(pay);
+    public void addReq(Vacation avacation) {
+        if (avacation.getSeller().equals(this.user.getEmail())) {
+            this.popAlerterror("You can't Buy yours Vacation !");}
+            else {
+            Order req = new Order(avacation.getSeller(), this.user.getEmail(), avacation.getVacation_id(), false);
+            if (this.isReqExists(req)) {
+                this.popAlerterror("You already sent a request for this Vacation !");
+            } else {
+                this.addReq(req);
+                popAlertinfo("Your Request successfully sent!");
+            }
+        }
     }
 
-    public void addReq(int vacation_id) {
-
+    public void addReq(int avacationID) {
+        this.addReq(this.getVacation(avacationID));
     }
+
+
+    public void addReq(Vacation avacation,Vacation avacationtoTade) {
+        if (avacation.getSeller().equals(this.user.getEmail())) {
+            this.popAlerterror("You can't Trades your Vacation with your Vacation !");
+            }
+        else {
+            TradeRequest req = new TradeRequest(avacation.getSeller(), this.user.getEmail(), avacation.getVacation_id(), avacationtoTade.getVacation_id(),true);
+            if (this.isReqExists(req)) {
+                this.popAlerterror("You already sent a request for this Vacation !");
+            } else {
+                this.addReq(req);
+                popAlertinfo("Your Request successfully sent!");
+            }
+            this.goToSearchView();
+        }
+    }
+
+
+    public void addPayment(Payment pay) {model.addPayment(pay);
+    }
+
+
+    public void addReq(TradeRequest tradeRequest) {model.addReq(tradeRequest);}
+
+    public void addTradeReq(int avacationID, boolean isChoosen){
+        if(!isChoosen) {
+            this.VacationID4Trade = avacationID;
+            this.goToSellerVacationsView("Trade");
+        }
+        else{
+            this.addReq(this.getVacation(this.VacationID4Trade),this.getVacation(avacationID));
+
+        }
+    }
+
 
     //  ******************** Check if Exists *****************************
     public Boolean isUserExists(User user) {
         return model.isUserExists(user);
     }
 
+    public Boolean isReqExists (Order req) {
+        return model.isSaleReqExists (req.getSeller_email(), req.getBuyer_email(), req.getVacation_id());}
+
+
+    public Boolean isReqExists (TradeRequest req) {
+        return model.isSaleReqExists (req.getVacation_id(), req.getVacationtoTrade_id());}
+
 
     //*************** Delete ******************************
 
     public void DeleteProfile() {
-        model.deleteRequestsBySeller(this.user.getEmail());
-        model.deleteRequestsByBuyer(this.user.getEmail());
-        model.deleteVacationsBySeller(this.user.getEmail());
+
+
+        model.deleteRequestsByBuyer(user.getEmail());
+        model.deleteRequestsBySeller(user.getEmail());
+        model.deleteTradeRequestsByTrader(user.getEmail());
+        model.deleteTradeRequestBySeller(user.getEmail());
+        model.deleteVacationsBySeller(user.getEmail());
         model.deleteUser(this.user);
         this.user = null;
+
+
+
 
     }
 
@@ -386,7 +480,7 @@ public class ViewModel extends Application {
             profileViewController.loadUserView();
             stage.setScene(ProfileViewScene);
         } else {
-            popAlertinfo("You are NOT Sign in!");
+            popAlertinfo("Please Sign in!");
             stage.setScene(signInScene);
         }
     }
@@ -397,7 +491,7 @@ public class ViewModel extends Application {
             editProfileController.loadUserView();
             stage.setScene(EditProfileScene);
         } else {
-            popAlertinfo("You are NOT Sign in!");
+            popAlertinfo("Please Sign in!");
             stage.setScene(signInScene);
         } }
 
@@ -408,7 +502,7 @@ public class ViewModel extends Application {
         goTo="goToSearchView";
         if (isUserExists(this.user)){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText("Are you sure you want to delete ypur proflie?");
+            alert.setContentText("Are you sure you want to delete your proflie?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 this.DeleteProfile();
@@ -416,7 +510,7 @@ public class ViewModel extends Application {
             }
         }
         else {
-            this.popAlertinfo("You are NOT Sign in!");
+            this.popAlertinfo("Please Sign in!");
             this.goToSignIn();
         } }
 
@@ -429,7 +523,7 @@ public class ViewModel extends Application {
             stage.setScene(AddVacationScene);
         }
         else {
-            popAlertinfo("You are NOT Sign in!");
+            popAlertinfo("Please Sign in!");
             stage.setScene(signInScene);
         } }
 
@@ -445,7 +539,7 @@ public class ViewModel extends Application {
                 sellerVacationController.loadAvailableSellerVacations();
             stage.setScene(SellerVacationiewScene);
         } else {
-            popAlertinfo("You are NOT Sign in!");
+            popAlertinfo("Please Sign in!");
             stage.setScene(signInScene);
         } }
 
@@ -459,7 +553,7 @@ public class ViewModel extends Application {
             sellerRequestsController.loadSellerRequests();
             stage.setScene(SellerRequestViewScene);
         } else {
-            popAlertinfo("You are NOT Sign in!");
+            popAlertinfo("Please Sign in!");
             stage.setScene(signInScene);
         }
     }
@@ -467,16 +561,20 @@ public class ViewModel extends Application {
 
 
     public void goToSellerVacationDetails(int vacationID) {
-        goTo="goToSearchView";
+        if(goTo=="View")
+            sellerVacationDetailsController.setButtonsOff();
+        if(goTo=="Trade")
+            sellerVacationDetailsController.setButtonsON();
+
         this.vacation = model.getVacationByVacationId(vacationID);
         sellerVacationDetailsController.loadVacationView(this.vacation);
         stage.setScene(SellerVacationDetailsScene);
     }
 
-    public void goToRequestDetails(int vacationID) {
+    public void goToRequestDetails(Order req) {
         goTo="goToSearchView";
-        this.vacation = model.getVacationByVacationId(vacationID);
-        requestDetailsController.loadVacationRequestView(this.vacation);
+        this.vacation = this.getVacation(req.getVacation_id());
+        requestDetailsController.loadVacationRequestView(this.vacation,req);
         stage.setScene(RequestDetailsViewScene);
     }
 
@@ -513,7 +611,7 @@ public class ViewModel extends Application {
             buyerRequestsController.loadBuyerVacations();
             stage.setScene(BuyerRequestsViewScene);
         } else {
-            popAlertinfo("You are NOT Sign in!");
+            popAlertinfo("Please Sign in!");
             stage.setScene(signInScene);
         }
     }
@@ -533,7 +631,7 @@ public class ViewModel extends Application {
         if (this.user==null)
             stage.setScene(signInScene);
         else
-            popAlertinfo("You already Sign in!"); }
+            popAlertinfo("Please Sign in!"); }
 
 
 
@@ -544,10 +642,57 @@ public class ViewModel extends Application {
             goToSearchView();
         }
         else
-            popAlertinfo("You are NOT Sign in!");
+            popAlertinfo("Please Sign in!");
     }
 
 
+
+///******************* Trade Requests *********************
+
+    public void goToInbox_traderequests(){
+        goTo="goToInbox_traderequests";
+        if (isUserExists(this.user)) {
+            traderRequestController.loadTraderRequestInbox();
+            stage.setScene(TraderRequestScene);
+        }
+        else{
+            popAlertinfo("Please Sign in!");
+            stage.setScene(signInScene);
+        }
+    }
+    public void goToOutbox_traderequests(){
+        goTo="goToOutbox_traderequests";
+        if (isUserExists(this.user)) {
+            traderRequestController.loadTraderRequestOutBox();
+            stage.setScene(TraderRequestScene);
+        }
+        else{
+            popAlertinfo("Please Sign in!");
+            stage.setScene(signInScene);
+        }
+    }
+
+
+    public void goToDetailsOutBox(TradeRequest tradeRequest){
+        if (isUserExists(this.user)) {
+            tradeRequestDetailsController.loadTraderRequestOutBox(tradeRequest);
+            stage.setScene(TradeRequestDetailsScene);
+        }
+        else{
+            popAlertinfo("Please Sign in!");
+            stage.setScene(signInScene);
+        }
+    }
+    public void goToDetailsIntBox(TradeRequest tradeRequest){
+        if (isUserExists(this.user)) {
+            tradeRequestDetailsController.loadTraderRequestInbox(tradeRequest);
+            stage.setScene(TradeRequestDetailsScene);
+        }
+        else{
+            popAlertinfo("Please Sign in!");
+            stage.setScene(signInScene);
+        }
+    }
 
 
 
@@ -575,6 +720,12 @@ public class ViewModel extends Application {
             this.goToSellerRequest();
         if(this.goTo.equals("goToAddVacation"))
             this.goToAddVacation();
+        if(this.goTo=="goToInbox_traderequests")
+            this.goToInbox_traderequests();
+        if(this.goTo=="goToOutbox_traderequests")
+            this.goToOutbox_traderequests();
+
+
     }
 
 

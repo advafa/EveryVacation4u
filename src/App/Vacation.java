@@ -213,5 +213,9 @@ public class Vacation {
     }
 
 
+    public String toStringVacation_status(){
+        return this.vacation_status?"Available": "Sold out";
+    }
+
 
 }

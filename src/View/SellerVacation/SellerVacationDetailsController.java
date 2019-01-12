@@ -45,7 +45,7 @@ public class SellerVacationDetailsController implements Initializable {
     public Label vac_status;
     public Label seller_email;
     public Label name;
-
+    public Button done_btn;
 
     private ViewModel viewModel;
     private Vacation vacation;
@@ -115,89 +115,25 @@ public class SellerVacationDetailsController implements Initializable {
 
 
     }
+    public void setButtonsON() {
+        done_btn.setVisible(true);
+
+    }
+
+
+    public void setButtonsOff() {
+        done_btn.setVisible(false);
+    }
+
+
+    public void goToDone (MouseEvent mouseEvent) {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("In this send Requst you agree to trade in");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                this.viewModel.addTradeReq(this.vacation.getVacation_id(),true);
+
+
+            }}
 }
-
-//     if (vacation.getVacation_status()) {
-//        this.vac_status.setText("Available for sale");
-//        dec_btn.setDisable(false);
-//        app_btn.setDisable(false);
-//        payment.setDisable(false);
-//    } else {
-//        this.vac_status.setText("Sold out");
-//        dec_btn.setDisable(true);
-//        app_btn.setDisable(true);
-//        payment.setDisable(true);
-//    }
-
-
-
-
-//
-
-//
-//
-//
-//        public void ApproveSaleRequest(MouseEvent mouseEvent){
-//            if(!viewModel.getVacationStatus(clickedRow.getVacation_id())){
-//                viewModel.popAlerterror("This vacation Sold Out!");
-//                return;
-//            }
-//            Order ord=new Order(user.getEmail(),clickedRow.getBuyer_email(),clickedRow.getVacation_id(),false);
-//            this.viewModel.setSellerStatus(ord,true);
-//
-//        }
-//
-//        public void DeclineSaleRequest(MouseEvent mouseEvent){
-//            if(!viewModel.getVacationStatus(clickedRow.getVacation_id())){
-//                viewModel.popAlerterror("This vacation Sold Out!");
-//                return;
-//            }
-//            Order ord=new Order(user.getEmail(),clickedRow.getBuyer_email(),clickedRow.getVacation_id(),false);
-//            this.viewModel.setSellerStatus(ord,false);
-//
-//        }
-//
-//
-//    }
-//
-//public void goToPay(MouseEvent mouseEvent) {
-//    if (vacation.getVacation_status() && !order.getBuyer_status() && order.getSeller_status()) {
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//        alert.setContentText("Are you sure this buyer pay in cash?");
-//        Optional<ButtonType> result = alert.showAndWait();
-//        if (result.get() == ButtonType.OK) {
-//            this.viewModel.setVacationStatus(vacation.getVacation_id(), false);
-//            this.viewModel.setBuyerStatus(order, true);
-//        }
-//    } else {
-//        if (!vacation.getVacation_status())
-//            viewModel.popAlerterror("This vacation Sold Out!");
-//        if (order.getBuyer_status())
-//            viewModel.popAlerterror("This buyer already pay!");
-//        if (!order.getSeller_status())
-//            viewModel.popAlerterror("Yoy declined this request!");
-//
-//
-//    }
-//
-//
-//
-////}
-//
-//public void Aprrove(MouseEvent mouseEvent) {
-//        if (!vacation.getVacation_status()) {
-//        viewModel.popAlerterror("This vacation Sold Out!");
-//        return;
-//        }
-//        this.viewModel.setSellerStatus(order, true);
-//
-//        }
-//
-//public void Decline(MouseEvent mouseEvent) {
-//        if (!vacation.getVacation_status()) {
-//        viewModel.popAlerterror("This vacation Sold Out!");
-//        return;
-//        }
-//        this.viewModel.setSellerStatus(order, false);
-//
-//        }

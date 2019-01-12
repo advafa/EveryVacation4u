@@ -39,6 +39,8 @@ public class SellerRequestsController implements Initializable {
 
     private ViewModel viewModel;
 
+    private Order req;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colVacationId.setCellValueFactory(new PropertyValueFactory<>("vacation_id"));
@@ -57,6 +59,8 @@ public class SellerRequestsController implements Initializable {
         colBuyerName.setStyle("-fx-alignment: BASELINE_CENTER");
         colRequestStatus.setStyle("-fx-alignment: BASELINE_CENTER");
 
+        colCheckin.setSortType(TableColumn.SortType.DESCENDING);
+        colCheckout.setSortType(TableColumn.SortType.DESCENDING);
 
         SaleRequst = FXCollections.observableArrayList();
 
@@ -66,7 +70,8 @@ public class SellerRequestsController implements Initializable {
                 if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
 
                     this.clickedRow = row.getItem();
-
+                    this.req= new Order(clickedRow.getSeller_email(), clickedRow.getBuyer_email(), clickedRow.getVacation_id(), false);
+                    this.req.setSeller_status(clickedRow.getSellerStatus());
 
                 }
             });
@@ -87,7 +92,7 @@ public class SellerRequestsController implements Initializable {
         this.clickedRow = null;
         SaleRequstTable.setItems(FXCollections.observableArrayList());
         SaleRequst = FXCollections.observableArrayList();
-        List<Order> SaleRequstList = viewModel.getOrdersByseller_email();
+        List<Order> SaleRequstList = viewModel.getRequestsByseller_email();
         Vacation vacation;
         String checkin;
         String checkout;
@@ -96,22 +101,18 @@ public class SellerRequestsController implements Initializable {
         String buyer_name;
         String stat;
         TableViewClass addrow;
-        for (Order order : SaleRequstList) {
-            vacation = viewModel.getVacation(order.getVacation_id());
+        for (Order currentReq : SaleRequstList) {
+            vacation = viewModel.getVacation(currentReq.getVacation_id());
             if (vacation.getVacation_status()) {
                 from = vacation.getFrom();
                 to = vacation.getto();
                 checkin = vacation.toStringCheckin();
                 checkout = vacation.toStringCheckout();
-                buyer_name = viewModel.getUserNameByEmail(order.getBuyer_email());
-                if (order.getSeller_status() == null) {
-                    stat = "";
-                } else {
-                    stat = order.getSeller_status() ? "Approved" : "Declined";
-                }
-                addrow = new TableViewClass(order.getVacation_id(), checkin, checkout, from, to, buyer_name, stat);
-                addrow.setBuyer_email(order.getBuyer_email());
-                addrow.setSeller_email(order.getSeller_email());
+                buyer_name = viewModel.getUserNameByEmail(currentReq.getBuyer_email());
+                stat=currentReq.toStringSellerStatus();
+                addrow = new TableViewClass(currentReq.getVacation_id(), checkin, checkout, from, to, buyer_name, stat);
+                addrow.setBuyer_email(currentReq.getBuyer_email());
+                addrow.setSeller_email(currentReq.getSeller_email());
                 SaleRequst.add(addrow);
             }
         }
@@ -122,7 +123,7 @@ public class SellerRequestsController implements Initializable {
     }
 
 
-    public void ApprovePament(MouseEvent mouseEvent) {
+    public void ApprovePayment(MouseEvent mouseEvent) {
         if (this.clickedRow == null)
             viewModel.popAlertinfo("Please pick a Request row from the Table!");
         else{
@@ -141,12 +142,10 @@ public class SellerRequestsController implements Initializable {
             alert.setContentText("Are you sure this buyer payed in cash?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                this.viewModel.setVacationStatus(clickedRow.getVacation_id(), false);
-//                Order ord = new Order(clickedRow.getSeller_email(), clickedRow.getBuyer_email(), clickedRow.getVacation_id(), true);
-//                this.viewModel.setBuyerStatus(ord, true);
-
                 Payment payment=new Payment(clickedRow.getSeller_email(), clickedRow.getBuyer_email(), clickedRow.getVacation_id());
                 this.viewModel.addPayment(payment);
+                this.viewModel.setVacationStatus(clickedRow.getVacation_id(), false);
+                this.viewModel.popAlertinfo("Your Approve of Payment successfully saved!");
                 loadSellerRequests();
             }
         }
@@ -163,8 +162,8 @@ public class SellerRequestsController implements Initializable {
                 viewModel.popAlerterror("This vacation Sold Out!");
                 return;
             }
-            Order ord = new Order(clickedRow.getSeller_email(), clickedRow.getBuyer_email(), clickedRow.getVacation_id(), false);
-            this.viewModel.setSellerStatus(ord,true);
+            this.req.setSeller_status(true);
+            this.viewModel.setSellerStatus(this.req,true);
             loadSellerRequests();
 
         }}
@@ -177,18 +176,18 @@ public class SellerRequestsController implements Initializable {
                     viewModel.popAlerterror("This vacation Sold Out!");
                     return;
                 }
-                Order ord = new Order(clickedRow.getSeller_email(), clickedRow.getBuyer_email(), clickedRow.getVacation_id(), false);
-                this.viewModel.setSellerStatus(ord, false);
+                this.req.setSeller_status(false);
+                this.viewModel.setSellerStatus(this.req, false);
                 loadSellerRequests();
 
             }
         }
+
         public void goToDetails(MouseEvent mouseEvent) {
         if (this.clickedRow == null)
             viewModel.popAlertinfo("Please pick a Request row from the Table!");
-//        else
-//            viewModel.(this.clickedRow.getVacation_id(), this.clickedRow.getSeller_status());
-
+        else
+            viewModel.goToRequestDetails(this.req);
     }
 
 

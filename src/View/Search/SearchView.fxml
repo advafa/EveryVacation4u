@@ -6,90 +6,86 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Search.SearchViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="765.0" prefWidth="1130.0" styleClass="bodybg" stylesheets="@../images/background.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Search.SearchViewController">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #000000;">
+      <GridPane fx:id="hotel" layoutX="54.0" layoutY="127.0" prefHeight="78.0" prefWidth="843.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="127.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="210.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="176.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="190.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="175.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="48.0" minHeight="9.0" prefHeight="24.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <AnchorPane layoutX="-2.0" layoutY="172.0" prefHeight="597.0" prefWidth="907.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <TreeTableView fx:id="packageTable" layoutY="29.0" prefHeight="466.0" prefWidth="999.0" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="29.0">
-                     <columns>
-                        <TreeTableColumn fx:id="colStartDate" prefWidth="75.0" text="Check in" />
-                        <TreeTableColumn fx:id="colEndDate" prefWidth="75.0" text="Check out" />
-                        <TreeTableColumn fx:id="colCategory" prefWidth="75.0" text="From" />
-                        <TreeTableColumn fx:id="colDescription" prefWidth="75.0" text="To" />
-                        <TreeTableColumn fx:id="colPrice" prefWidth="75.0" text="Price" />
-                        <TreeTableColumn fx:id="colProductId" prefWidth="75.0" text="Percent off" />
-                     </columns>
-                     <columnResizePolicy>
-                        <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TreeTableView>
-                  <Button layoutX="342.0" layoutY="533.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="228.0" text="More Details" />
-                  <Label layoutX="198.0" layoutY="486.0" prefHeight="40.0" prefWidth="516.0" text="Click on the wanted vacation and then click the botton for more details" textFill="WHITE" />
-               </children>
-            </AnchorPane>
-            <GridPane fx:id="hotel" layoutX="29.0" layoutY="47.0" prefHeight="76.0" prefWidth="802.0" style="-fx-background-color: #000000;" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="193.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="209.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="169.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="199.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="229.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="48.0" minHeight="9.0" prefHeight="24.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Label prefHeight="21.0" prefWidth="130.0" text="Check in" textFill="WHITE" />
-                  <Label layoutX="10.0" layoutY="19.0" prefHeight="21.0" prefWidth="130.0" text="Check out" textFill="WHITE" GridPane.columnIndex="1" />
-                  <Label layoutX="10.0" layoutY="57.0" prefHeight="21.0" prefWidth="130.0" text="To" textFill="WHITE" GridPane.columnIndex="3" />
-                  <Label layoutX="10.0" layoutY="110.0" prefHeight="21.0" prefWidth="130.0" text="From" textFill="WHITE" GridPane.columnIndex="2" />
-                  <DatePicker id="StartDatePicker" prefHeight="31.0" prefWidth="197.0" GridPane.rowIndex="1" />
-                  <DatePicker id="StartDatePicker" layoutX="10.0" layoutY="84.0" prefHeight="31.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="from" layoutX="342.0" layoutY="269.0" prefHeight="31.0" prefWidth="181.0" promptText="From" value="Israel" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <items>
-                        <FXCollections fx:factory="observableArrayList">
-                           <String fx:value="Austria" />
-                           <String fx:value="Brazil" />
-                           <String fx:value="China" />
-                           <String fx:value="Denmark" />
-                           <String fx:value="Egypt" />
-                           <String fx:value="France" />
-                           <String fx:value="Israel" />
-                           <String fx:value="Italy" />
-                           <String fx:value="United Kingdom" />
-                           <String fx:value="United States of America" />
-                        </FXCollections>
-                     </items>
-                  </ComboBox>
-                  <ComboBox fx:id="to" layoutX="342.0" layoutY="86.0" prefHeight="31.0" prefWidth="201.0" promptText="to" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <items>
-                        <FXCollections fx:factory="observableArrayList">
-                           <String fx:value="Austria" />
-                           <String fx:value="Brazil" />
-                           <String fx:value="China" />
-                           <String fx:value="Denmark" />
-                           <String fx:value="Egypt" />
-                           <String fx:value="France" />
-                           <String fx:value="Israel" />
-                           <String fx:value="Italy" />
-                           <String fx:value="United Kingdom" />
-                           <String fx:value="United States of America" />
-                        </FXCollections>
-                     </items>
-                  </ComboBox>
-               </children>
-            </GridPane>
-            <Button layoutX="848.0" layoutY="83.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="143.0" text="Search4U" />
+            <Label prefHeight="21.0" prefWidth="130.0" text="Check in" />
+            <Label layoutX="10.0" layoutY="19.0" prefHeight="21.0" prefWidth="130.0" text="Check out" GridPane.columnIndex="1" />
+            <Label layoutX="10.0" layoutY="57.0" prefHeight="21.0" prefWidth="130.0" text="To" GridPane.columnIndex="3" />
+            <Label layoutX="10.0" layoutY="110.0" prefHeight="21.0" prefWidth="130.0" text="From" GridPane.columnIndex="2" />
+            <DatePicker id="StartDatePicker" fx:id="checkin" prefHeight="31.0" prefWidth="197.0" GridPane.rowIndex="1" />
+            <DatePicker id="StartDatePicker" fx:id="checkout" layoutX="10.0" layoutY="84.0" prefHeight="31.0" prefWidth="199.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="from" layoutX="342.0" layoutY="269.0" prefHeight="31.0" prefWidth="190.0" promptText="From" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="Austria" />
+                     <String fx:value="Brazil" />
+                     <String fx:value="China" />
+                     <String fx:value="Denmark" />
+                     <String fx:value="Egypt" />
+                     <String fx:value="France" />
+                     <String fx:value="Israel" />
+                     <String fx:value="Italy" />
+                     <String fx:value="United Kingdom" />
+                     <String fx:value="United States of America" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+            <ComboBox fx:id="to" layoutX="342.0" layoutY="86.0" prefHeight="31.0" prefWidth="182.0" promptText="to" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="Austria" />
+                     <String fx:value="Brazil" />
+                     <String fx:value="China" />
+                     <String fx:value="Denmark" />
+                     <String fx:value="Egypt" />
+                     <String fx:value="France" />
+                     <String fx:value="Israel" />
+                     <String fx:value="Italy" />
+                     <String fx:value="United Kingdom" />
+                     <String fx:value="United States of America" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
          </children>
-      </AnchorPane>
+      </GridPane>
+      <TableView fx:id="VacationsListTable" layoutX="82.0" layoutY="242.0" prefHeight="359.0" prefWidth="992.0">
+         <columns>
+            <TableColumn fx:id="colCheckin" prefWidth="155.00001525878906" text="Checkin" />
+            <TableColumn fx:id="colCheckout" prefWidth="148.0" text="Checkout" />
+            <TableColumn fx:id="colFrom" prefWidth="136.0" text="From" />
+            <TableColumn fx:id="colTo" prefWidth="148.0" text="To" />
+            <TableColumn fx:id="colPrice" prefWidth="168.0" text="Price" />
+            <TableColumn fx:id="colff" prefWidth="230.0" text="Off %" />
+         </columns>
+      </TableView>
+      <Button fx:id="details" layoutX="613.0" layoutY="644.0" mnemonicParsing="false" onMouseClicked="#goToDetails" prefHeight="38.0" prefWidth="181.0" text="More Details" />
+      <Button fx:id="buyReq_btn" layoutX="185.0" layoutY="644.0" mnemonicParsing="false" onMouseClicked="#addReq" prefHeight="38.0" prefWidth="181.0" text="Send Buy Request" />
+      <Button fx:id="trade_btn" layoutX="398.0" layoutY="644.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="181.0" text="Send Trade Request" />
+      <Button fx:id="search_btn" layoutX="976.0" layoutY="157.0" mnemonicParsing="false" onMouseClicked="#SimpleSearch" prefHeight="38.0" prefWidth="130.0" text="Search4U" />
+      <Label layoutX="54.0" layoutY="61.0" prefHeight="53.0" prefWidth="625.0" text="Wellcome to EveryVacation4U Search" textFill="#0d186b">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
