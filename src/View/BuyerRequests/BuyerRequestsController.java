@@ -1,12 +1,13 @@
 package View.BuyerRequests;
 
-import App.Order;
-import App.TableViewClass;
+import App.Request;
+import View.TableViewClass;
 import App.Vacation;
 import Main.ViewModel;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,10 +20,27 @@ import java.util.ResourceBundle;
 
 public class BuyerRequestsController implements Initializable {
 
+    //MenuItems
+    @FXML
+    public MenuItem SignUp_menu;
+    public MenuItem View_profile_menu;
+    public MenuItem EditProfile_menu;
+    public MenuItem Delete_profile_menu;
+    public MenuItem addVac_menu;
+    public MenuItem seller_vacations_menu;
+    public MenuItem seller_req_menu;
+    public MenuItem search_menu;
+    public MenuItem buyer_req_menu;
+    public MenuItem inbox_traderequests_menu;
+    public MenuItem outbox_traderequests_menu;
+    public MenuItem SignIn_menu;
+    public MenuItem SignOut_menu;
+    public MenuItem exit_menu;
+
+
 //seller_status true=approve, false=decline
 
     public TableView<TableViewClass> SaleRequstTable;
-    public TableColumn<TableViewClass, Integer> colVacationId;
     public TableColumn<TableViewClass, String> colCheckin;
     public TableColumn<TableViewClass, String> colCheckout;
     public TableColumn<TableViewClass, String> colFrom;
@@ -39,7 +57,24 @@ public class BuyerRequestsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        colVacationId.setCellValueFactory(new PropertyValueFactory<>("vacation_id"));
+
+        //*********  Menu Functions **************///
+        SignUp_menu.setOnAction(e -> {viewModel.goToSignUp();});
+        View_profile_menu.setOnAction(e -> {viewModel.goToProfileView();});
+        EditProfile_menu.setOnAction(e -> {viewModel.goToEditProfile();});
+        Delete_profile_menu.setOnAction(e -> {viewModel.goTODeleteProfile();});;
+        addVac_menu.setOnAction(e -> {viewModel.goToAddVacation();});
+        seller_vacations_menu.setOnAction(e -> {viewModel.goToSellerVacationsView("View");});
+        seller_req_menu.setOnAction(e -> {viewModel.goToSellerRequest();});
+        search_menu.setOnAction(e -> {viewModel.goToSearchView();});
+        buyer_req_menu.setOnAction(e -> {viewModel.goToBuyerVacationsView();});
+        inbox_traderequests_menu.setOnAction(e -> {viewModel.goToInbox_traderequests();});
+        outbox_traderequests_menu.setOnAction(e -> {viewModel.goToOutbox_traderequests();});
+        SignIn_menu.setOnAction(e -> {viewModel.goToSignIn();});
+        SignOut_menu.setOnAction(e -> {viewModel.SignOut();});
+        exit_menu.setOnAction(e -> {System.exit(0);});
+
+
         colFrom.setCellValueFactory(new PropertyValueFactory<> ("from"));
         colTo.setCellValueFactory(new PropertyValueFactory<> ("to"));
         colCheckin.setCellValueFactory(new PropertyValueFactory<>("checkin"));
@@ -49,7 +84,6 @@ public class BuyerRequestsController implements Initializable {
 
 
 
-        colVacationId.setStyle("-fx-alignment: BASELINE_CENTER");
         colFrom.setStyle("-fx-alignment: BASELINE_CENTER");
         colTo.setStyle("-fx-alignment: BASELINE_CENTER");
         colCheckin.setStyle("-fx-alignment: BASELINE_CENTER");
@@ -99,7 +133,7 @@ else
 
             SaleRequstTable.setItems(FXCollections.observableArrayList());
             SaleRequst = FXCollections.observableArrayList();
-            List<Order> SaleRequstList = viewModel.getRequestsByBuyer_email();
+            List<Request> SaleRequstList = viewModel.getRequestsByBuyer_email();
             Vacation vacation;
             String checkin;
         String checkout;
@@ -108,16 +142,16 @@ else
         String name;
         String stat;
         TableViewClass addrow;
-            for(Order order : SaleRequstList){
-                vacation=viewModel.getVacation(order.getVacation_id());
+            for(Request request : SaleRequstList){
+                vacation=viewModel.getVacation(request.getVacation_id());
                 from=vacation.getFrom();
                 to=vacation.getto();
                 checkin=vacation.toStringCheckin();
                 checkout=vacation.toStringCheckout();
-                name=viewModel.getUserNameByEmail(order.getSeller_email());
-                if(order.getSeller_status()==null) {stat="Submit";}
-                else {stat=order.getSeller_status()?"Approved":"Declined";}
-                addrow=new TableViewClass(order.getVacation_id(),checkin,checkout, from,to,name,stat);
+                name=viewModel.getUserNameByEmail(request.getSeller_email());
+                if(request.getSeller_status()==null) {stat="Submit";}
+                else {stat=request.getSeller_status()?"Approved":"Declined";}
+                addrow=new TableViewClass(request.getVacation_id(),checkin,checkout, from,to,name,stat);
               SaleRequst.add(addrow);
             }
 

@@ -6,6 +6,9 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="765.0" prefWidth="1130.0" styleClass="bodybg" stylesheets="@../images/background.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Search.SearchViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="765.0" prefWidth="1155.0" styleClass="bodybg" stylesheets="@../images/background.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Search.SearchViewController">
    <children>
       <GridPane fx:id="hotel" layoutX="54.0" layoutY="127.0" prefHeight="78.0" prefWidth="843.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="127.0">
          <columnConstraints>
@@ -68,24 +71,71 @@
             </ComboBox>
          </children>
       </GridPane>
-      <TableView fx:id="VacationsListTable" layoutX="82.0" layoutY="242.0" prefHeight="359.0" prefWidth="992.0">
+      <TableView fx:id="VacationsListTable" layoutX="83.0" layoutY="228.0" prefHeight="359.0" prefWidth="1008.0">
          <columns>
             <TableColumn fx:id="colCheckin" prefWidth="155.00001525878906" text="Checkin" />
             <TableColumn fx:id="colCheckout" prefWidth="148.0" text="Checkout" />
             <TableColumn fx:id="colFrom" prefWidth="136.0" text="From" />
             <TableColumn fx:id="colTo" prefWidth="148.0" text="To" />
-            <TableColumn fx:id="colPrice" prefWidth="168.0" text="Price" />
-            <TableColumn fx:id="colff" prefWidth="230.0" text="Off %" />
+            <TableColumn fx:id="colPrice" prefWidth="122.0" text="Price" />
+            <TableColumn fx:id="colff" prefWidth="149.0" text="Off %" />
+            <TableColumn fx:id="colSellerName" prefWidth="146.0" text="Seller Name" />
          </columns>
       </TableView>
       <Button fx:id="details" layoutX="613.0" layoutY="644.0" mnemonicParsing="false" onMouseClicked="#goToDetails" prefHeight="38.0" prefWidth="181.0" text="More Details" />
       <Button fx:id="buyReq_btn" layoutX="185.0" layoutY="644.0" mnemonicParsing="false" onMouseClicked="#addReq" prefHeight="38.0" prefWidth="181.0" text="Send Buy Request" />
-      <Button fx:id="trade_btn" layoutX="398.0" layoutY="644.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="181.0" text="Send Trade Request" />
-      <Button fx:id="search_btn" layoutX="976.0" layoutY="157.0" mnemonicParsing="false" onMouseClicked="#SimpleSearch" prefHeight="38.0" prefWidth="130.0" text="Search4U" />
+      <Button fx:id="trade_btn" layoutX="398.0" layoutY="644.0" mnemonicParsing="false"  onMouseClicked="#addTradeReq" prefHeight="38.0" prefWidth="181.0" text="Send Trade Request" />
+      <Button fx:id="search_btn" layoutX="1000.0" layoutY="166.0" mnemonicParsing="false" onMouseClicked="#SimpleSearch" prefHeight="38.0" prefWidth="130.0" text="Search4U" />
       <Label layoutX="54.0" layoutY="61.0" prefHeight="53.0" prefWidth="625.0" text="Wellcome to EveryVacation4U Search" textFill="#0d186b">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
+      <MenuBar prefHeight="10.0" prefWidth="662.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Search vacation">
+               <items>
+                  <MenuItem fx:id="search_menu" mnemonicParsing="false" text="Simple Search" />
+               </items>
+            </Menu>
+            <Menu fx:id="profile" mnemonicParsing="false" text="My Profil">
+               <items>
+                  <MenuItem fx:id="View_profile_menu" mnemonicParsing="false" text="View" />
+                  <MenuItem fx:id="EditProfile_menu" mnemonicParsing="false" text="Edit" />
+                  <MenuItem fx:id="Delete_profile_menu" mnemonicParsing="false" text="Delete" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Sell Vacation">
+               <items>
+                  <MenuItem fx:id="addVac_menu" mnemonicParsing="false" text="Add New Vacation" />
+                  <MenuItem fx:id="seller_vacations_menu" mnemonicParsing="false" text="My Vacations" />
+                  <MenuItem fx:id="seller_req_menu" mnemonicParsing="false" text="buyers Requests" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Buy Now!">
+               <items>
+                  <MenuItem fx:id="buyer_req_menu" mnemonicParsing="false" text="My vacation Request" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Trade in">
+               <items>
+                  <MenuItem fx:id="inbox_traderequests_menu" mnemonicParsing="false" text="Inbox  Requests" />
+                  <MenuItem fx:id="outbox_traderequests_menu" mnemonicParsing="false" text="Outbox  Requests" />
+               </items>
+            </Menu>
+            <Menu fx:id="profile1" mnemonicParsing="false" text="Sign">
+               <items>
+                  <MenuItem fx:id="SignIn_menu" mnemonicParsing="false" text="Sign in" />
+                  <MenuItem fx:id="SignOut_menu" mnemonicParsing="false" text="Sign out" />
+                  <MenuItem fx:id="SignUp_menu" mnemonicParsing="false" text="Sign Up" />
+               </items>
+            </Menu>
+            <Menu fx:id="exit_menu" mnemonicParsing="false" text="Exit">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Exit" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

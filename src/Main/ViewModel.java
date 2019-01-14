@@ -9,7 +9,7 @@ import App.*;
 import Model.Model;
 
 //import Views
-import View.AddVacation.AddVacationController;
+import View.Vacation.VacationController;
 import View.BuyerRequests.BuyerRequestsController;
 import View.BuyerRequests.BuyerVacationDetailsController;
 import View.Profile.EditProfileController;
@@ -39,8 +39,6 @@ import javafx.stage.StageStyle;
 import java.util.List;
 import java.util.Optional;
 
-import static javafx.scene.input.KeyCode.V;
-
 public class ViewModel extends Application {
 
     //init xy offsets
@@ -53,8 +51,8 @@ public class ViewModel extends Application {
 
 
     //************************Vacation4U********************************
-    private Scene AddVacationScene;
-    private AddVacationController addVacationController;
+    private Scene VacationScene;
+    private VacationController vacationController;
 
     private Scene BuyerRequestsViewScene;
     private BuyerRequestsController buyerRequestsController;
@@ -103,9 +101,9 @@ public class ViewModel extends Application {
     private String goTo;
 
     //*********************************************************************
-    private Order orderforSeller;
-    private Order orderforBuyer;
-    private Order CurrentReq;
+    private Request requestforSeller;
+    private Request requestforBuyer;
+    private Request CurrentReq;
 
 
     private int VacationID4Trade;
@@ -113,8 +111,8 @@ public class ViewModel extends Application {
     public void start(Stage stage) throws Exception {
 
 
-        FXMLLoader addVacationLoader = new FXMLLoader(getClass().getResource("../View/AddVacation/AddVacationView.fxml"));
-        Parent addVacationRoot = (Parent) addVacationLoader.load();
+        FXMLLoader VacationLoader = new FXMLLoader(getClass().getResource("../View/Vacation/VacationView.fxml"));
+        Parent VacationRoot = (Parent) VacationLoader.load();
 
         FXMLLoader BuyerRequestsViewLoader = new FXMLLoader(getClass().getResource("../View/BuyerRequests/BuyerRequestsView.fxml"));
         Parent BuyerRequestsViewRoot = (Parent) BuyerRequestsViewLoader.load();
@@ -164,7 +162,7 @@ public class ViewModel extends Application {
         this.stage.initStyle(StageStyle.UNDECORATED);
 
         //set mouse pressed
-        setDraggable(stage, addVacationRoot);
+        setDraggable(stage, VacationRoot);
         setDraggable(stage, BuyerRequestsViewRoot);
         setDraggable(stage, buyerVacationDetailViewRoot);
         setDraggable(stage, EditProfileViewRoot);
@@ -182,7 +180,7 @@ public class ViewModel extends Application {
 //
 
 
-        AddVacationScene = new Scene(addVacationRoot);
+        VacationScene = new Scene(VacationRoot);
         BuyerRequestsViewScene = new Scene(BuyerRequestsViewRoot);
         BuyerVacationDetailsScene = new Scene(buyerVacationDetailViewRoot);
         EditProfileScene = new Scene(EditProfileViewRoot);
@@ -201,8 +199,8 @@ public class ViewModel extends Application {
         Model model = new Model();
         setModel(model);
 
-        addVacationController = addVacationLoader.getController();
-        addVacationController.setViewModel(this);
+        vacationController = VacationLoader.getController();
+        vacationController.setViewModel(this);
 
         buyerRequestsController = BuyerRequestsViewLoader.getController();
         buyerRequestsController.setViewModel(this);
@@ -246,7 +244,7 @@ public class ViewModel extends Application {
         tradeRequestDetailsController=TradeRequestDetailsLoader.getController();
         tradeRequestDetailsController.setViewModel(this);
 //        loadUser("Tal@gmail.com", "1111");
-        loadUser("Niv@gmail.com", "12345678");
+        loadUser("advafa@gmai.l.com", "12345678");
 //
 
 //        Order o1= new Order("Tal@gmail.com","Niv@gmail.com",4,false);
@@ -260,14 +258,18 @@ public class ViewModel extends Application {
 //
 //        setSellerStatus(o2, true);
 //        setSellerStatus(o3,false);
-        TradeRequest t2=new TradeRequest("Niv@gmail.com","Hilel@gmail.com",2,3,true);
-t2.setSeller_status(true);
-        TradeRequest t1=new TradeRequest("Niv@gmail.com","Hilel@gmail.com",3,4,true);
-t1.setSeller_status(false);
+//        TradeRequest t2=new TradeRequest("Niv@gmail.com","Hilel@gmail.com",2,3,true);
+//t2.setSeller_status(true);
+//        TradeRequest t1=new TradeRequest("Niv@gmail.com","Hilel@gmail.com",3,4,true);
+//t1.setSeller_status(false);
         //this.addReq(t1);
       //  this.addReq(t2);
         //        TradeRequest t2=new TradeRequest("Hilel@gmail.com","Niv@gmail.com")
-        stage.setScene(this.signUpScene);
+        //stage.setScene(this.SearchViewScene);
+
+
+
+        this.goToSearchView();
         stage.show();
 
     }
@@ -315,22 +317,25 @@ t1.setSeller_status(false);
 
     public void setUser(User user) {
         model.UpdateUser(user);
+        this.user=user;
     }
 
-    public void setSellerStatus(Order ord, boolean sellerStatus) {
-        model.UpdateOrdersSellerStatus(ord, sellerStatus);
+    public void setSellerStatus(Request req, boolean sellerStatus) {
+        model.UpdateRequestsSellerStatus(req, sellerStatus);
     }
     public void setSellerStatus(TradeRequest req, boolean sellerStatus) {
         model.UpdateTradeRequestSellerStatus(req,sellerStatus);
     }
 
-    public void setBuyerStatus(Order ord, boolean buyerStatus) {
-        model.UpdateOrdersBuyerStatus(ord, buyerStatus);
+    public void setBuyerStatus(Request req, boolean buyerStatus) {
+        model.UpdateRequestsBuyerStatus(req, buyerStatus);
     }
 
     public void setVacationStatus(int vacation_id, boolean vac_status) {
         model.UpdatVacationStatus(vacation_id, vac_status);
     }
+
+     public void EditVacation(Vacation vac) {model.UpdateVacation(vac);}
 
 
     //***************** Get Functions ************************
@@ -339,8 +344,8 @@ t1.setSeller_status(false);
 //    public Vacation getVacation(){ return this.vacation; }
 
 //
-    public List<Order> getRequestsByBuyer_email() {return model.getRequestsByBuyer_email(user.getEmail()); }
-    public List<Order> getRequestsByseller_email() { return model.getRequestsByseller_email(user.getEmail()); }
+    public List<Request> getRequestsByBuyer_email() {return model.getRequestsByBuyer_email(user.getEmail()); }
+    public List<Request> getRequestsByseller_email() { return model.getRequestsByseller_email(user.getEmail()); }
     public boolean getVacationStatus(int vacationID){ return model.getVacationByVacationId(vacationID).getVacation_status(); }
     public Vacation getVacation(int vacationID){ return model.getVacationByVacationId(vacationID);}
     public List<Vacation> getVacationsByseller_email(){ return model.getVacationsByseller_email(this.user.getEmail()); }
@@ -351,6 +356,14 @@ t1.setSeller_status(false);
     public List<TradeRequest> getTradeRequestByseller_email(){return model.getTradeRequestByseller_email(this.user.getEmail());}
     public List<TradeRequest> getTradeRequestByTrader_email(){ return model.getTradeRequestByTrader_email(this.user.getEmail());}
 
+    public List<String> getAirports() {return model.getAirports();}
+
+
+
+    public List<TradeRequest> getTradeRequestsByVacationID(int id) {return model.getTradeRequestsByVacationID(id);}
+    public List<Request> getRequestsByVacationID(int id) {return model.getRequestsByVacationID(id);}
+
+
     //*****************  Add functions ******************************
     public void AddUser(User user) {
         model.addUser(user);
@@ -360,15 +373,15 @@ t1.setSeller_status(false);
         model.addVacation(vacation);
     }
 
-    public void addReq(Order order) {
-        model.addReq(order);
+    public void addReq(Request req) {
+        model.addReq(req);
     }
 
     public void addReq(Vacation avacation) {
         if (avacation.getSeller().equals(this.user.getEmail())) {
             this.popAlerterror("You can't Buy yours Vacation !");}
             else {
-            Order req = new Order(avacation.getSeller(), this.user.getEmail(), avacation.getVacation_id(), false);
+            Request req = new Request(avacation.getSeller(), this.user.getEmail(), avacation.getVacation_id(), false);
             if (this.isReqExists(req)) {
                 this.popAlerterror("You already sent a request for this Vacation !");
             } else {
@@ -384,10 +397,7 @@ t1.setSeller_status(false);
 
 
     public void addReq(Vacation avacation,Vacation avacationtoTade) {
-        if (avacation.getSeller().equals(this.user.getEmail())) {
-            this.popAlerterror("You can't Trades your Vacation with your Vacation !");
-            }
-        else {
+
             TradeRequest req = new TradeRequest(avacation.getSeller(), this.user.getEmail(), avacation.getVacation_id(), avacationtoTade.getVacation_id(),true);
             if (this.isReqExists(req)) {
                 this.popAlerterror("You already sent a request for this Vacation !");
@@ -397,7 +407,7 @@ t1.setSeller_status(false);
             }
             this.goToSearchView();
         }
-    }
+
 
 
     public void addPayment(Payment pay) {model.addPayment(pay);
@@ -409,7 +419,10 @@ t1.setSeller_status(false);
     public void addTradeReq(int avacationID, boolean isChoosen){
         if(!isChoosen) {
             this.VacationID4Trade = avacationID;
-            this.goToSellerVacationsView("Trade");
+            if (this.getVacation(this.VacationID4Trade).getSeller().equals(this.user.getEmail()))
+                this.popAlerterror("You can't Trades your Vacation with your Vacation !");
+            else
+                this.goToSellerVacationsView("Trade");
         }
         else{
             this.addReq(this.getVacation(this.VacationID4Trade),this.getVacation(avacationID));
@@ -418,12 +431,17 @@ t1.setSeller_status(false);
     }
 
 
+
     //  ******************** Check if Exists *****************************
     public Boolean isUserExists(User user) {
         return model.isUserExists(user);
     }
 
-    public Boolean isReqExists (Order req) {
+    public Boolean isUserExists() {
+        return model.isUserExists(this.user);
+    }
+
+    public Boolean isReqExists (Request req) {
         return model.isSaleReqExists (req.getSeller_email(), req.getBuyer_email(), req.getVacation_id());}
 
 
@@ -450,10 +468,19 @@ t1.setSeller_status(false);
     }
 
 
-    public void DeleteVacation(Vacation vacation) {
-        model.deleteVacation(vacation);
-    }
 
+
+    public void DeleteVacation(int vacationID) {
+        if (model.getVacationByVacationId(vacationID)!=null) {
+            if (!this.getTradeRequestsByVacationID(vacationID).isEmpty())
+                model.deleteTradeRequestByVacationID(vacationID);
+
+            if (!getRequestsByVacationID(vacationID).isEmpty())
+                model.deleteRequestsByVacationID(vacationID);
+
+            model.deleteVacation(this.getVacation(vacationID));
+        }
+    }
 
 //    eleteVacation(Vacation aVacation) {db.del
 //        deleteUser(User user){db.deleteUser(user);
@@ -520,13 +547,23 @@ t1.setSeller_status(false);
     public void goToAddVacation() {
         goTo="goToAddVacation";
         if (isUserExists(this.user)) {
-            stage.setScene(AddVacationScene);
+            vacationController.loadAddVacation();
+            stage.setScene(VacationScene);
         }
         else {
             popAlertinfo("Please Sign in!");
             stage.setScene(signInScene);
         } }
 
+    public void goToEditVacation(int vacID) {
+        if (isUserExists(this.user)) {
+            vacationController.loadEditVacation(this.getVacation(vacID));
+            stage.setScene(VacationScene);
+        }
+        else {
+            popAlertinfo("Please Sign in!");
+            stage.setScene(signInScene);
+        } }
 
 
     public void goToSellerVacationsView(String page) {
@@ -571,7 +608,7 @@ t1.setSeller_status(false);
         stage.setScene(SellerVacationDetailsScene);
     }
 
-    public void goToRequestDetails(Order req) {
+    public void goToRequestDetails(Request req) {
         goTo="goToSearchView";
         this.vacation = this.getVacation(req.getVacation_id());
         requestDetailsController.loadVacationRequestView(this.vacation,req);
@@ -583,10 +620,7 @@ t1.setSeller_status(false);
 
     public void goToSearchView() {
         goTo="goToSearchView";
-        if (isUserExists(this.user))
-            searchViewController.setButtonsON();
-        else
-            searchViewController.setButtonsOff();
+        searchViewController.setAirports();
         stage.setScene(SearchViewScene);
     }
 

@@ -8,6 +8,7 @@ import Main.ViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import java.time.LocalDate;
 
@@ -22,12 +23,47 @@ public class EditProfileController implements Initializable {
     public javafx.scene.control.TextField confirm_password;
     public javafx.scene.control.DatePicker birth_date;
     public javafx.scene.control.TextField city;
+    //MenuItems
+    @FXML
+    public MenuItem SignUp_menu;
+    public MenuItem View_profile_menu;
+    public MenuItem EditProfile_menu;
+    public MenuItem Delete_profile_menu;
+    public MenuItem addVac_menu;
+    public MenuItem seller_vacations_menu;
+    public MenuItem seller_req_menu;
+    public MenuItem search_menu;
+    public MenuItem buyer_req_menu;
+    public MenuItem inbox_traderequests_menu;
+    public MenuItem outbox_traderequests_menu;
+    public MenuItem SignIn_menu;
+    public MenuItem SignOut_menu;
+    public MenuItem exit_menu;
+
 
     private ViewModel viewModel;
     private User user;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //*********  Menu Functions **************///
+        SignUp_menu.setOnAction(e -> {viewModel.goToSignUp();});
+        View_profile_menu.setOnAction(e -> {viewModel.goToProfileView();});
+        EditProfile_menu.setOnAction(e -> {viewModel.goToEditProfile();});
+        Delete_profile_menu.setOnAction(e -> {viewModel.goTODeleteProfile();});;
+        addVac_menu.setOnAction(e -> {viewModel.goToAddVacation();});
+        seller_vacations_menu.setOnAction(e -> {viewModel.goToSellerVacationsView("View");});
+        seller_req_menu.setOnAction(e -> {viewModel.goToSellerRequest();});
+        search_menu.setOnAction(e -> {viewModel.goToSearchView();});
+        buyer_req_menu.setOnAction(e -> {viewModel.goToBuyerVacationsView();});
+        inbox_traderequests_menu.setOnAction(e -> {viewModel.goToInbox_traderequests();});
+        outbox_traderequests_menu.setOnAction(e -> {viewModel.goToOutbox_traderequests();});
+        SignIn_menu.setOnAction(e -> {viewModel.goToSignIn();});
+        SignOut_menu.setOnAction(e -> {viewModel.SignOut();});
+        exit_menu.setOnAction(e -> {System.exit(0);});
+
+
+
 
     }
 
@@ -152,6 +188,7 @@ public class EditProfileController implements Initializable {
         confirm_password.setText("");
         city.setText("");
         birth_date.setValue(null);
+        email.setText("");
     }
 
 

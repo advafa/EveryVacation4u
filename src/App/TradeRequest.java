@@ -1,6 +1,6 @@
 package App;
 
-public class TradeRequest extends Order {
+public class TradeRequest extends Request {
 
     private int vacationtoTrade_id;
 

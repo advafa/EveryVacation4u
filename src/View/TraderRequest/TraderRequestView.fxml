@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="533.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.TraderRequest.TraderRequestController">
+<AnchorPane prefHeight="533.0" prefWidth="906.0" styleClass="bodybg" stylesheets="@../images/background.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.TraderRequest.TraderRequestController">
    <children>
       <AnchorPane layoutX="-71.0" prefHeight="533.0" prefWidth="906.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -41,16 +41,15 @@
             <Button fx:id="detailsout_btn" layoutX="585.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#goToDetailsOutBox" prefHeight="31.0" prefWidth="170.0" text="More Details" />
          </children>
       </AnchorPane>
-      <MenuBar layoutX="20.0" layoutY="18.0" prefHeight="10.0" prefWidth="662.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar prefHeight="10.0" prefWidth="662.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <menus>
             <Menu mnemonicParsing="false" text="Search vacation">
                <items>
-                  <MenuItem fx:id="search_menu" mnemonicParsing="false" text="Search vacation" />
+                  <MenuItem fx:id="search_menu" mnemonicParsing="false" text="Simple Search" />
                </items>
             </Menu>
             <Menu fx:id="profile" mnemonicParsing="false" text="My Profil">
                <items>
-                  <MenuItem fx:id="SignUp_menu" mnemonicParsing="false" text="Sign Up" />
                   <MenuItem fx:id="View_profile_menu" mnemonicParsing="false" text="View" />
                   <MenuItem fx:id="EditProfile_menu" mnemonicParsing="false" text="Edit" />
                   <MenuItem fx:id="Delete_profile_menu" mnemonicParsing="false" text="Delete" />
@@ -58,7 +57,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Sell Vacation">
                <items>
-                  <MenuItem fx:id="addVac_menu" mnemonicParsing="false" text="New Vacation" />
+                  <MenuItem fx:id="addVac_menu" mnemonicParsing="false" text="Add New Vacation" />
                   <MenuItem fx:id="seller_vacations_menu" mnemonicParsing="false" text="My Vacations" />
                   <MenuItem fx:id="seller_req_menu" mnemonicParsing="false" text="buyers Requests" />
                </items>
@@ -74,10 +73,11 @@
                   <MenuItem fx:id="outbox_traderequests_menu" mnemonicParsing="false" text="Outbox  Requests" />
                </items>
             </Menu>
-            <Menu fx:id="profile1" mnemonicParsing="false" text="Log in">
+            <Menu fx:id="profile1" mnemonicParsing="false" text="Sign">
                <items>
                   <MenuItem fx:id="SignIn_menu" mnemonicParsing="false" text="Sign in" />
                   <MenuItem fx:id="SignOut_menu" mnemonicParsing="false" text="Sign out" />
+                  <MenuItem fx:id="SignUp_menu" mnemonicParsing="false" text="Sign Up" />
                </items>
             </Menu>
             <Menu fx:id="exit_menu" mnemonicParsing="false" text="Exit">

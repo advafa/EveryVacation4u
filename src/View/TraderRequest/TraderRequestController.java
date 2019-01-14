@@ -2,7 +2,7 @@ package View.TraderRequest;
 
 
 
-import App.TableViewClass;
+import View.TableViewClass;
 import App.Vacation;
 import App.TradeRequest;
 import Main.ViewModel;
@@ -45,6 +45,7 @@ public class TraderRequestController implements Initializable {
 
 
     //MenuItems
+    //MenuItems
     @FXML
     public MenuItem SignUp_menu;
     public MenuItem View_profile_menu;
@@ -60,15 +61,17 @@ public class TraderRequestController implements Initializable {
     public MenuItem SignIn_menu;
     public MenuItem SignOut_menu;
     public MenuItem exit_menu;
+
     public Button app_btn;
     public Button dec_btn;
     public Button detailsout_btn;
     public Button detailsin_btn;
 
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-//*********  Menu Functions **************///
+        //*********  Menu Functions **************///
         SignUp_menu.setOnAction(e -> {viewModel.goToSignUp();});
         View_profile_menu.setOnAction(e -> {viewModel.goToProfileView();});
         EditProfile_menu.setOnAction(e -> {viewModel.goToEditProfile();});

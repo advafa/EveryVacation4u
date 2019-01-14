@@ -1,7 +1,7 @@
 package App;
 import java.time.LocalDate;
 
-public class Order {
+public class Request {
 
     private String seller_email;
     private String buyer_email;
@@ -11,7 +11,7 @@ public class Order {
 
 
 
-    public Order(String seller_email, String buyer_email, int vacation_id, Boolean buyer_status){
+    public Request(String seller_email, String buyer_email, int vacation_id, Boolean buyer_status){
         this.seller_email=seller_email;
         this.buyer_email=buyer_email;
         this.vacation_id=vacation_id;

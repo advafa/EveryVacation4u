@@ -1,11 +1,12 @@
 package View.Search;
 
-import App.TableViewClass;
+import View.TableViewClass;
 import App.Vacation;
 import Main.ViewModel;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -14,11 +15,27 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 
 public class SearchViewController implements Initializable {
+
+    //MenuItems
+    @FXML
+    public MenuItem SignUp_menu;
+    public MenuItem View_profile_menu;
+    public MenuItem EditProfile_menu;
+    public MenuItem Delete_profile_menu;
+    public MenuItem addVac_menu;
+    public MenuItem seller_vacations_menu;
+    public MenuItem seller_req_menu;
+    public MenuItem search_menu;
+    public MenuItem buyer_req_menu;
+    public MenuItem inbox_traderequests_menu;
+    public MenuItem outbox_traderequests_menu;
+    public MenuItem SignIn_menu;
+    public MenuItem SignOut_menu;
+    public MenuItem exit_menu;
 
 //seller_status true=approve, false=decline
 
@@ -29,6 +46,7 @@ public class SearchViewController implements Initializable {
     public TableColumn<TableViewClass, String> colTo;
     public TableColumn<TableViewClass, Integer> colPrice;
     public TableColumn<TableViewClass, Integer> colff;
+    public TableColumn<TableViewClass, String> colSellerName;
 
     public DatePicker checkin;
     public DatePicker checkout;
@@ -50,13 +68,30 @@ public class SearchViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //*********  Menu Functions **************///
+        SignUp_menu.setOnAction(e -> {viewModel.goToSignUp();});
+        View_profile_menu.setOnAction(e -> {viewModel.goToProfileView();});
+        EditProfile_menu.setOnAction(e -> {viewModel.goToEditProfile();});
+        Delete_profile_menu.setOnAction(e -> {viewModel.goTODeleteProfile();});;
+        addVac_menu.setOnAction(e -> {viewModel.goToAddVacation();});
+        seller_vacations_menu.setOnAction(e -> {viewModel.goToSellerVacationsView("View");});
+        seller_req_menu.setOnAction(e -> {viewModel.goToSellerRequest();});
+        search_menu.setOnAction(e -> {viewModel.goToSearchView();});
+        buyer_req_menu.setOnAction(e -> {viewModel.goToBuyerVacationsView();});
+        inbox_traderequests_menu.setOnAction(e -> {viewModel.goToInbox_traderequests();});
+        outbox_traderequests_menu.setOnAction(e -> {viewModel.goToOutbox_traderequests();});
+        SignIn_menu.setOnAction(e -> {viewModel.goToSignIn();});
+        SignOut_menu.setOnAction(e -> {viewModel.SignOut();});
+        exit_menu.setOnAction(e -> {System.exit(0);});
+
+
         colFrom.setCellValueFactory(new PropertyValueFactory<> ("from"));
         colTo.setCellValueFactory(new PropertyValueFactory<> ("to"));
         colCheckin.setCellValueFactory(new PropertyValueFactory<>("checkin"));
         colCheckout.setCellValueFactory(new PropertyValueFactory<>("checkout"));
         colPrice.setCellValueFactory(new PropertyValueFactory<> ("price"));
         colff.setCellValueFactory(new PropertyValueFactory<> ("off"));
-
+        colSellerName.setCellValueFactory(new PropertyValueFactory<> ("name"));
 
 
         colFrom.setStyle("-fx-alignment: BASELINE_CENTER");
@@ -65,7 +100,7 @@ public class SearchViewController implements Initializable {
         colCheckout.setStyle("-fx-alignment: BASELINE_CENTER");
         colPrice.setStyle("-fx-alignment: BASELINE_CENTER");
         colff.setStyle("-fx-alignment: BASELINE_CENTER");
-
+        colSellerName.setStyle("-fx-alignment: BASELINE_CENTER");
 
         VacationsList = FXCollections.observableArrayList();
 
@@ -81,6 +116,7 @@ public class SearchViewController implements Initializable {
             });
             return row;
         });
+        this.VacationsListTable.setItems(null);
 
 
 
@@ -97,16 +133,16 @@ public class SearchViewController implements Initializable {
             this.viewModel.goToSearchVacationDetails(this.clickedRow.getVacation_id());
     }
 
-    public void setButtonsON() {
-        buyReq_btn.setVisible(true);
-        trade_btn.setVisible(true);
+    public void setAirports() {
+
+        ObservableList<String> AirportsList = FXCollections.observableArrayList();
+        List<String> Airports = this.viewModel.getAirports();
+        AirportsList.addAll(Airports);
+        from.setItems(AirportsList);
+        to.setItems(AirportsList);
+
     }
 
-
-    public void setButtonsOff() {
-        buyReq_btn.setVisible(false);
-        trade_btn.setVisible(false);
-    }
 
 
 
@@ -120,6 +156,7 @@ public class SearchViewController implements Initializable {
             addrow=new TableViewClass(vacation.getVacation_id(),vacation.toStringCheckin(),vacation.toStringCheckout(), vacation.getFrom(),vacation.getto());
             addrow.setPrice(vacation.getSale_price());
             addrow.setOff(vacation.getOff());
+            addrow.setName(this.viewModel.getUserNameByEmail(vacation.getSeller()));
             this.VacationsList.add(addrow);
         }
 
@@ -198,22 +235,33 @@ public class SearchViewController implements Initializable {
 
 
     public void addReq (MouseEvent mouseEvent) {
-
-        if (this.clickedRow == null)
-            viewModel.popAlertinfo("Please pick a Vacation from Table!");
-        else {
-            this.viewModel.addReq(this.clickedRow.getVacation_id());
-            this.reset();
+        if (!this.viewModel.isUserExists()) {
+            this.viewModel.popAlertinfo("Please Sign in!");
+        } else {
+            if (this.clickedRow == null)
+                viewModel.popAlertinfo("Please pick a Vacation from Table!");
+            else {
+                this.viewModel.addReq(this.clickedRow.getVacation_id());
+                this.reset();
+            }
         }
     }
-
     public void addTradeReq (MouseEvent mouseEvent) {
-        if (this.clickedRow == null)
-            viewModel.popAlertinfo("Please pick a Vacation from Table!");
-        else {
-            this.viewModel.addTradeReq(this.clickedRow.getVacation_id(),false);
-            this.reset();
+
+        if (!this.viewModel.isUserExists()) {
+            this.viewModel.popAlertinfo("Please Sign in!");
+        } else
+            {
+            if(this.viewModel.getAvailableVacationsByseller_email().isEmpty())
+                viewModel.popAlertinfo("You don't have any vacation for trade!");
+            else{
+            if (this.clickedRow == null)
+                viewModel.popAlertinfo("Please pick a Vacation from Table!");
+            else {
+                this.viewModel.addTradeReq(this.clickedRow.getVacation_id(), false);
+                this.reset();
+            }
         }
-    }
+    }}
 
 }

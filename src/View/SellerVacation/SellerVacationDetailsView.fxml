@@ -24,6 +24,8 @@
                      </children>
                   </AnchorPane>
                   <Button fx:id="back_btn" layoutX="785.0" layoutY="598.0" mnemonicParsing="false" onMouseClicked="#Back" prefHeight="39.0" prefWidth="142.0" text="Back" />
+                  <Button fx:id="edit_btn" layoutX="215.0" layoutY="603.0" mnemonicParsing="false" onMouseClicked="#goToEditVacation" prefHeight="39.0" prefWidth="154.0" text="Edit" />
+                  <Button fx:id="del_btn" layoutX="407.0" layoutY="602.0" mnemonicParsing="false" onMouseClicked="#goToDeleteVacation" prefHeight="39.0" prefWidth="154.0" text="Delete" />
                   <GridPane fx:id="hotel" layoutX="258.0" layoutY="82.0" prefHeight="453.0" prefWidth="656.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="262.0" minWidth="10.0" prefWidth="191.0" />
@@ -126,6 +128,7 @@
                      </children>
                   </GridPane>
                   <Button fx:id="done_btn" layoutX="608.0" layoutY="599.0" mnemonicParsing="false" onMouseClicked="#goToDone" prefHeight="39.0" prefWidth="142.0" text="Done" />
+                  <Button fx:id="back1_btn" layoutX="587.0" layoutY="603.0" mnemonicParsing="false" onMouseClicked="#Back" prefHeight="39.0" prefWidth="154.0" text="Back" />
                </children>
             </AnchorPane>
          </children>

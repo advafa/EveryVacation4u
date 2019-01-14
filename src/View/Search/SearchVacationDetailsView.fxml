@@ -135,7 +135,7 @@
                   <Button fx:id="buyReq_btn" layoutX="218.0" layoutY="558.0" mnemonicParsing="false" onMouseClicked="#addReq" prefHeight="38.0" prefWidth="181.0" text="Send Request" />
                </children>
             </AnchorPane>
-            <Button fx:id="trade_btn" layoutX="408.0" layoutY="558.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="181.0" text="Send Trade Request" />
+            <Button fx:id="trade_btn" layoutX="408.0" layoutY="558.0" mnemonicParsing="false" onMouseClicked="#addTradeReq" prefHeight="38.0" prefWidth="181.0" text="Send Trade Request" />
             <Button fx:id="back_btn" layoutX="624.0" layoutY="559.0" mnemonicParsing="false" onMouseClicked="#goToback" prefHeight="38.0" prefWidth="181.0" text="Back" />
          </children>
       </AnchorPane>

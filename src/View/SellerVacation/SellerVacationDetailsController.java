@@ -1,6 +1,5 @@
 package View.SellerVacation;
 
-import App.Order;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -12,7 +11,6 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import App.User;
 import App.Vacation;
 import Main.ViewModel;
 import javafx.fxml.FXML;
@@ -45,7 +43,12 @@ public class SellerVacationDetailsController implements Initializable {
     public Label vac_status;
     public Label seller_email;
     public Label name;
+
     public Button done_btn;
+    public Button del_btn;
+    public Button edit_btn;
+    public Button back1_btn;
+    public Button back_btn;
 
     private ViewModel viewModel;
     private Vacation vacation;
@@ -116,12 +119,22 @@ public class SellerVacationDetailsController implements Initializable {
 
     }
     public void setButtonsON() {
+        del_btn.setVisible(false);
+        edit_btn.setVisible(false);
+        back1_btn.setVisible(false);
+
+        back_btn.setVisible(true);
         done_btn.setVisible(true);
 
     }
 
 
     public void setButtonsOff() {
+        del_btn.setVisible(true);
+        edit_btn.setVisible(true);
+        back1_btn.setVisible(true);
+
+        back_btn.setVisible(false);
         done_btn.setVisible(false);
     }
 
@@ -136,4 +149,20 @@ public class SellerVacationDetailsController implements Initializable {
 
 
             }}
-}
+
+
+    public void goToDeleteVacation (MouseEvent mouseEvent) {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Are you sure you want to delete this Vacation?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                this.viewModel.DeleteVacation(this.vacation.getVacation_id());
+                this.viewModel.popAlertinfo("Your Vacation successfully deleted !");
+                viewModel.goToSellerVacationsView();
+            }}
+
+    public void goToEditVacation (MouseEvent mouseEvent) {this.viewModel.goToEditVacation(this.vacation.getVacation_id()); }
+    }
+
+

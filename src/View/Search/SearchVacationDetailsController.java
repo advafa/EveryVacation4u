@@ -111,5 +111,20 @@ public class SearchVacationDetailsController implements Initializable {
     }
 
 
+    public void addTradeReq (MouseEvent mouseEvent) {
+
+        if (!this.viewModel.isUserExists()) {
+            this.viewModel.popAlertinfo("Please Sign in!");
+        } else
+        {
+            if(this.viewModel.getAvailableVacationsByseller_email().isEmpty())
+                viewModel.popAlertinfo("You don't have any vacation for trade!");
+            else
+                this.viewModel.addTradeReq( this.vacation.getVacation_id(), false);
+
+
+            }
+        }
+
     }
 

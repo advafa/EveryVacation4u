@@ -3,6 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -55,5 +58,51 @@
       </AnchorPane>
       <Button fx:id="reset" layoutX="355.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#reset" prefHeight="41.0" prefWidth="122.0" text="Reset" />
       <Button fx:id="bt_sup" layoutX="185.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#EditProfile" prefHeight="41.0" prefWidth="122.0" text="Update" />
+      <MenuBar prefHeight="10.0" prefWidth="662.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Search vacation">
+               <items>
+                  <MenuItem fx:id="search_menu" mnemonicParsing="false" text="Simple Search" />
+               </items>
+            </Menu>
+            <Menu fx:id="profile" mnemonicParsing="false" text="My Profil">
+               <items>
+                  <MenuItem fx:id="View_profile_menu" mnemonicParsing="false" text="View" />
+                  <MenuItem fx:id="EditProfile_menu" mnemonicParsing="false" text="Edit" />
+                  <MenuItem fx:id="Delete_profile_menu" mnemonicParsing="false" text="Delete" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Sell Vacation">
+               <items>
+                  <MenuItem fx:id="addVac_menu" mnemonicParsing="false" text="Add New Vacation" />
+                  <MenuItem fx:id="seller_vacations_menu" mnemonicParsing="false" text="My Vacations" />
+                  <MenuItem fx:id="seller_req_menu" mnemonicParsing="false" text="buyers Requests" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Buy Now!">
+               <items>
+                  <MenuItem fx:id="buyer_req_menu" mnemonicParsing="false" text="My vacation Request" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Trade in">
+               <items>
+                  <MenuItem fx:id="inbox_traderequests_menu" mnemonicParsing="false" text="Inbox  Requests" />
+                  <MenuItem fx:id="outbox_traderequests_menu" mnemonicParsing="false" text="Outbox  Requests" />
+               </items>
+            </Menu>
+            <Menu fx:id="profile1" mnemonicParsing="false" text="Sign">
+               <items>
+                  <MenuItem fx:id="SignIn_menu" mnemonicParsing="false" text="Sign in" />
+                  <MenuItem fx:id="SignOut_menu" mnemonicParsing="false" text="Sign out" />
+                  <MenuItem fx:id="SignUp_menu" mnemonicParsing="false" text="Sign Up" />
+               </items>
+            </Menu>
+            <Menu fx:id="exit_menu" mnemonicParsing="false" text="Exit">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Exit" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

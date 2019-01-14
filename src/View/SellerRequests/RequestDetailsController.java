@@ -1,6 +1,6 @@
 package View.SellerRequests;
 
-import App.Order;
+import App.Request;
 import App.Payment;
 import App.Vacation;
 import Main.ViewModel;
@@ -10,15 +10,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
+
 import java.net.URL;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -52,7 +47,7 @@ public class RequestDetailsController implements Initializable {
 
     private ViewModel viewModel;
     private Vacation vacation;
-    private Order sale_requst;
+    private Request sale_requst;
 
 
     @Override
@@ -61,7 +56,7 @@ public class RequestDetailsController implements Initializable {
 
 
 
-public void loadVacationRequestView(Vacation vacation, Order saleRequst) {
+public void loadVacationRequestView(Vacation vacation, Request saleRequst) {
     this.vacation = vacation;
     this.sale_requst=saleRequst;
 
