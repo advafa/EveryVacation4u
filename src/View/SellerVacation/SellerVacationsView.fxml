@@ -10,10 +10,10 @@
 
 <AnchorPane prefHeight="509.0" prefWidth="833.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SellerVacation.SellerVacationController">
    <children>
-      <AnchorPane layoutX="-68.0" prefHeight="423.0" prefWidth="691.0" styleClass="bodybg" stylesheets="@../images/background.css" AnchorPane.bottomAnchor="-23.0" AnchorPane.leftAnchor="-68.0" AnchorPane.rightAnchor="44.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="-68.0" prefHeight="509.0" prefWidth="864.0" styleClass="bodybg" stylesheets="@../images/background.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="details" layoutX="213.0" layoutY="401.0" mnemonicParsing="false" onMouseClicked="#goToDetails" prefHeight="39.0" prefWidth="154.0" text="More Details" />
-            <TableView fx:id="SaleRequstTable" layoutX="101.0" layoutY="73.0" prefHeight="315.0" prefWidth="787.0">
+            <Button fx:id="details" layoutX="118.0" layoutY="401.0" mnemonicParsing="false" onMouseClicked="#goToDetails" prefHeight="39.0" prefWidth="154.0" text="More Details" />
+            <TableView fx:id="SaleRequstTable" layoutX="101.0" layoutY="73.0" prefHeight="307.0" prefWidth="648.0">
                <columns>
                   <TableColumn fx:id="colCheckin" prefWidth="124.0" text="Checkin" />
                   <TableColumn fx:id="colCheckout" prefWidth="125.0" text="Checkout" />
@@ -22,10 +22,10 @@
                   <TableColumn fx:id="colVacatinStatus" minWidth="0.0" prefWidth="158.0" text="Status" />
                </columns>
             </TableView>
-            <Button fx:id="done_btn" layoutX="429.0" layoutY="401.0" mnemonicParsing="false" onMouseClicked="#goToDone" prefHeight="39.0" prefWidth="154.0" text="Done" />
-            <Button fx:id="edit_btn" layoutX="428.0" layoutY="402.0" mnemonicParsing="false" onMouseClicked="#goToEditVacation" prefHeight="39.0" prefWidth="154.0" text="Edit" />
-            <Button fx:id="del_btn" layoutX="639.0" layoutY="402.0" mnemonicParsing="false" onMouseClicked="#goToDeleteVacation" prefHeight="39.0" prefWidth="154.0" text="Delete" />
-            <Button fx:id="can_btn" layoutX="639.0" layoutY="402.0" mnemonicParsing="false" onMouseClicked="#goToCancel" prefHeight="39.0" prefWidth="154.0" text="Cancel" />
+            <Button fx:id="done_btn" layoutX="333.0" layoutY="401.0" mnemonicParsing="false" onMouseClicked="#goToDone" prefHeight="39.0" prefWidth="154.0" text="Done" />
+            <Button fx:id="edit_btn" layoutX="333.0" layoutY="402.0" mnemonicParsing="false" onMouseClicked="#goToEditVacation" prefHeight="39.0" prefWidth="154.0" text="Edit" />
+            <Button fx:id="del_btn" layoutX="543.0" layoutY="402.0" mnemonicParsing="false" onMouseClicked="#goToDeleteVacation" prefHeight="39.0" prefWidth="154.0" text="Delete" />
+            <Button fx:id="can_btn" layoutX="544.0" layoutY="402.0" mnemonicParsing="false" onMouseClicked="#goToCancel" prefHeight="39.0" prefWidth="154.0" text="Cancel" />
          </children>
       </AnchorPane>
       <MenuBar prefHeight="10.0" prefWidth="662.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -51,7 +51,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Buy Now!">
                <items>
-                  <MenuItem fx:id="buyer_req_menu" mnemonicParsing="false" text="My vacation Request" />
+                  <MenuItem fx:id="searcher_req_menu" mnemonicParsing="false" text="My vacation Request" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Trade in">

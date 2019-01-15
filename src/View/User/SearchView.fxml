@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="765.0" prefWidth="1155.0" styleClass="bodybg" stylesheets="@../images/background.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Search.SearchViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="765.0" prefWidth="1155.0" styleClass="bodybg" stylesheets="@../images/background.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.User.SearchViewController">
    <children>
       <GridPane fx:id="hotel" layoutX="54.0" layoutY="127.0" prefHeight="78.0" prefWidth="843.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="127.0">
          <columnConstraints>
@@ -84,7 +84,7 @@
       </TableView>
       <Button fx:id="details" layoutX="613.0" layoutY="644.0" mnemonicParsing="false" onMouseClicked="#goToDetails" prefHeight="38.0" prefWidth="181.0" text="More Details" />
       <Button fx:id="buyReq_btn" layoutX="185.0" layoutY="644.0" mnemonicParsing="false" onMouseClicked="#addReq" prefHeight="38.0" prefWidth="181.0" text="Send Buy Request" />
-      <Button fx:id="trade_btn" layoutX="398.0" layoutY="644.0" mnemonicParsing="false"  onMouseClicked="#addTradeReq" prefHeight="38.0" prefWidth="181.0" text="Send Trade Request" />
+      <Button fx:id="trade_btn" layoutX="398.0" layoutY="644.0" mnemonicParsing="false" onMouseClicked="#addTradeReq" prefHeight="38.0" prefWidth="181.0" text="Send Trade Request" />
       <Button fx:id="search_btn" layoutX="1000.0" layoutY="166.0" mnemonicParsing="false" onMouseClicked="#SimpleSearch" prefHeight="38.0" prefWidth="130.0" text="Search4U" />
       <Label layoutX="54.0" layoutY="61.0" prefHeight="53.0" prefWidth="625.0" text="Wellcome to EveryVacation4U Search" textFill="#0d186b">
          <font>
@@ -114,7 +114,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Buy Now!">
                <items>
-                  <MenuItem fx:id="buyer_req_menu" mnemonicParsing="false" text="My vacation Request" />
+                  <MenuItem fx:id="searcher_req_menu" mnemonicParsing="false" text="My vacation Request" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Trade in">

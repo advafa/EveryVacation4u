@@ -41,8 +41,8 @@ public class RequestDetailsController implements Initializable {
     public Label original_price;
     public Label sellerStatus;
     public Label vac_status;
-    public Label buyer_email;
-    public Label buyer_status;
+    public Label searcher_email;
+    public Label searcher_status;
     public Label name;
 
     private ViewModel viewModel;
@@ -90,26 +90,26 @@ public void loadVacationRequestView(Vacation vacation, Request saleRequst) {
     this.num.setText(""+vacation.getNum_of_tickets());
     this.price.setText(vacation.getSale_price()+"$");
     this.original_price.setText(vacation.getOriginal_price()+"$");
-    this.buyer_status.setText(saleRequst.toStringBuyer_status());
+    this.searcher_status.setText(saleRequst.toStringSearcher_status());
     this.sellerStatus.setText(this.sale_requst.toStringSellerStatus());
 
     if(vacation.getVacation_status()) {
         if (this.sale_requst.getSeller_status()) {
-            this.buyer_email.setVisible(true);
-            this.buyer_email.setText("Contact Buyer: " + this.sale_requst.getBuyer_email());
+            this.searcher_email.setVisible(true);
+            this.searcher_email.setText("Contact Searcher: " + this.sale_requst.getSearcher_email());
             this.vac_status.setText("You Approved this Request");
         } else{
-            this.buyer_email.setVisible(false);
+            this.searcher_email.setVisible(false);
             if(this.sale_requst.getSeller_status()!=null)
                 this.vac_status.setText("You Declined this Request");
             else
                 this.vac_status.setText("Please Approve or Decline this Sale Request!");
     }}
     else {this.vac_status.setText("Sold out");
-        this.buyer_email.setVisible(false);
+        this.searcher_email.setVisible(false);
     }
 
-    this.name.setText(viewModel.getUserNameByEmail(this.sale_requst.getBuyer_email()));
+    this.name.setText(viewModel.getUserNameByEmail(this.sale_requst.getSearcher_email()));
 }
 
 
@@ -149,15 +149,14 @@ public void loadVacationRequestView(Vacation vacation, Request saleRequst) {
         }
         if (this.vacation.getVacation_status()&& this.sale_requst.getSeller_status()) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setContentText("Are you sure this buyer payed in cash?");
+                alert.setContentText("Are you sure this searcher payed in cash?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     this.vacation.setVacation_status(false);
-                    this.sale_requst.setBuyer_status(true);
-
+                    this.sale_requst.setSearcher_status(true);
                     this.viewModel.setVacationStatus(this.vacation.getVacation_id(), false);
-                    this.viewModel.setBuyerStatus(this.sale_requst, true);
-                    Payment payment=new Payment(this.sale_requst.getSeller_email(), this.sale_requst.getBuyer_email(), this.sale_requst.getVacation_id());
+                    this.viewModel.setSearcherStatus(this.sale_requst, true);
+                    Payment payment=new Payment(this.sale_requst.getSeller_email(), this.sale_requst.getSearcher_email(), this.sale_requst.getVacation_id());
                     this.viewModel.addPayment(payment);
                     this.viewModel.popAlertinfo("Your Approve of Payment successfully saved!");
                     loadVacationRequestView(this.vacation,this.sale_requst);

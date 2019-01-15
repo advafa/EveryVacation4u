@@ -25,7 +25,7 @@ public class Model {
 
     //  ******************** Check if Exists ***********************************
     public Boolean isUserExists(User user) { return db.isUserExists(user);}
-    public Boolean  isSaleReqExists (String seller_email,String buyer_email,int VacationId) { return db. isReqExists (seller_email, buyer_email,VacationId);}
+    public Boolean  isSaleReqExists (String seller_email,String searcher_email,int VacationId) { return db. isReqExists (seller_email, searcher_email,VacationId);}
     public Boolean  isSaleReqExists (int VacationId, int VacationtoTrade_id) { return db. isReqExists (VacationId,VacationtoTrade_id);}
 
     //  ******************** Delete ***********************************
@@ -35,7 +35,7 @@ public class Model {
 
     public void deleteVacationsBySeller(String userEmail){db.deleteVacationsBySeller(userEmail);}
     public void deleteRequestsBySeller(String selllerEmail){db.deleteRequestsBySeller(selllerEmail);}
-    public void deleteRequestsByBuyer(String buyerEmail){db.deleteRequestsByBuyer(buyerEmail);}
+    public void deleteRequestsBySearcher(String searcherEmail){db.deleteRequestsBySearcher(searcherEmail);}
 
 
     public void deleteRequestsByVacationID (int vacation_id) {db.deleteRequestsByVacationID (vacation_id);}
@@ -49,7 +49,7 @@ public class Model {
     public String getUserNameByEmail(String email){return db.getUserNameByEmail(email);}
     public Vacation getVacationByVacationId(int VacationId){return db.getVacationByVacationId(VacationId);}
     public List<Request> getRequestsByseller_email(String seller_email){return db.getRequestsByseller_email(seller_email);}
-    public List<Request> getRequestsByBuyer_email(String buyer_email){return db.getRequestsByBuyer_email(buyer_email);}
+    public List<Request> getRequestsBySearcher_email(String searcher_email){return db.getRequestsBySearcher_email(searcher_email);}
     public List<Vacation> getAllAvailableVacations(){return db.getAllAvailableVacations();}
     public List<Vacation> getVacationBySimpleSearch(Vacation aVacation){return db.getVacationBySimpleSearch(aVacation);}
     public List<Vacation> getVacationsByseller_email(String seller_email){return db.getVacationsByseller_email(seller_email);}
@@ -67,7 +67,7 @@ public class Model {
         //*****************Update************************
     public void UpdateUser(User user){db.UpdateUser(user);}
     public void UpdateRequestsSellerStatus(Request ord, boolean sellerStatus) {db.UpdateRequestsSellerStatus(ord,sellerStatus);};
-    public void UpdateRequestsBuyerStatus(Request ord, boolean buyerStatus) {db.UpdateRequestsBuyerStatus(ord,buyerStatus);}
+    public void UpdateRequestsSearcherStatus(Request req, boolean searcherStatus) {db.UpdateRequestsSearcherStatus(req,searcherStatus);}
     public void UpdatVacationStatus(int vacation_id, boolean vac_status) {db.UpdatVacationStatus(vacation_id,vac_status);}
     public void UpdateVacation(Vacation vac){db.UpdateVacation(vac);}
 

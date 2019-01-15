@@ -1,21 +1,21 @@
-package View.Search;
+package View.SearcherRequests;
 
+
+
+
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import App.Vacation;
 import Main.ViewModel;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.scene.control.Button;
 
 
-public class SearchVacationDetailsController implements Initializable {
-
-
+public class SearcherRequestDetailsController implements Initializable {
 
     @FXML
     public Label check_in;
@@ -35,39 +35,43 @@ public class SearchVacationDetailsController implements Initializable {
     public Label num;
     public Label price;
     public Label off;
-
+    public Label sellerStatus;
+    public Label vac_status;
     public Label seller_email;
     public Label name;
-
-    public Button buyReq_btn;
-    public Button trade_btn;
-
     private ViewModel viewModel;
     private Vacation vacation;
-
+    private Boolean status;
+    private String statusString;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {}
+    public void initialize(URL url, ResourceBundle rb) {
 
-    public void setViewModel(ViewModel viewModel) {this.viewModel = viewModel; }
-
-    public void setButtonsON() {
-        buyReq_btn.setVisible(true);
-        trade_btn.setVisible(true);
     }
 
 
-    public void setButtonsOff() {
-        buyReq_btn.setVisible(false);
-        trade_btn.setVisible(false);
-    }
-    public void addReq (MouseEvent mouseEvent) {
+    public void Back (MouseEvent mouseEvent){viewModel.goToSearcherVacationsView();}
 
-        this.viewModel.addReq(this.vacation);
-    }
 
-    public void loadVacationView(Vacation vacation) {
-        this.vacation = vacation;
+
+    public void setViewModel(ViewModel viewModel) { this.viewModel = viewModel; }
+
+
+
+    public void loadVacation(Vacation vacation, String status){
+
+        this.vacation=vacation;
+        this.statusString=status;
+
+        if(status== "Approved") this.status=true;
+        if(status== "Declined") this.status=false;
+        if(status== "") {
+            this.status=null;
+            this.statusString="submitted";
+        }
+
+
+
         //Set Labels
 
         this.check_in.setText(vacation.toStringCheckin());
@@ -78,8 +82,7 @@ public class SearchVacationDetailsController implements Initializable {
 
         if(vacation.getBackFlight()){
             this.backf.setText("Back flight Included");}
-        else{
-            this.backf.setText("Back flight *NOT* Included");}
+        else{this.backf.setText("Back flight *NOT* Included");}
 
         this.handbag.setText(vacation.getHand_bag());
         this.checkbag.setText(vacation.getChecked_bag());
@@ -96,35 +99,32 @@ public class SearchVacationDetailsController implements Initializable {
             this.hotel_in.setText("Hotel *NOT* Included");
             this.hotel_type.setText("");
             this.hotel_raiting.setText("");
-            }
+        }
+
+
         this.num.setText(""+vacation.getNum_of_tickets());
         this.price.setText(vacation.getSale_price()+"$");
         this.off.setText(vacation.getOff()+"%");
+        this.sellerStatus.setText(this.statusString);
+
+        if(vacation.getVacation_status()){
+            if(this.status){
+                this.vac_status.setText("Vacation Available for sale !!");
+                seller_email.setVisible(true);
+                seller_email.setText("Contact Seller: "+ vacation.getSeller());}
+            else{
+                this.vac_status.setText("Your Request "+this.statusString+" for this Vacation");
+                seller_email.setVisible(false);
+
+            }}
+        else {this.vac_status.setText("Sold out");
+            seller_email.setVisible(false);
+        }
         this.name.setText(viewModel.getUserNameByEmail(this.vacation.getSeller()));
 
-        }
-
-
-    public void goToback (MouseEvent mouseEvent) {
-
-        this.viewModel.goToSearchView();
     }
 
 
-    public void addTradeReq (MouseEvent mouseEvent) {
-
-        if (!this.viewModel.isUserExists()) {
-            this.viewModel.popAlertinfo("Please Sign in!");
-        } else
-        {
-            if(this.viewModel.getAvailableVacationsByseller_email().isEmpty())
-                viewModel.popAlertinfo("You don't have any vacation for trade!");
-            else
-                this.viewModel.addTradeReq( this.vacation.getVacation_id(), false);
 
 
-            }
-        }
-
-    }
-
+}

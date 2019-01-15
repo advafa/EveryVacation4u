@@ -99,6 +99,8 @@ public class TradeRequestDetailsController implements Initializable {
         this.backInBox_btn.setVisible(true);
         this.backOutBox_btn.setVisible(false);
         this.loadRequestsDetails(tradeRequestDetails);
+        if(this.tradeRequest.getSeller_status()==null){
+            seller_email.setVisible(false);}else {
         if(this.vacationTrade.getVacation_status()&& this.Myvacation.getVacation_status() && this.tradeRequest.getSeller_status())
         {
             seller_email.setVisible(true);
@@ -107,7 +109,7 @@ public class TradeRequestDetailsController implements Initializable {
         else
             seller_email.setVisible(false);
 
-        }
+        }}
     public void loadTraderRequestOutBox(TradeRequest tradeRequestDetails){
 
         this.app_btn.setVisible(false);
@@ -115,11 +117,13 @@ public class TradeRequestDetailsController implements Initializable {
         this.backInBox_btn.setVisible(false);
         this.backOutBox_btn.setVisible(true);
         this.loadRequestsDetails(tradeRequestDetails);
+        if(this.tradeRequest.getSeller_status()==null){
+            seller_email.setVisible(false);}else {
         if(this.vacationTrade.getVacation_status()&& this.Myvacation.getVacation_status() && this.tradeRequest.getSeller_status())
         {seller_email.setVisible(true);
             seller_email.setText("Contact Seller: "+this.tradeRequest.getSeller_email());}
             else
-            seller_email.setVisible(false);
+            seller_email.setVisible(false);}
 
 
     }
@@ -189,7 +193,7 @@ public class TradeRequestDetailsController implements Initializable {
         this.vac_stat1.setText(vacationTrade.toStringVacation_status());
 
         this.name.setText(viewModel.getUserNameByEmail(this.vacationTrade.getSeller()));
-        this.sellerStatus.setText(this.tradeRequest.toStringBuyer_status());
+        this.sellerStatus.setText(this.tradeRequest.toStringSellerStatus());
 
 
     }

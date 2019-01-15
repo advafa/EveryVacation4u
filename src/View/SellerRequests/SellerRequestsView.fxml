@@ -16,8 +16,8 @@
             <TableColumn fx:id="colCheckout" prefWidth="103.0" text="Checkout" />
             <TableColumn fx:id="colFrom" prefWidth="87.0" text="From" />
             <TableColumn fx:id="colTo" prefWidth="76.0" text="To" />
-            <TableColumn fx:id="colBuyerName" prefWidth="117.0" text="Buyer Name" />
-            <TableColumn fx:id="colRequestStatus" prefWidth="134.0" text="Request Status" />
+            <TableColumn fx:id="colSearcherName" prefWidth="130.0" text="Searcher Name" />
+            <TableColumn fx:id="colRequestStatus" prefWidth="175.0" text="Request Status" />
          </columns>
       </TableView>
       <Button fx:id="details" layoutX="621.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#goToDetails" prefHeight="31.0" prefWidth="170.0" text="More Details" />
@@ -47,7 +47,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Buy Now!">
                <items>
-                  <MenuItem fx:id="buyer_req_menu" mnemonicParsing="false" text="My vacation Request" />
+                  <MenuItem fx:id="searcher_req_menu" mnemonicParsing="false" text="My vacation Request" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Trade in">

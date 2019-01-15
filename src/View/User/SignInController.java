@@ -1,4 +1,4 @@
-package View.SignIn;
+package View.User;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,7 +23,7 @@ public class SignInController implements Initializable {
     public MenuItem seller_vacations_menu;
     public MenuItem seller_req_menu;
     public MenuItem search_menu;
-    public MenuItem buyer_req_menu;
+    public MenuItem searcher_req_menu;
     public MenuItem inbox_traderequests_menu;
     public MenuItem outbox_traderequests_menu;
     public MenuItem SignIn_menu;
@@ -45,7 +45,7 @@ public class SignInController implements Initializable {
         seller_vacations_menu.setOnAction(e -> {viewModel.goToSellerVacationsView("View");});
         seller_req_menu.setOnAction(e -> {viewModel.goToSellerRequest();});
         search_menu.setOnAction(e -> {viewModel.goToSearchView();});
-        buyer_req_menu.setOnAction(e -> {viewModel.goToBuyerVacationsView();});
+        searcher_req_menu.setOnAction(e -> {viewModel.goToSearcherVacationsView();});
         inbox_traderequests_menu.setOnAction(e -> {viewModel.goToInbox_traderequests();});
         outbox_traderequests_menu.setOnAction(e -> {viewModel.goToOutbox_traderequests();});
         SignIn_menu.setOnAction(e -> {viewModel.goToSignIn();});

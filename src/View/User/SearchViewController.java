@@ -1,4 +1,4 @@
-package View.Search;
+package View.User;
 
 import View.TableViewClass;
 import App.Vacation;
@@ -30,7 +30,7 @@ public class SearchViewController implements Initializable {
     public MenuItem seller_vacations_menu;
     public MenuItem seller_req_menu;
     public MenuItem search_menu;
-    public MenuItem buyer_req_menu;
+    public MenuItem searcher_req_menu;
     public MenuItem inbox_traderequests_menu;
     public MenuItem outbox_traderequests_menu;
     public MenuItem SignIn_menu;
@@ -69,19 +69,45 @@ public class SearchViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //*********  Menu Functions **************///
-        SignUp_menu.setOnAction(e -> {viewModel.goToSignUp();});
-        View_profile_menu.setOnAction(e -> {viewModel.goToProfileView();});
-        EditProfile_menu.setOnAction(e -> {viewModel.goToEditProfile();});
-        Delete_profile_menu.setOnAction(e -> {viewModel.goTODeleteProfile();});;
-        addVac_menu.setOnAction(e -> {viewModel.goToAddVacation();});
-        seller_vacations_menu.setOnAction(e -> {viewModel.goToSellerVacationsView("View");});
-        seller_req_menu.setOnAction(e -> {viewModel.goToSellerRequest();});
-        search_menu.setOnAction(e -> {viewModel.goToSearchView();});
-        buyer_req_menu.setOnAction(e -> {viewModel.goToBuyerVacationsView();});
-        inbox_traderequests_menu.setOnAction(e -> {viewModel.goToInbox_traderequests();});
-        outbox_traderequests_menu.setOnAction(e -> {viewModel.goToOutbox_traderequests();});
-        SignIn_menu.setOnAction(e -> {viewModel.goToSignIn();});
-        SignOut_menu.setOnAction(e -> {viewModel.SignOut();});
+        SignUp_menu.setOnAction(e -> {
+            VacationsListTable.getItems().clear();
+            viewModel.goToSignUp();});
+        View_profile_menu.setOnAction(e -> {
+            VacationsListTable.getItems().clear();
+            viewModel.goToProfileView();});
+        EditProfile_menu.setOnAction(e -> {
+            VacationsListTable.getItems().clear();
+            viewModel.goToEditProfile();});
+        Delete_profile_menu.setOnAction(e -> {
+            VacationsListTable.getItems().clear();
+        viewModel.goTODeleteProfile();});;
+        addVac_menu.setOnAction(e -> {
+            VacationsListTable.getItems().clear();
+            viewModel.goToAddVacation();});
+        seller_vacations_menu.setOnAction(e -> {
+            VacationsListTable.getItems().clear();
+            viewModel.goToSellerVacationsView("View");});
+        seller_req_menu.setOnAction(e -> {
+            VacationsListTable.getItems().clear();
+            viewModel.goToSellerRequest();});
+        search_menu.setOnAction(e -> {
+            VacationsListTable.getItems().clear();
+            viewModel.goToSearchView();});
+        searcher_req_menu.setOnAction(e -> {
+            VacationsListTable.getItems().clear();
+            viewModel.goToSearcherVacationsView();});
+        inbox_traderequests_menu.setOnAction(e -> {
+            VacationsListTable.getItems().clear();
+            viewModel.goToInbox_traderequests();});
+        outbox_traderequests_menu.setOnAction(e -> {
+            VacationsListTable.getItems().clear();
+            viewModel.goToOutbox_traderequests();});
+        SignIn_menu.setOnAction(e -> {
+            VacationsListTable.getItems().clear();
+            viewModel.goToSignIn();});
+        SignOut_menu.setOnAction(e -> {
+            VacationsListTable.getItems().clear();
+            viewModel.SignOut();});
         exit_menu.setOnAction(e -> {System.exit(0);});
 
 
@@ -116,7 +142,6 @@ public class SearchViewController implements Initializable {
             });
             return row;
         });
-        this.VacationsListTable.setItems(null);
 
 
 

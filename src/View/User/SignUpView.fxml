@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SignUp.SignUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.User.SignUpController">
    <children>
       <AnchorPane layoutX="-26.0" prefHeight="523.0" prefWidth="759.0" styleClass="bodybg" stylesheets="@../images/background.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-26.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <AnchorPane layoutX="-10.0" layoutY="-8.0" prefHeight="523.0" prefWidth="743.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -82,7 +82,7 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Buy Now!">
                      <items>
-                        <MenuItem fx:id="buyer_req_menu" mnemonicParsing="false" text="My vacation Request" />
+                        <MenuItem fx:id="searcher_req_menu" mnemonicParsing="false" text="My vacation Request" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Trade in">

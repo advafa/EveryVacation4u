@@ -3,10 +3,10 @@ package View;
 public class TableViewClass {
 
     private String seller_email;
-    private String buyer_email;
+    private String searcher_email;
     private int vacation_id;
     private String seller_status;//true=approve, false=decline
-    private String buyer_status;//true=paid, false=submit
+    private String searcher_status;//true=paid, false=submit
 
     private int vacation_idT;
     public String name;
@@ -55,8 +55,6 @@ public class TableViewClass {
         this.checkout=checkout;
         this.from= from;
         this.to= to;
-        this.name=name;
-        this.seller_status = seller_status;
 
     }
 
@@ -71,17 +69,16 @@ public class TableViewClass {
     public String getName(){return this.name;}
     public String getSeller_status(){return this.seller_status;}
     public String getVac_status(){return this.vac_status;}
-    public String getBuyer_email(){return this.buyer_email;}
+    public String getSearcher_email(){return this.searcher_email;}
     public String getSeller_email(){return this.seller_email;}
-    public String getBuyer_status(){return this.buyer_status;}//true=paid, false=submit
+    public String getSearcher_status(){return this.searcher_status;}//true=paid, false=submit
     public  int getOff(){return this.off;}
     public  int getPrice(){return this.price;}
     public Boolean getSellerStatus(){
         if (this.seller_status.equals("Approved")) return true;
-        if (this.seller_status.equals("Declined")) return false;
-        return null;
+        else return false;
     }
-    public String getTrader_email(){return this.buyer_email;}
+    public String getTrader_email(){return this.searcher_email;}
 
     public String getCheckinT(){return this.checkinT;}
     public String getCheckoutT(){return this.checkoutT;}
@@ -100,13 +97,13 @@ public class TableViewClass {
     public void setName(String name){this.name= name;}
     public void setSeller_status(String seller_status){this.seller_status= seller_status;}
     public void setVac_status(String vac_status){this.vac_status=vac_status;}
-    public void setBuyer_email(String buyer_email) {this.buyer_email = buyer_email;}
+    public void setSearcher_email(String searcher_email) {this.searcher_email = searcher_email;}
     public void setSeller_email(String seller_email) {this.seller_email = seller_email;}
-    public void setBuyer_status(String buyer_status) {this.buyer_status = buyer_status; }
+    public void setSearcher_status(String searcher_status) {this.searcher_status = searcher_status; }
     public  void setPrice(int price){this.price= price;}
     public  void setOff(int off){this.off= off;}
 
-    public void setTrader_email(String trader_email) {this.buyer_email = trader_email;}
+    public void setTrader_email(String trader_email) {this.searcher_email = trader_email;}
 
 
     public void setCheckinT(String checkin){this.checkinT= checkin;}

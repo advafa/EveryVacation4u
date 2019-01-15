@@ -14,7 +14,7 @@
          <children>
             <TableView fx:id="RradeRequstsTable" layoutX="7.0" layoutY="67.0" prefHeight="385.0" prefWidth="901.0">
               <columns>
-                  <TableColumn prefWidth="403.0" text="My Vacation">
+                  <TableColumn prefWidth="403.0" text="Trade in Vacation">
                      <columns>
                         <TableColumn fx:id="colCheckin" prefWidth="97.0" text="Check in" />
                       <TableColumn fx:id="colCheckout" prefWidth="86.0" text="Check out" />
@@ -23,7 +23,7 @@
                         <TableColumn fx:id="colPrice" prefWidth="71.0" text="Price" />
                      </columns>
                   </TableColumn>
-                  <TableColumn prefWidth="403.0" text="Trade in Vacation">
+                  <TableColumn prefWidth="403.0" text="My Vacation">
                      <columns>
                         <TableColumn fx:id="colCheckinT" prefWidth="97.0" text="Check in" />
                         <TableColumn fx:id="colCheckoutT" prefWidth="86.0" text="Check out" />
@@ -64,7 +64,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Buy Now!">
                <items>
-                  <MenuItem fx:id="buyer_req_menu" mnemonicParsing="false" text="My vacation Request" />
+                  <MenuItem fx:id="searcher_req_menu" mnemonicParsing="false" text="My vacation Request" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Trade in">

@@ -55,7 +55,7 @@ public class TraderRequestController implements Initializable {
     public MenuItem seller_vacations_menu;
     public MenuItem seller_req_menu;
     public MenuItem search_menu;
-    public MenuItem buyer_req_menu;
+    public MenuItem searcher_req_menu;
     public MenuItem inbox_traderequests_menu;
     public MenuItem outbox_traderequests_menu;
     public MenuItem SignIn_menu;
@@ -80,7 +80,7 @@ public class TraderRequestController implements Initializable {
         seller_vacations_menu.setOnAction(e -> {viewModel.goToSellerVacationsView("View");});
         seller_req_menu.setOnAction(e -> {viewModel.goToSellerRequest();});
         search_menu.setOnAction(e -> {viewModel.goToSearchView();});
-        buyer_req_menu.setOnAction(e -> {viewModel.goToBuyerVacationsView();});
+        searcher_req_menu.setOnAction(e -> {viewModel.goToSearcherVacationsView();});
         inbox_traderequests_menu.setOnAction(e -> {viewModel.goToInbox_traderequests();});
         outbox_traderequests_menu.setOnAction(e -> {viewModel.goToOutbox_traderequests();});
         SignIn_menu.setOnAction(e -> {viewModel.goToSignIn();});
@@ -121,7 +121,8 @@ public class TraderRequestController implements Initializable {
 
                     this.clickedRow = row.getItem();
                     this.req= new TradeRequest(clickedRow.getSeller_email(), clickedRow.getTrader_email(), clickedRow.getVacation_id(), clickedRow.getVacation_idT(),true);
-                    this.req.setSeller_status(clickedRow.getSellerStatus());
+
+
 
                 }
             });
@@ -172,23 +173,21 @@ private void loadRequests(List<TradeRequest> TradeRequstList){
 
         vacation = viewModel.getVacation(currentReq.getVacation_id());
         vacation4trade=viewModel.getVacation(currentReq.getVacationtoTrade_id());
-        if (vacation.getVacation_status()&& vacation4trade.getVacation_status()) {
-//            stat=currentReq.getSeller_status()?"Approved":"Declined";
-            stat="try";
-            addrow = new TableViewClass(vacation.getVacation_id(), vacation.toStringCheckin(),vacation.toStringCheckout(),vacation.getFrom(),vacation.getto(),stat);
+        stat=currentReq.toStringSellerStatus();
+            addrow = new TableViewClass(vacation.getVacation_id(), vacation.toStringCheckin(),vacation.toStringCheckout(),vacation.getFrom(),vacation.getto());
             addrow.setPrice(vacation.getSale_price());
-
             addrow.setCheckinT(vacation4trade.toStringCheckin());
             addrow.setCheckoutT(vacation4trade.toStringCheckout());
             addrow.setFromT(vacation4trade.getFrom());
             addrow.setTooT(vacation4trade.getto());
             addrow.setPriceT(vacation4trade.getSale_price());
-
+            addrow.setVacation_idT(vacation4trade.getVacation_id());
+            addrow.setSeller_status(stat);
 
 
             RradeRequsts.add(addrow);
         }
-    }
+
 
 
     RradeRequstsTable.setItems(RradeRequsts);
@@ -249,14 +248,18 @@ private void loadRequests(List<TradeRequest> TradeRequstList){
     public void goToDetailsOutBox (MouseEvent mouseEvent) {
         if (this.clickedRow == null)
             viewModel.popAlertinfo("Please pick a Request row from the Table!");
-        else
+        else{
+            if(!this.clickedRow.getSeller_status().equals("Submit"))
+                this.req.setSeller_status(this.clickedRow.getSeller_status().equals("Approved"));
             viewModel.goToDetailsOutBox(this.req);
-    }
+    }}
 
     public void goToDetailsIntBox (MouseEvent mouseEvent) {
         if (this.clickedRow == null)
             viewModel.popAlertinfo("Please pick a Request row from the Table!");
         else
+        if(!this.clickedRow.getSeller_status().equals("Submit"))
+            this.req.setSeller_status(this.clickedRow.getSeller_status().equals("Approved"));
             viewModel.goToDetailsIntBox (this.req);
     }
 

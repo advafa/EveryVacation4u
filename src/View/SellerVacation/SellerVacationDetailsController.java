@@ -76,6 +76,7 @@ public class SellerVacationDetailsController implements Initializable {
     public void loadVacationView(Vacation vacation) {
         this.vacation = vacation;
 
+
         this.check_in.setText(vacation.toStringCheckin());
         this.check_out.setText(vacation.toStringCheckout());
         this.from.setText(vacation.getFrom());
@@ -162,7 +163,11 @@ public class SellerVacationDetailsController implements Initializable {
                 viewModel.goToSellerVacationsView();
             }}
 
-    public void goToEditVacation (MouseEvent mouseEvent) {this.viewModel.goToEditVacation(this.vacation.getVacation_id()); }
+    public void goToEditVacation (MouseEvent mouseEvent) {
+        if(!this.vacation.getVacation_status())
+            this.viewModel.popAlertinfo("This Vacation is NOT Avalible !!!");
+        else
+        this.viewModel.goToEditVacation(this.vacation.getVacation_id()); }
     }
 
 

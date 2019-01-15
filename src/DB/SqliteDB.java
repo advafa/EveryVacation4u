@@ -80,14 +80,14 @@ public class SqliteDB {
     private void createRequestsTable() throws SQLException {
         execute("CREATE TABLE IF NOT EXISTS Requests (\n" +
                 "seller_email text, \n" +
-                "buyer_email text, \n" +
+                "searcher_email text, \n" +
                 "vacation_id int, \n" +
                 "seller_status int, \n" +
-                "buyer_status int, \n" +
-                "CONSTRAINT PK_Requests PRIMARY KEY (seller_email, buyer_email, vacation_id), \n" +
+                "searcher_status int, \n" +
+                "CONSTRAINT PK_Requests PRIMARY KEY (seller_email, searcher_email, vacation_id), \n" +
                 "CONSTRAINT FK_Requests FOREIGN KEY (vacation_id) REFERENCES Vacations(vacation_id),\n" +
                 "CONSTRAINT FK_RequestSeller FOREIGN KEY (seller_email) REFERENCES Users(email), \n" +
-                "CONSTRAINT FK_RequestBuyer FOREIGN KEY (buyer_email) REFERENCES Users(email));"
+                "CONSTRAINT FK_RequestSearcher FOREIGN KEY (searcher_email) REFERENCES Users(email));"
         );
     }
 
@@ -213,12 +213,12 @@ private int getVacationID(){
         try {
 
             String seller_email = req.getSeller_email();
-            String buyer_email = req.getBuyer_email();
+            String searcher_email = req.getSearcher_email();
             int vacation_id = req.getVacation_id();
             int seller_status = -1;
-            int buyer_status = 0;
+            int searcher_status = 0;
 
-            String query = String.format("INSERT INTO Requests VALUES('%s','%s', %d, %d, %d)", seller_email, buyer_email, vacation_id, seller_status, buyer_status);
+            String query = String.format("INSERT INTO Requests VALUES('%s','%s', %d, %d, %d)", seller_email, searcher_email, vacation_id, seller_status, searcher_status);
             execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -244,7 +244,7 @@ private int getVacationID(){
         try {
 
             String seller_email = tradeRequest.getSeller_email();
-            String trader_email = tradeRequest.getBuyer_email();
+            String trader_email = tradeRequest.getSearcher_email();
             int vacation_id = tradeRequest.getVacation_id();
             int vacationtoTrade_id = tradeRequest.getVacationtoTrade_id();
             int seller_status = -1;
@@ -291,7 +291,7 @@ private int getVacationID(){
     public void deleteRequest(Request req) {
         try {
             execute("DELETE FROM Requests WHERERequests.seller_email = " + req.getSeller_email() +
-                    " AND Requests.buyer_email = " + req.getBuyer_email() + " AND Requests.vacation_id = " + req.getVacation_id() + " ;");
+                    " AND Requests.searcher_email = " + req.getSearcher_email() + " AND Requests.vacation_id = " + req.getVacation_id() + " ;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -319,10 +319,10 @@ private int getVacationID(){
         }
     }
 
-    public void deleteRequestsByBuyer(String buyerEmail) {
-        if(!this.getRequestsByBuyer_email(buyerEmail).isEmpty()) {
+    public void deleteRequestsBySearcher(String searcherEmail) {
+        if(!this.getRequestsBySearcher_email(searcherEmail).isEmpty()) {
             try {
-                execute("DELETE FROM Requests WHERE Requests.buyer_email = " + buyerEmail + "' ;");
+                execute("DELETE FROM Requests WHERE Requests.searcher_email = " + searcherEmail + "' ;");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -457,27 +457,27 @@ private int getVacationID(){
     public void UpdateRequestsSellerStatus(Request req, boolean sellerStatus) {
         try {
             String seller_email = req.getSeller_email();
-            String buyer_email = req.getBuyer_email();
+            String searcher_email = req.getSearcher_email();
             int vacation_id = req.getVacation_id();
             int status = sellerStatus ? 1 : 0;
 
             String query = "UPDATE Requests SET seller_status=" + status +
-                    " WHERE seller_email = '" + seller_email + "' AND buyer_email='" + buyer_email + "' AND vacation_id=" + vacation_id + "";
+                    " WHERE seller_email = '" + seller_email + "' AND searcher_email='" + searcher_email + "' AND vacation_id=" + vacation_id + "";
             execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void UpdateRequestsBuyerStatus(Request req, boolean buyerStatus) {
+    public void UpdateRequestsSearcherStatus(Request req, boolean searcherStatus) {
         try {
             String seller_email = req.getSeller_email();
-            String buyer_email = req.getBuyer_email();
+            String searcher_email = req.getSearcher_email();
             int vacation_id = req.getVacation_id();
-            int status = buyerStatus ? 1 : 0;
+            int status = searcherStatus ? 1 : 0;
 
-            String query = "UPDATE Requests SET buyer_status = " + status + "" +
-                    " WHERE seller_email = '" + seller_email + "' AND buyer_email='" + buyer_email + "' AND vacation_id=" + vacation_id + "";
+            String query = "UPDATE Requests SET searcher_status = " + status + "" +
+                    " WHERE seller_email = '" + seller_email + "' AND searcher_email='" + searcher_email + "' AND vacation_id=" + vacation_id + "";
             execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -501,7 +501,7 @@ private int getVacationID(){
     public void UpdateTradeRequestSellerStatus(TradeRequest req, boolean sellerStatus) {
         try {
             String seller_email = req.getSeller_email();
-            String trader_email = req.getBuyer_email();
+            String trader_email = req.getSearcher_email();
             int vacation_id = req.getVacation_id();
             int vacationtoTrade_id = req.getVacationtoTrade_id();
             int status = sellerStatus ? 1 : 0;
@@ -573,16 +573,17 @@ private int getVacationID(){
             return requests;
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
+
     }
 
 
-    public List<Request> getRequestsByBuyer_email(String buyer_email) {
+    public List<Request> getRequestsBySearcher_email(String searcher_email) {
         try {
             Statement st = dbConnection.createStatement();
             ResultSet resSet = st.executeQuery("SELECT * FROM Requests " +
-                    "WHERE Requests.buyer_email = '" + buyer_email + "';");
+                    "WHERE Requests.searcher_email = '" + searcher_email + "';");
 
             List<Request> requests = new ArrayList<>();
             while (resSet.next()) {
@@ -636,7 +637,8 @@ private int getVacationID(){
         try {
             Statement st = dbConnection.createStatement();
             ResultSet resSet = st.executeQuery("SELECT * FROM TradeRequests " +
-                    "WHERE TradeRequests.seller_email = '" + seller_email + "';");
+                    "WHERE TradeRequests.seller_email = '" + seller_email + "' AND TradeRequests.vacation_id in (select vacation_id from Vacations where Vacations.vacation_status=1 )" +
+                    "AND TradeRequests.vacationtoTrade_id in (select vacation_id from Vacations where Vacations.vacation_status=1 );");
             List<TradeRequest> tradeRequests = new ArrayList<>();
             while (resSet.next()) {
                 tradeRequests.add(getTradeFromRow(resSet));
@@ -822,14 +824,14 @@ private int getVacationID(){
 
     private Request getRequestFromRow(ResultSet resultSet) throws SQLException {
         String seller_email = resultSet.getString("seller_email");
-        String buyer_email = resultSet.getString("buyer_email");
+        String searcher_email = resultSet.getString("searcher_email");
         int vacation_id = resultSet.getInt("vacation_id");
         Boolean seller_status = resultSet.getInt("seller_status") == 1;
         if(resultSet.getInt("seller_status") == -1) seller_status=null;
-        Boolean buyer_status = resultSet.getInt("buyer_status") == 1;
+        Boolean searcher_status = resultSet.getInt("searcher_status") == 1;
 
 
-        Request request = new Request(seller_email, buyer_email, vacation_id, buyer_status);
+        Request request = new Request(seller_email, searcher_email, vacation_id, searcher_status);
         request.setSeller_status(seller_status);
         return request;
     }
@@ -870,11 +872,11 @@ private int getVacationID(){
     }
 
 
-    public Boolean isReqExists (String seller_email,String buyer_email,int VacationId) {
+    public Boolean isReqExists (String seller_email,String searcher_email,int VacationId) {
          try {
             Statement st = dbConnection.createStatement();
             ResultSet resSet = st.executeQuery("SELECT * FROM Requests " +
-                    "WHERE Requests.vacation_id = "+ VacationId+" AND  Requests.seller_email = '" + seller_email + "' AND Requests.buyer_email='"+buyer_email+ "' ;");
+                    "WHERE Requests.vacation_id = "+ VacationId+" AND  Requests.seller_email = '" + seller_email + "' AND Requests.searcher_email='"+searcher_email+ "' ;");
              Request req=getRequestFromRow(resSet);
             return req!=null;
         } catch (SQLException e) {
@@ -914,3 +916,4 @@ private int getVacationID(){
         st.execute(sql);
     }
 }
+

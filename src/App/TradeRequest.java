@@ -14,13 +14,9 @@ public class TradeRequest extends Request {
     public int getVacationtoTrade_id(){return this.vacationtoTrade_id;}
     public void setVacationtoTrade_id(int vacation_id) {this.vacationtoTrade_id = vacation_id;}
 
-    public String toStringBuyer_status(){
-        if (this.buyer_status == null)
-            return  "";
-        return this.buyer_status? "Trade" : "Submit";
-    }
+
 public String getTrader_email(){
-        return this.getBuyer_email();
+        return this.getSearcher_email();
 }
 
 

@@ -210,7 +210,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Buy Now!">
                <items>
-                  <MenuItem fx:id="buyer_req_menu" mnemonicParsing="false" text="My vacation Request" />
+                  <MenuItem fx:id="searcher_req_menu" mnemonicParsing="false" text="My vacation Request" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Trade in">
