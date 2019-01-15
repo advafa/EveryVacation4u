@@ -98,7 +98,7 @@
                <items>
                   <MenuItem fx:id="addVac_menu" mnemonicParsing="false" text="Add New Vacation" />
                   <MenuItem fx:id="seller_vacations_menu" mnemonicParsing="false" text="My Vacations" />
-                  <MenuItem fx:id="seller_req_menu" mnemonicParsing="false" text="buyers Requests" />
+                  <MenuItem fx:id="seller_req_menu" mnemonicParsing="false" text="Sale Requests" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Buy Now!">
