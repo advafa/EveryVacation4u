@@ -222,9 +222,6 @@ public class ViewModel extends Application {
         tradeRequestDetailsController=TradeRequestDetailsLoader.getController();
         tradeRequestDetailsController.setViewModel(this);
 
-        loadUser("advafa@gmai.l.com", "12345678");
-
-
 
         this.goToSearchView();
         stage.show();
@@ -619,7 +616,7 @@ public class ViewModel extends Application {
         if (this.user==null)
             stage.setScene(signInScene);
         else
-            popAlertinfo("Please Sign in!"); }
+            popAlertinfo("You already Sign in!"); }
 
 
 
